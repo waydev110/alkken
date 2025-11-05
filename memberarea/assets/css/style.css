@@ -3326,14 +3326,14 @@ fieldset:disabled .btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #2091dd;
-  border-color: #2091dd;
+  background-color: #d4af37;
+  border-color: #a88b2e;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #3354c0;
-  border-color: #304fb5;
+  background-color: #1a1a1a;
+  border-color: #d4af37;
 }
 
 .btn-check:focus + .btn-primary, .btn-primary:focus {
@@ -3658,14 +3658,14 @@ fieldset:disabled .btn {
 }
 
 .btn-outline-primary {
-  color: #1983d1;
-  border-color: #1983d1;
+  color: #1a1a1a;
+  border-color: #1a1a1a;
 }
 
 .btn-outline-primary:hover {
   color: #fff;
-  background-color: #1983d1;
-  border-color: #1983d1;
+  background-color: #1a1a1a;
+  border-color: #1a1a1a;
 }
 
 .btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
@@ -10869,7 +10869,7 @@ fieldset:disabled .btn {
   --mlm-theme-color-grad-2: #24474e;
   --mlm-theme-color-grad-3: #3d7198;
   /* color schemes */
-  --mlm-theme-color: #1983d1;
+  --mlm-theme-color: #1a1a1a;
   --mlm-theme-color-2: #3d7198;
   --mlm-theme-color-light: #ffffff;
   --mlm-theme-bordercolor: #dadff6;
@@ -10884,7 +10884,7 @@ fieldset:disabled .btn {
   --mlm-sidebar-text: #ffffff;
   --mlm-sidebar-text-active: #ffffff;
   --mlm-card-color: rgba(255, 255, 255, 0.95);
-  --mlm-card-text: #1983d1;
+  --mlm-card-text: #1a1a1a;
   --mlm-page-bg-1: #f1f3f8;
   --mlm-page-bg-2: #e5ecfe;
   --mlm-page-text: #1a1a1a;
@@ -15354,7 +15354,7 @@ h5.price {
 .form-search-custom .btn-outline-primary:disabled,
 .form-search-custom .btn-outline-primary.disabled {
     border-color: var(--mlm-theme-bordercolor);
-    color: #1983d1;
+    color: #1a1a1a;
     background-color: transparent;
     border-top-right-radius: 0px;
     border-end-end-radius: 0px;
