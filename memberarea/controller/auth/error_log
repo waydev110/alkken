@@ -1,0 +1,56 @@
+[07-Oct-2025 02:15:50 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPassword() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php on line 17
+[09-Oct-2025 14:55:48 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPIN() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_pin.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_pin.php on line 18
+[11-Oct-2025 16:32:55 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPIN() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_pin.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_pin.php on line 18
+[13-Oct-2025 17:12:05 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPassword() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php on line 17
+[20-Oct-2025 14:40:54 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPassword() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php on line 17
+[21-Oct-2025 21:59:35 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPassword() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php on line 17
+[22-Oct-2025 17:49:22 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPassword() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php on line 17
+[23-Oct-2025 14:28:08 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPassword() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php on line 17
+[02-Nov-2025 17:27:41 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPassword() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php on line 17
+[02-Nov-2025 17:28:23 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPassword() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php on line 17
+[03-Nov-2025 05:04:42 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPassword() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php on line 17
+[03-Nov-2025 05:05:56 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPassword() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php:17
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_password.php on line 17
+[03-Nov-2025 05:06:30 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPIN() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_pin.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_pin.php on line 18
+[03-Nov-2025 05:06:38 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classSMS::smsGantiPIN() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_pin.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/auth/update_pin.php on line 18

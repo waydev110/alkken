@@ -1,0 +1,11 @@
+[11-Sep-2025 14:10:57 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/1040): Too many connections in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[11-Sep-2025 14:10:57 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[11-Sep-2025 14:10:57 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[11-Sep-2025 14:10:57 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (08004/1040): Too many connections in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[11-Sep-2025 14:10:57 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[11-Sep-2025 14:10:57 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[11-Sep-2025 14:10:57 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function fetch_object() on bool in /home/netp7474/public_html/new.netlife.my.id/model/classProduk.php:287
+Stack trace:
+#0 /home/netp7474/public_html/new.netlife.my.id/adminarea/controller/produk/list.php(6): classProduk->datatable(Array)
+#1 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/model/classProduk.php on line 287

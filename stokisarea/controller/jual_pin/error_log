@@ -1,0 +1,61 @@
+[23-Oct-2025 11:49:20 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[23-Oct-2025 11:49:20 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[23-Oct-2025 11:49:20 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[23-Oct-2025 11:49:20 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[23-Oct-2025 11:49:20 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[23-Oct-2025 11:49:20 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[23-Oct-2025 11:49:20 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[23-Oct-2025 11:49:20 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[23-Oct-2025 11:49:20 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[23-Oct-2025 11:49:20 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function fetch_object() on bool in /home/netp7474/public_html/new.netlife.my.id/model/classStokisJualPin.php:169
+Stack trace:
+#0 /home/netp7474/public_html/new.netlife.my.id/stokisarea/controller/jual_pin/jual_pin_list.php(8): classStokisJualPin->datatable(Array, '2')
+#1 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/model/classStokisJualPin.php on line 169
+[23-Oct-2025 11:49:23 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[23-Oct-2025 11:49:23 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[23-Oct-2025 11:49:23 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[23-Oct-2025 11:49:23 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[23-Oct-2025 11:49:23 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[23-Oct-2025 11:49:23 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[23-Oct-2025 11:49:23 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[23-Oct-2025 11:49:23 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[23-Oct-2025 11:49:23 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[23-Oct-2025 11:49:23 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function fetch_object() on bool in /home/netp7474/public_html/new.netlife.my.id/model/classStokisJualPin.php:169
+Stack trace:
+#0 /home/netp7474/public_html/new.netlife.my.id/stokisarea/controller/jual_pin/jual_pin_list.php(8): classStokisJualPin->datatable(Array, '2')
+#1 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/model/classStokisJualPin.php on line 169
+[23-Oct-2025 11:49:25 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[23-Oct-2025 11:49:25 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[23-Oct-2025 11:49:25 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[23-Oct-2025 11:49:25 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[23-Oct-2025 11:49:25 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[23-Oct-2025 11:49:25 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[23-Oct-2025 11:49:25 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[23-Oct-2025 11:49:25 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[23-Oct-2025 11:49:25 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[23-Oct-2025 11:49:25 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function fetch_object() on bool in /home/netp7474/public_html/new.netlife.my.id/model/classStokisJualPin.php:169
+Stack trace:
+#0 /home/netp7474/public_html/new.netlife.my.id/stokisarea/controller/jual_pin/jual_pin_list.php(8): classStokisJualPin->datatable(Array, '2')
+#1 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/model/classStokisJualPin.php on line 169
+[23-Oct-2025 11:49:29 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[23-Oct-2025 11:49:29 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[23-Oct-2025 11:49:29 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[23-Oct-2025 11:49:29 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[23-Oct-2025 11:49:29 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[23-Oct-2025 11:49:29 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[23-Oct-2025 11:49:29 Asia/Jakarta] PHP Warning:  mysqli::__construct(): (HY000/2002): Resource temporarily unavailable in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 25
+[23-Oct-2025 11:49:29 Asia/Jakarta] PHP Warning:  mysqli::query(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 34
+[23-Oct-2025 11:49:29 Asia/Jakarta] PHP Warning:  mysqli::close(): Couldn't fetch mysqli in /home/netp7474/public_html/new.netlife.my.id/model/classConnection.php on line 10
+[23-Oct-2025 11:49:29 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function fetch_object() on bool in /home/netp7474/public_html/new.netlife.my.id/model/classStokisJualPin.php:169
+Stack trace:
+#0 /home/netp7474/public_html/new.netlife.my.id/stokisarea/controller/jual_pin/jual_pin_list.php(8): classStokisJualPin->datatable(Array, '2')
+#1 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/model/classStokisJualPin.php on line 169
+[23-Oct-2025 18:41:15 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function fetch_object() on bool in /home/netp7474/public_html/new.netlife.my.id/stokisarea/controller/jual_pin/card.php:6
+Stack trace:
+#0 /home/netp7474/public_html/new.netlife.my.id/stokisarea/controller/jual_pin/get_cart.php(35): include()
+#1 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/stokisarea/controller/jual_pin/card.php on line 6

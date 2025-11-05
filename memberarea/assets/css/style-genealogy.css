@@ -1,0 +1,682 @@
+:root {
+
+  --mitra: #805ea4;
+
+  --emerald: #3faaad;
+
+  --silver: #aaaaaa;
+
+  --gold: #d88b40;
+
+  --diamond: #9c0b0b;
+
+  --platinum: #1a73bd;
+
+  --premium: #c73192;
+
+  --default: #6b6b6b;
+
+  --blank: #f7f7f7;
+
+  --red: #9c0909;
+
+  --border: #d5d5d5;
+
+}
+
+.to-upline{
+
+  color : #fd940d;
+
+}
+
+.to-upline:hover{
+
+  color : #f2961f;
+
+}
+
+.to-upline h4{
+
+  font-size :1em;
+
+  font-weight: 600;
+
+  margin-top: 0;
+
+}
+
+.input-group-addon{
+
+  padding:0px;
+
+  border:none;
+
+}
+
+.input-group-addon .btn{
+
+  border-top-left-radius: 0;
+
+  border-bottom-left-radius: 0;
+
+}
+
+.tree {
+
+  display: block;
+
+  padding:0;
+
+  /* width:980px; */
+
+}
+
+.tree ul {
+
+  display: flex;
+
+  justify-content: space-around!important;
+
+  padding: 20px 0; 
+
+  position: relative;
+
+  width:100%;
+
+}
+
+
+
+.tree li {
+
+  /*float: left; */
+
+  text-align: center;
+
+  list-style-type: none;
+
+  position: relative;
+
+  padding: 20px 0px;
+
+}
+
+
+
+/* .tree ul ul ul li{
+
+  width:120px;
+
+} */
+
+.tree ul li{
+
+  width:50%;
+
+}
+
+/* 
+
+@media (max-width: 767px) {
+
+  .tree ul li{
+
+    width:120px!important;
+
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+  .tree ul ul li{
+
+    width:120px!important;
+
+  }
+
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+  .tree ul ul li{
+
+    width:120px!important;
+
+  }
+
+} */
+
+
+
+.member-blank a {
+
+  color: rgb(7, 101, 39);
+
+}
+
+
+
+.card-member {
+
+  display: block;
+
+  width: 110px;
+
+  margin:0 auto;
+
+  text-align: center;
+
+  color: #333;
+
+  background-color: #d5d5d5;
+
+  border-radius: 5px;
+
+  padding: 0;
+
+  padding-bottom:5px;
+
+  font-size: 11px;
+
+}
+
+.card-member .card-member-header h2 {
+
+  display:block;
+
+  width: 100px;
+
+  padding: 5px;
+
+  margin:0px auto;
+
+  border-radius:0 0 20px 20px;
+
+  font-size: 0.9em;
+
+  font-weight: 600;
+
+  color: #333;
+
+  text-align: center;
+
+}
+
+.card-member .card-member-header a, .card-member .card-member-header span {
+
+  display:block;
+
+  width: 85px;
+
+  margin:10px auto;
+
+  margin-bottom:5px;
+
+  border-radius: 50%;
+
+  color:var(--default);
+
+}
+.card-member .card-member-header a img {
+
+
+  border-radius: 18px;
+
+}
+
+.card-member h4{
+
+  color: #291f57;
+
+  padding:0px!important;
+
+}
+
+.card-member .card-member-header img{
+
+  margin: 0px;
+
+}
+
+
+
+
+
+.card-member-body .member-info{
+
+  display:flex;
+
+  justify-content: space-between;
+
+  align-items: stretch;
+
+  color: #000000;
+
+  border-radius: 5px;
+
+  text-align: center;
+
+  padding:3px 0px;
+
+}
+
+
+
+.member-blank .member-info, .member-blank h3, .member-blank h4, .member-blank h5 {
+
+  color: var(--default)!important;
+
+}
+
+
+
+.member-info span{
+
+  width:20px;
+
+  padding:2px 0px;
+
+  display: inline-block;
+
+  vertical-align: middle;
+
+  font-size: 1.5em;
+
+
+
+  /* height:20px; */
+
+  /* border: 1px solid #ffff; */
+
+  /* border-radius: 5px; */
+
+}
+
+
+
+.member-info span:first-child, .member-info span:last-child {
+
+  width:40px;
+
+  background-color: #fafafa;
+
+  color: #000000;
+
+  font-size: 1em;
+
+  padding:5px 5px 0px 5px;
+
+}
+
+
+
+.member-blank-red .member-info span:first-child, .member-blank-red .member-info span:last-child {
+
+  background-color: var(--red)!important;
+
+}
+
+.member-blank .member-info span:first-child, .member-blank .member-info span:last-child {
+
+  background-color: var(--blank)!important;
+
+}
+
+.member-platinum .member-info span:first-child, .member-platinum .member-info span:last-child {
+
+  background-color: var(--platinum)!important;
+
+}
+
+.member-gold .member-info span:first-child, .member-gold .member-info span:last-child {
+
+  background-color: var(--gold)!important;
+
+}
+
+.member-silver .member-info span:first-child, .member-silver .member-info span:last-child {
+
+  background-color: var(--silver)!important;
+
+}
+
+
+
+.member-info span:last-child { 
+
+  border-radius: 3px 0 0 3px;
+
+}
+
+.member-info span:first-child { 
+
+  border-radius: 0 3px 3px 0;
+
+}
+
+
+
+.card-member-body .member-posting{
+
+  display:flex;
+
+  justify-content: space-around;
+
+  align-items: stretch;
+
+  background-color: #efebff;
+
+  color: #291f57;
+
+  border-radius: 5px;
+
+  text-align: center;
+
+  padding:3px 0px;
+
+  margin-bottom: 5px;
+
+}
+
+
+.member-profil {
+
+}
+
+.member-profile h3, .member-profile h4, .member-profile h5{
+
+  width:100%;
+
+  padding:0px;
+
+  vertical-align: middle;
+
+  font-size: 1.1em;
+
+  font-weight: 600;
+
+  color: #333;
+
+  text-align: center;
+
+  margin-top:2px;
+
+  margin-bottom:2px;
+
+}
+
+.member-profile h3{
+
+  font-size: 1em;
+
+  font-weight: 600;
+
+  color: #333;
+
+  text-transform: uppercase;
+
+}
+
+.member-profile h4{
+
+  font-size: 1em;
+
+  font-weight: 600;
+
+}
+
+.member-profile h5{
+
+  font-size: 0.9em;
+
+  font-weight: 600;
+
+  color: #333;
+
+}
+
+
+
+.member-packet{
+
+  width:90px!important;
+
+  padding:3px!important;
+
+  margin:0 auto;
+
+  border-radius: 25px;
+
+  margin-bottom: 5px!important;
+
+  font-size: 0.9em!important;
+
+}
+
+.member-blank-red .member-packet {
+
+  background-color: var(--red)!important;
+
+}
+
+.member-blank .member-packet{
+
+  background-color: var(--blank)!important;
+
+}
+
+.member-platinum .member-packet {
+
+  background-color: var(--platinum)!important;
+
+}
+
+.member-gold .member-packet {
+
+  background-color: var(--gold)!important;
+
+}
+
+.member-silver .member-packet {
+
+  background-color: var(--silver)!important;
+
+}
+
+.member-rank{
+
+  width:100px!important;
+
+  padding:0px 5px!important;
+
+  margin:0 auto;
+
+  margin-top: 5px!important;
+
+  border-radius: 5px;
+
+  margin-bottom: 5px!important;
+
+  font-size: 0.9em!important;
+
+  /* background-color: var(--gold) */
+
+}
+
+
+
+
+
+/*We will use ::before and ::after to draw the connectors*/
+
+
+
+.tree li::before, .tree li::after{
+
+  content: '';
+
+  position: absolute; top: 0; right: 50%;
+
+  border-top: 3px solid var(--border);
+
+  width: 70%; 
+
+  height: 20px;
+
+}
+
+.tree li::after{
+
+  right: auto; left: 50%;
+
+  border-left: 3px solid var(--border);
+
+}
+
+
+
+/*We need to remove left-right connectors from elements without 
+
+any siblings*/
+
+.tree li:only-child::after, .tree li:only-child::before {
+
+  display: none;
+
+}
+
+
+
+/*Remove space from the top of single children*/
+
+.tree li:only-child{ padding-top: 0;}
+
+
+
+/*Remove left connector from first child and 
+
+right connector from last child*/
+
+.tree li:first-child::before, .tree li:last-child::after{
+
+  border: 0 none;
+
+
+
+}
+
+/*Adding back the vertical connector to the last nodes*/
+
+.tree li:last-child::before{
+
+  border-right: 3px solid var(--border);
+
+  border-radius: 0 5px 0 0;
+
+  -webkit-border-radius: 0 5px 0 0;
+
+  -moz-border-radius: 0 5px 0 0;
+
+}
+
+.tree li:first-child::after{
+
+  border-radius: 5px 0 0 0;
+
+  -webkit-border-radius: 5px 0 0 0;
+
+  -moz-border-radius: 5px 0 0 0;
+
+}
+
+
+
+/*Time to add downward connectors from parents*/
+
+.tree ul::before{
+
+  content: '';
+
+  position: absolute; top: 0; left: 50%;
+
+  border-left: 3px solid var(--border);
+
+  width: 0; 
+
+  height: 20px;
+
+}
+
+
+
+.bg-premium {
+
+  background-color: var(--premium);
+
+  color: #efebff!important;
+
+}
+
+.bg-platinum {
+
+  background-color: var(--platinum);
+
+  color: #efebff!important;
+
+}
+
+.bg-gold {
+
+  background-color: var(--gold);
+
+  color: #efebff!important;
+
+}
+
+.bg-mitra {
+
+  background-color: var(--mitra);
+
+  color: #efebff!important;
+
+}
+
+.bg-emerald {
+
+  background-color: var(--emerald);
+
+  color: #efebff!important;
+
+}
+
+.bg-silver {
+
+  background-color: var(--silver);
+
+  color: #efebff!important;
+
+}
+
+.bg-diamond {
+
+  background-color: var(--diamond);
+
+  color: #ffffff!important;
+
+}
+
+.bg-default {
+
+  background-color: var(--default);
+
+  color: #ffffff!important;
+
+}
+
+.text-default{
+
+  color:#4f4f4f!important;
+
+}

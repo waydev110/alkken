@@ -1,0 +1,5 @@
+[06-Aug-2025 11:31:33 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to a member function fetch_object() on bool in /home/netp7474/public_html/new.netlife.my.id/model/classCRUD.php:154
+Stack trace:
+#0 /home/netp7474/public_html/new.netlife.my.id/adminarea/controller/produk_reseller/list.php(65): classCRUD->datatable('produk_reseller', 'produk', 'mlm_produk', Array, 't.*, COALESCE(G...', Array, Array, Array, Array, Array, Array, Array)
+#1 {main}
+  thrown in /home/netp7474/public_html/new.netlife.my.id/model/classCRUD.php on line 154

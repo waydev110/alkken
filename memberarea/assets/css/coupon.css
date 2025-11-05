@@ -1,0 +1,40 @@
+
+.coupon .right-coupon {
+    border-left: 1px dashed #ddd;
+    width: 40% !important;
+    position:relative;
+}
+.coupon .middle-coupon {
+    padding-left: 20px;
+}
+
+.coupon .right-coupon .info::after, .coupon .right-coupon .info::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--mlm-page-bg-1);
+    border-radius: 100%;
+}
+.coupon .right-coupon .info::before {
+    top: -10px;
+    left: -10px;
+}
+
+.coupon .right-coupon .info::after {
+    bottom: -10px;
+    left: -10px;
+}
+.coupon .time {
+    font-size: 1.6rem;
+}
+.badge {
+    border-radius: 20px;
+    padding: 2px 10px;
+}
+.badge-success {
+    background-color: #28a745
+}
+.badge-default {
+    background-color: #848484
+}
