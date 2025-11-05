@@ -1,50 +1,38 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 function createCaptcha() {
     $kode = "bcdefghjkmnp";
-    $pass = array(); 
-    $panjangkode = strlen($kode) - 2; 
+    $pass = [];
     for ($i = 0; $i < 4; $i++) {
-        $n = rand(0, $panjangkode);
-        $pass[] = $kode[$n];
+        $pass[] = $kode[rand(0, strlen($kode) - 1)];
     }
-    return implode($pass); 
+    return implode($pass);
 }
 
-// hasil kode acak disimpan di $code
 $code = createCaptcha();
-
-// kode acak disimpan di dalam session agar data dapat dipassing ke halaman lain
 $_SESSION["captcha"] = $code;
 
-// membuat background
+// create image
 $wh = imagecreatetruecolor(150, 40);
-$bgc = imagecolorallocate($wh, 255, 255, 255);  // Background color
+$bgc = imagecolorallocate($wh, 255, 255, 255);
 imagefill($wh, 0, 0, $bgc);
 
-// Path to the TTF font file
-$fontPath = __DIR__ . '/Hey_Comic.ttf';  // Use absolute path
+// font path
+$fontPath = __DIR__ . '/TimesNewRomanceBold-3zzoy.ttf';
 
-// Check if font file exists, otherwise use built-in font
-$useTTF = file_exists($fontPath);
+$x = 20;
 for ($i = 0; $i < strlen($code); $i++) {
-    // Generate random color for each character
-    $randomColor = imagecolorallocate($wh, rand(0, 255), rand(0, 255), rand(0, 255));  // Random color
-    
-    // Draw the character with the random color
-    if ($useTTF) {
-        imagettftext($wh, 20, 0, $x, 30, $randomColor, $fontPath, $code[$i]);
-    } else {
-        imagestring($wh, 5, $x, 10, $code[$i], $randomColor);
-    }
-    
-    // Increase the space between characters
-    $x += 30; 
+    $color = imagecolorallocate($wh, rand(0,255), rand(0,255), rand(0,255));
+    imagettftext($wh, 22, rand(-10,10), $x, 30, $color, $fontPath, $code[$i]);
+    $x += 30;
 }
 
-// membuat gambar
-header('Content-Type: image/jpg');
-imagejpeg($wh);
+header("Cache-Control: no-cache, must-revalidate");
+header("Expires: 0");
+header('Content-Type: image/png');
+imagepng($wh);
 imagedestroy($wh);
 ?>
