@@ -5,6 +5,7 @@
         public function index($id_plan_jenis = ''){
             $sql  = "SELECT * FROM mlm_produk_jenis 
                         WHERE CASE WHEN LENGTH('$id_plan_jenis') > 0 THEN id_plan_jenis = '$id_plan_jenis' ELSE 1 END
+                        AND deleted_at IS NULL
                         ORDER BY id ASC";
             $c    = new classConnection();
             $query 	= $c->_query($sql);

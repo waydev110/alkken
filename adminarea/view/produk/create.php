@@ -5,7 +5,6 @@
     require_once("../model/classProdukJenis.php");
     $cpj = new classProdukJenis();
     $produk_jenis = $cpj->index();
-    $produk_jenis = $cpj->index();
 ?>
 <div class="row">
     <div class="col-md-12">
