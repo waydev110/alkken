@@ -59,6 +59,12 @@
         .bg-theme {
             background: var(--dark);
         }
+        .footer .nav .nav-item.centerbutton .nav-link > span img {
+            opacity: 1;
+            width: 32px;
+            height: 50px;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body class="body-scroll theme-<?=$theme?>" data-page="index">

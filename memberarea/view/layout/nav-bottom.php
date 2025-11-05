@@ -162,7 +162,7 @@ ol, ul {
                 ?>
                 <a class="nav-link" href="<?=$link?>">
                     <span class="bg-theme">
-                        <i class="nav-icon fa-light fa-network-wired"></i>
+                        <img src="../images/icons/icon-register.png" alt="">
                     </span>
                 </a>
             </li>
