@@ -24,16 +24,20 @@ $bgc = imagecolorallocate($wh, 255, 255, 255);  // Background color
 imagefill($wh, 0, 0, $bgc);
 
 // Path to the TTF font file
-$fontPath = 'Hey_Comic.ttf';  // Replace this with the path to your font file
+$fontPath = __DIR__ . '/Hey_Comic.ttf';  // Use absolute path
 
-// menggambar tiap karakter dengan warna yang berbeda
-$x = 20; // posisi X awal
+// Check if font file exists, otherwise use built-in font
+$useTTF = file_exists($fontPath);
 for ($i = 0; $i < strlen($code); $i++) {
     // Generate random color for each character
     $randomColor = imagecolorallocate($wh, rand(0, 255), rand(0, 255), rand(0, 255));  // Random color
     
     // Draw the character with the random color
-    imagettftext($wh, 20, 0, $x, 30, $randomColor, $fontPath, $code[$i]);
+    if ($useTTF) {
+        imagettftext($wh, 20, 0, $x, 30, $randomColor, $fontPath, $code[$i]);
+    } else {
+        imagestring($wh, 5, $x, 10, $code[$i], $randomColor);
+    }
     
     // Increase the space between characters
     $x += 30; 
