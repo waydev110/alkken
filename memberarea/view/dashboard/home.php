@@ -584,6 +584,7 @@ $cbrp = new classBonusRewardPaket();
                             </a>
                         </div>
                     </div>
+                    <?php if ($member->max_autosave > 0) { ?>
                     <div class="col-6">
                         <div class="stats-card">
                             <p class="stats-label mb-1">Kekurangan Autosave</p>
@@ -592,6 +593,7 @@ $cbrp = new classBonusRewardPaket();
                             </a>
                         </div>
                     </div>
+                    <?php } ?>
                     <div class="col-6">
                         <div class="stats-card">
                             <p class="stats-label mb-1">Saldo Bonus</p>
@@ -652,6 +654,7 @@ $cbrp = new classBonusRewardPaket();
                                 </div>
                             </div>
                         </div>
+                        <?php if ($member->max_autosave > 0) { ?>
                         <div class="swiper-slide">
                             <p class="network-card-title">Saldo Autosave</p>
                             <div class="row">
@@ -665,6 +668,7 @@ $cbrp = new classBonusRewardPaket();
                                 </div>
                             </div>
                         </div>
+                        <?php } ?>
                     <?php } ?>
                     <div class="swiper-slide">
                         <p class="network-card-title">Kode Aktivasi</p>
