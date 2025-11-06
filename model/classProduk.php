@@ -584,6 +584,7 @@
                             LEFT JOIN mlm_produk_plan ppl ON ppl.id_plan = pl.id AND ppl.id_produk = '$id_produk'
                             WHERE ppl.deleted_at IS NULL 
                             AND pl.tampilkan = '1'
+                            AND pl.deleted_at IS NULL
                             ORDER BY pl.id ASC";
             $c    = new classConnection();
             $query     = $c->_query($sql);
