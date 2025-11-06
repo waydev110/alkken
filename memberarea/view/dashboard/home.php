@@ -696,6 +696,102 @@ $cbrp = new classBonusRewardPaket();
                             </div>
                         </div>
                     </div>
+                    <?php
+                    while ($row = $plan_pasangan->fetch_object()) {
+                        $poin_pasangan = $cm->total_poin_pasangan($session_member_id, $row->id);
+                        $poin = $cm->jumlah_poin_pasangan($session_member_id, $row->id);
+                        $show_pasangan = false;
+                        if ($row->id >= 200) {
+                            $show_pasangan = true;
+                        } else {
+                            if ($show_modul) {
+                                $show_pasangan = true;
+                            } else {
+                                $show_pasangan = false;
+                            }
+                        }
+                        if ($show_pasangan) {
+                    ?>
+                    <div class="swiper-slide">
+                        <p class="network-card-title">Total Poin Pasangan <?=$row->show_name?></p>
+                        <div class="row">
+                            <div class="col-6 network-stat">
+                                <p class="network-stat-label">Kiri</p>
+                                <p class="network-stat-value"><?= currency($poin_pasangan->jumlah_kiri) ?></p>
+                            </div>
+                            <div class="col-6 network-stat">
+                                <p class="network-stat-label">Kanan</p>
+                                <p class="network-stat-value"><?= currency($poin_pasangan->jumlah_kanan) ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <p class="network-card-title">Jumlah Potensi Pasangan <?=$row->show_name?></p>
+                        <div class="row">
+                            <div class="col-6 network-stat">
+                                <p class="network-stat-label">Kiri</p>
+                                <p class="network-stat-value"><?= currency($poin->potensi_kiri) ?></p>
+                            </div>
+                            <div class="col-6 network-stat">
+                                <p class="network-stat-label">Kanan</p>
+                                <p class="network-stat-value"><?= currency($poin->potensi_kanan) ?></p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
+                        }
+                    }
+                    ?>
+                    <?php if ($_binary == true && $show_modul) { ?>
+                    <?php
+                    while ($row = $plan_reward->fetch_object()) {
+                        $kondisi = false;
+                        if ($row->reward_wajib_ro == 1) {
+                            $jumlah_poin_ro = $cm->jumlah_poin_ro($member->id, $row->id);
+                            if ($jumlah_poin_ro > 0) {
+                                $kondisi = true;
+                            } else {
+                                $kondisi = false;
+                            }
+                        } else {
+                            $kondisi = true;
+                        }
+                    ?>
+                    <div class="swiper-slide">
+                        <p class="network-card-title">Jumlah Poin Reward <?=$row->nama_reward?></p>
+                        <div class="row">
+                            <?php
+                            if ($kondisi == true) {
+                                $poin = $cm->jumlah_poin_reward($session_member_id, $row->id);
+                            ?>
+                            <div class="col-6 network-stat">
+                                <p class="network-stat-label">Kiri</p>
+                                <p class="network-stat-value"><?= currency($poin->reward_kiri) ?></p>
+                            </div>
+                            <div class="col-6 network-stat">
+                                <p class="network-stat-label">Kanan</p>
+                                <p class="network-stat-value"><?= currency($poin->reward_kanan) ?></p>
+                            </div>
+                            <?php
+                            } else {
+                            ?>
+                            <div class="col-6 network-stat">
+                                <p class="network-stat-label">Kiri</p>
+                                <p class="network-stat-value"><i class="fas fa-lock"></i></p>
+                            </div>
+                            <div class="col-6 network-stat">
+                                <p class="network-stat-label">Kanan</p>
+                                <p class="network-stat-value"><i class="fas fa-lock"></i></p>
+                            </div>
+                            <?php
+                            }
+                            ?>
+                        </div>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                    <?php } ?>
                 </div>
             </div>
         </div>

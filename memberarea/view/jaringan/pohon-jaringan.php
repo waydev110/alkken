@@ -116,7 +116,7 @@ function titik($id, $upline, $action, $next = '0', $_binary = true)
                 ?>
                     <div class="poin-row">
                         <span class="poin-left"><?= currency($poin_pasangan->jumlah_kiri) ?></span>
-                        <span class="poin-label"><i class="fas fa-chart-line"></i><br><?= $row->show_name ?></span>
+                        <span class="poin-label"><i class="fas fa-chart-line"></i><br><?= $row->show_name ? $row->show_name : 'Pasangan' ?></span>
                         <span class="poin-right"><?= currency($poin_pasangan->jumlah_kanan) ?></span>
                     </div>
                 <?php
