@@ -584,6 +584,14 @@ $cbrp = new classBonusRewardPaket();
                             </a>
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div class="stats-card">
+                            <p class="stats-label mb-1">Pending Bonus</p>
+                            <a href="<?= site_url('riwayat_saldo_wd') ?>" class="stats-value text-decoration-none">
+                                <?= rp($total_bonus_pending) ?> <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
                     <?php if ($member->max_autosave > 0) { ?>
                     <div class="col-6">
                         <div class="stats-card">
@@ -594,14 +602,14 @@ $cbrp = new classBonusRewardPaket();
                         </div>
                     </div>
                     <?php } ?>
-                    <div class="col-6">
+                    <!-- <div class="col-6">
                         <div class="stats-card">
                             <p class="stats-label mb-1">Saldo Bonus</p>
                             <a href="<?= site_url('riwayat_saldo_wd') ?>" class="stats-value text-decoration-none">
                                 <?= currency($saldo_wd) ?> <i class="fas fa-chevron-right"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- <div class="col-6">
                         <div class="stats-card">
                             <p class="stats-label mb-1">Sharing Profit</p> -->
