@@ -5,7 +5,10 @@
     require_once("../model/classProdukJenis.php");
     $cpj = new classProdukJenis();
     $produk_jenis = $cpj->index();
-?>
+    require_once("../model/classBonusFounder.php");
+    $cbf = new classBonusFounder();
+    $persentase_bonus_founder = $cbf->persentase_index();
+    ?>
 <div class="row">
     <div class="col-md-12">
         <div class="box box-primary">
@@ -122,7 +125,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <label for="fee_stokis" class="col-sm-2 control-label">Fee Stokis</label>
                             <div class="col-sm-10">
                                 <div class="input-group">
@@ -130,7 +133,7 @@
                                     <input type="text" class="form-control autonumeric3" name="fee_stokis" required="required" id="fee_stokis">
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                         <div class="form-group">
                             <label for="fee_founder" class="col-sm-2 control-label">Fee Founder</label>
                             <div class="col-sm-10">
@@ -140,6 +143,27 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label for="fee_founder" class="col-sm-2 control-label">Keterangan Bonus</label>
+                            <?php while($row = $persentase_bonus_founder->fetch_object()){ ?>
+                                <label for="fee_founder_<?=$row->id?>" data-persentase="<?=$row->persentase_bonus?>" class="col-sm-4 control-label fee-founder-label text-danger" style="text-align:left"><?=$row->name?> <?=$row->persentase_bonus?>% = Rp. <span id="fee_founder_<?=$row->id?>">0</span></label>
+                            <?php } ?>
+                        </div>
+                        <script>
+                            $(document).ready(function() {
+                                $('#fee_founder').on('keyup change', function() {
+                                    var feeFounder = $(this).autoNumeric('get');
+                                    
+                                    $('.fee-founder-label').each(function() {
+                                        var persentase = parseFloat($(this).data('persentase'));
+                                        var calculatedFee = (feeFounder * persentase) / 100;
+                                        var spanId = $(this).attr('for');
+                                        var formattedValue = calculatedFee.toLocaleString('id-ID', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+                                        $('#' + spanId).text(formattedValue);
+                                    });
+                                });
+                            });
+                        </script>
                         <div class="form-group">
                             <label for="qty" class="col-sm-2 control-label">Qty</label>
                             <div class="col-sm-4">

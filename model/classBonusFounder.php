@@ -103,7 +103,7 @@ class classBonusFounder{
 		$this->deleted_at = $deleted_at;
 	}
 
-    public function persentase_bonus_sponsor($id_member){
+    public function persentase_bonus($id_member){
         
         $sql = "SELECT p.persentase_bonus FROM mlm_member m
                         LEFT JOIN mlm_bonus_founder_setting p ON m.id_peringkat = p.id_peringkat
@@ -111,6 +111,14 @@ class classBonusFounder{
         $c = new classConnection();
         $query = $c->_query_fetch($sql);
         return $query->persentase_bonus;
+    }
+
+    public function persentase_index(){
+
+        $sql = "SELECT * FROM mlm_bonus_founder_setting ORDER BY id ASC";
+        $c = new classConnection();
+        $query = $c->_query($sql);
+        return $query;
     }
     
     public function create()

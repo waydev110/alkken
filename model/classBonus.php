@@ -627,31 +627,6 @@ class classBonus{
         $query  = $c->_query($sql);
         return $query;
     }
-    
-    public function get_total_bonus($status_transfer = '', $type = ''){
-        $sql_bonus = $this->_SQL_ALL();
-        $sql = "SELECT COALESCE(SUM(nominal), 0) AS total 
-                    FROM ($sql_bonus) AS b
-                    WHERE CASE WHEN LENGTH('$type') > 0 THEN type = '$type' ELSE 1 END
-                    AND CASE WHEN LENGTH('$status_transfer') > 0 THEN status_transfer = '$status_transfer' ELSE 1 END";
-        $c    = new classConnection();
-        $query  = $c->_query_fetch($sql);
-        if($query){
-            return $query->total;
-        }
-        return 0;
-    }
-    
-    public function item_bonus(){
-        $sql_bonus = $this->_SQL_ALL();
-        $sql = "SELECT b.type
-                    FROM ($sql_bonus) AS b
-                    GROUP BY b.type ORDER BY b.group_bonus ASC";
-                    // echo $sql;
-        $c    = new classConnection();
-        $query  = $c->_query($sql);
-        return $query;
-    }
     public function index_member($id){
         $sql = $this->_SQL($id);
         $c    = new classConnection();
@@ -742,24 +717,6 @@ class classBonus{
                 WHERE status_transfer = '1'
                 AND updated_at = '$updated_at'
                 ORDER BY updated_at DESC";
-        $c    = new classConnection();
-        $query  = $c->_query($sql);
-        return $query;
-    }
-
-    public function top_income($bulan = ''){
-        $sql = $this->_SQL_ALL();
-        $sql = "SELECT mm.nama_samaran, k.nama_kota, p.nama_plan, p.gambar, mm.id_member, mm.nama_member, SUM(b.nominal) AS total FROM ($sql) AS b
-                LEFT JOIN mlm_member mm ON b.id_member = mm.id                
-                LEFT JOIN mlm_plan p
-                    ON mm.id_plan = p.id           
-                LEFT JOIN mlm_kota k
-                    ON mm.id_kota = k.id
-                WHERE CASE WHEN LENGTH('$bulan') > 0 THEN LEFT(b.created_at, 7) = '$bulan' ELSE 1 END 
-                AND b.id_member > 1
-                GROUP BY b.id_member
-                ORDER BY total DESC
-                LIMIT 5";
         $c    = new classConnection();
         $query  = $c->_query($sql);
         return $query;
