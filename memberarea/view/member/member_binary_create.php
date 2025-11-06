@@ -242,54 +242,384 @@ if (!isset($_GET['upline']) || empty($_GET['upline'])) {
 <script src="assets/vendor/jquery-validation-1.19.5/jquery.validate.min.js"></script>
 <script>
     $(document).ready(function() {
-        // Initialize Select2 with custom styling
-        $('.select2').select2({
-            theme: 'default',
-            width: '100%'
+        var blockFirstForm = $('#blockFirstForm');
+        var blockNextForm = $('#blockNextForm');
+        var blockDataMember = $('#blockDataMember');
+        var blockDataMemberProspek = $('#blockDataMemberProspek');
+        var blockCloningID = $('#blockCloningID');
+        var formCekPIN = $('#formCekPIN');
+        var formPendaftaran = $('#formPendaftaran');
+        var btnSubmit = $('#btnSubmit');
+        var tipeAkun = $('#tipe_akun');
+
+        $('#id_sponsor').on("change", function(e) {
+            var sponsor = $('#id_sponsor').val();
+            var upline = $('#id_upline').val();
+            $.ajax({
+                type: 'post',
+                url: 'controller/member/get_sponsor.php',
+                data: {
+                    sponsor: sponsor,
+                    upline: upline
+                },
+                beforeSend: function() {
+                    loader_open();
+                },
+                success: function(result) {
+                    const obj = JSON.parse(result);
+                    if (obj.status == true) {
+                        $('#sponsor').val(obj.sponsor_id);
+                        $('#id_sponsor').val(obj.id_sponsor);
+                        $('#nama_samaran_sponsor').val(obj.nama_samaran_sponsor);
+                    } else {
+                        $('#nama_samaran_sponsor').val('Tidak ditemukan');
+                    }
+                },
+                complete: function() {
+                    loader_close();
+                }
+            });
         });
 
-        // Auto-fill account holder name
+        $('#member_prospek').on("change", function(e) {
+            var sponsor = $('#member_prospek').val();
+            var upline = $('#id_upline').val();
+            $.ajax({
+                type: 'post',
+                url: 'controller/member/get_sponsor_member_prospek.php',
+                data: {
+                    sponsor: sponsor,
+                    upline: upline
+                },
+                beforeSend: function() {
+                    loader_open();
+                },
+                success: function(result) {
+                    const obj = JSON.parse(result);
+                    if (obj.status == true) {
+                        $('#sponsor').val(obj.sponsor_id);
+                        $('#id_sponsor').val(obj.id_sponsor);
+                        $('#nama_samaran_sponsor').val(obj.nama_samaran_sponsor);
+                    } else {
+                        $('#nama_samaran_sponsor').val('Tidak ditemukan');
+                    }
+                },
+                complete: function() {
+                    loader_close();
+                }
+            });
+        });
+
+        $('#cloning_id').on("change", function(e) {
+            var id_member = $(this).val();
+            $.ajax({
+                type: 'post',
+                url: 'controller/member/get_cloning_sponsor.php',
+                data: {
+                    id_member: id_member
+                },
+                beforeSend: function() {
+                    loader_open();
+                },
+                success: function(result) {
+                    const obj = JSON.parse(result);
+                    if (obj.status == true) {
+                        $('#sponsor').val(obj.sponsor_id);
+                        $('#id_sponsor').val(obj.id_sponsor).attr('disabled', 'disabled');
+                        $('#nama_samaran_sponsor').val(obj.nama_samaran_sponsor);
+                    } else {
+                        $('#nama_samaran_sponsor').val('Tidak ditemukan');
+                    }
+                },
+                complete: function() {
+                    loader_close();
+                }
+            });
+        });
+
+
         $('#nama_member').on("keyup", function(e) {
             $('#atas_nama_rekening').val(e.target.value);
         });
-
-        // Toggle forms based on account type
-        $('#tipe_akun').on("change", function() {
-            var tipeAkun = $(this).val();
-            if (tipeAkun == '0') {
-                $('#blockDataMember, #blockDataBank').show();
-                $('#blockDataMemberProspek').hide();
-            } else if (tipeAkun == '1') {
-                $('#blockDataMemberProspek').hide();
-                $('#blockDataMember, #blockDataBank').hide();
-            } else if (tipeAkun == '2') {
-                $('#blockDataMember, #blockDataBank').hide();
-                $('#blockDataMemberProspek').show();
+        $('.select2').select2();
+        tipeAkun.on("change", function(e) {
+            if (e.target.value == '0') {
+                blockCloningID.hide();
+                blockDataMemberProspek.hide();
+                blockDataMember.show();
+                $('#id_sponsor').removeAttr('disabled');
+            } else if (e.target.value == '1') {
+                blockCloningID.show();
+                blockDataMemberProspek.hide();
+                blockDataMember.hide();
+                // $.ajax({
+                //     type: 'post',
+                //     url: 'controller/member/get_data_cloning.php',
+                //     beforeSend: function() {
+                //         loader_open();
+                //     },
+                //     success: function(result) {
+                //         const obj = JSON.parse(result);
+                //         if (obj.status == true) {
+                //             $('#cloning_id').html(obj.option);
+                //             $(".cloning_id").select2();
+                //         }
+                //     },
+                //     complete: function() {
+                //         loader_close();
+                //     }
+                // });
+            } else {
+                blockCloningID.hide();
+                blockDataMember.hide();
+                blockDataMemberProspek.show();
+                $('#id_sponsor').removeAttr('disabled');
             }
         });
-
-        // Form validation setup
-        $('#formPendaftaran').validate({
-            errorPlacement: function(error, element) {
-                error.appendTo(element.parent());
+        formPendaftaran.validate({
+            rules: {
+                kode_aktivasi: "required",
+                nama_member: {
+                    required: true,
+                    minlength: 3
+                },
+                nama_samaran: {
+                    required: true,
+                    minlength: 3
+                },
+                wa_member: {
+                    required: true,
+                    // verifyWA: true
+                },
+                email_member: {
+                    required: true,
+                    email: true,
+                    // verifyEmail: true
+                },
+                tempat_lahir: "required",
+                tanggal_lahir: "required",
+                nik: {
+                    required: true,
+                    minlength: 16
+                },
+                kota: "required",
+                kecamatan: "required",
+                kelurahan: "required",
+                rtrw: "required",
+                kodepos: {
+                    required: true,
+                    minlength: 5,
+                    maxlength: 5
+                },
+                alamat: "required",
+                id_bank: {
+                    required: true
+                },
+                no_rekening: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 16
+                },
+                username: {
+                    required: true,
+                    minlength: 4,
+                    verifyUsername: true,
+                    validUsernameFormat: true
+                },
+                atas_nama_rekening: "required",
+                cabang_rekening: "required"
             },
-            highlight: function(element) {
-                $(element).css('border-color', '#ef4444');
-            },
-            unhighlight: function(element) {
-                $(element).css('border-color', '#333');
+            messages: {
+                kode_aktivasi: "Silahkan pilih PIN.",
+                nama_member: {
+                    required: "Nama tidak boleh kosong.",
+                    minlength: "Nama minimal 3 karakter."
+                },
+                nama_samaran: {
+                    required: "Nama tidak boleh kosong.",
+                    minlength: "Nama minimal 3 karakter."
+                },
+                wa_member: {
+                    required: "Nomor Whatsapp tidak boleh kosong."
+                },
+                email: {
+                    required: "Email tidak boleh kosong.",
+                    email: "Format email tidak valid.",
+                },
+                user_member: {
+                    required: "Username tidak boleh kosong",
+                    minlength: "Username minimal {0} karakter",
+                    validUsernameFormat: "Format username tidak valid"
+                },
+                kota: "Kota tidak boleh kosong.",
+                alamat: "Alamat tidak boleh kosong.",
+                id_bank: "Bank tidak boleh kosong.",
+                no_rekening: {
+                    required: "Nomor rekening tidak boleh kosong.",
+                    minlength: "Nomor rekening minimal 10 digit.",
+                    maxlength: "Nomor rekening maksimal 16 digit."
+                },
+                atas_nama_rekening: "Atas nama rekening tidak boleh kosong.",
+                cabang_rekening: "Cabang/Unit rekening tidak boleh kosong.",
             }
         });
+        $.validator.addMethod("validUsernameFormat", function(value, element) {
+            return /^[a-zA-Z0-9_]+$/.test(value);
+        }, "Format username hanya menggunakan alphanumeric dan '_'");
 
-        // Submit button handler
-        $('#btnSubmit').on("click", function(e) {
-            if ($('#formPendaftaran').valid()) {
-                $('#blockFirstForm').hide();
-                $('#blockNextForm').show();
+        $.validator.addMethod("verifyUsername", function(value) {
+            var response = 'false';
+            $.ajax({
+                type: 'post',
+                url: 'controller/auth/cek_username.php',
+                data: {
+                    username: value
+                },
+                async: false,
+                success: function(result) {
+                    const obj = JSON.parse(result);
+                    response = obj.status;
+                },
+            });
+            if (response == true) {
+                console.log(response);
+                return true;
+            } else {
+                console.log(response);
+                return false;
+            }
+        }, 'Username tidak tersedia.');
+
+        btnSubmit.on("click", function(e) {
+            if (formPendaftaran.valid()) {
+                blockFirstForm.hide();
+                blockNextForm.show();
                 $('input[name=old_pin1]').focus();
             }
             e.preventDefault();
         });
+
+        formCekPIN.on("submit", function(e) {
+            var dataString = $(this).serialize();
+            $.ajax({
+                type: $(this).attr("method"),
+                url: $(this).attr("action"),
+                data: dataString,
+                success: function(result) {
+                    if (result == true) {
+                        formPendaftaran.submit();
+                    } else {
+                        if (result == 'limit') {
+                            formCekPIN.html('');
+                            formCekPIN.prepend(
+                                '<p class="form-error text-center text-danger mb-1">Anda salah memasukan PIN sebanyak 3 kali.</p><p class="form-error text-center text-danger mb-4">Silahkan coba beberapa saat lagi.</p>'
+                            );
+
+                        } else {
+                            if (formCekPIN.find('.form-error').length == 0) {
+                                formCekPIN.prepend(
+                                    '<p class="form-error text-center text-danger mb-4">PIN yang anda masukan salah.</p>'
+                                );
+
+                            }
+                        }
+                    }
+                }
+            });
+            e.preventDefault();
+        });
+
+        formPendaftaran.on("submit", function(e) {
+
+            $('input[name=hp_member').val(iti.getNumber());
+            var dataString = $(this).serialize();
+            $.ajax({
+                type: $(this).attr("method"),
+                url: $(this).attr("action"),
+                data: dataString,
+                beforeSend: function() {
+                    loader_open();
+                },
+                success: function(result) {
+                    const obj = JSON.parse(result);
+                    if (obj.status == true) {
+                        var redirect_url = 'genealogy_v1';
+                        show_success_html(obj.message, redirect_url);
+                    } else {
+                        var redirect_url = 'genealogy_v1';
+                        show_error(obj.message, redirect_url);
+                    }
+                },
+                complete: function() {
+                    loader_close();
+                }
+            });
+            e.preventDefault();
+        });
+
+        $.validator.addMethod("verifyWA", function(value) {
+            var response = 'false';
+            $.ajax({
+                type: 'post',
+                url: 'controller/profil/cek_wa.php',
+                data: {
+                    wa: value
+                },
+                async: false,
+                success: function(result) {
+                    response = result;
+                },
+            });
+            if (response == 'true') {
+                console.log(response);
+                return true;
+            } else {
+                console.log(response);
+                return false;
+            }
+        }, 'Nomor Whatsapp sudah digunakan.');
+
+        $.validator.addMethod("verifyEmail", function(value) {
+            var response = 'false';
+            $.ajax({
+                type: 'post',
+                url: 'controller/profil/cek_email.php',
+                data: {
+                    email: value
+                },
+                async: false,
+                success: function(result) {
+                    response = result;
+                },
+            });
+            if (response == 'true') {
+                console.log(response);
+                return true;
+            } else {
+                console.log(response);
+                return false;
+            }
+        }, 'Email sudah digunakan.');
     });
+    // function get_member_prospek(){
+    //     $.ajax({
+    //         type: 'post',
+    //         url: 'controller/member_prospek/get_member_prospek.php',
+    //         dataType: 'html',
+    //         // beforeSend: function () {
+    //         //     loader_open();
+    //         // },
+    //         success: function (html) {
+    //             if(html == '') {
+    //                 alert('Tidak ada prospek');
+    //             } else {
+    //                 $('#member_prospek').html(html);
+    //             }
+    //         },
+    //         // complete: function () {
+    //         //     loader_close();
+    //         // }
+    //     });
+    // }
 </script>
 <?php include 'view/layout/footer.php'; ?>
