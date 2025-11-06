@@ -42,7 +42,7 @@
     <!-- Header ends -->
 
     <!-- main page content -->
-    <div class="main-container container">
+    <div class="main-container container mt-4">
         <div class="row px-2">
             <div class="col-auto align-self-center">
                 <h5 class="mb-0 lh-xs" data-bulan="<?=$bulan?>" data-tgl="<?=$first_date?>" id="statement_bulan">

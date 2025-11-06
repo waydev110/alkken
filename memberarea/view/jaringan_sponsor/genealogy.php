@@ -13,7 +13,9 @@
         $jumlah_ro = '<span class="size-11 text-danger fw-bold">Belum RO Aktif</span>';
         $tgl_ro = '';
     }
-    $downline = $cm->get_downline($session_member_id);
+    $jumlah_ro = '';
+    $tgl_ro = '';
+    // $downline = $cm->get_downline($session_member_id);
 ?>
 <?php include 'view/layout/header.php'; ?>
 
@@ -61,8 +63,8 @@
                     <li>
                         <div class="listree-submenu-heading">
                             <div class="card rounded-0 bg-white w-auto" onclick="getDownline('<?=base64_encode($session_member_id)?>', 0, this)">
-                                <div class="card-body pt-2 ps-2 pb-0">
-                                    <div class="row mb-2">
+                                <div class="card-body pt-2 ps-4 pb-0">
+                                    <div class="row mb-2 ps-2">
                                         <?php
                                         echo '<div class="col-auto align-self-center text-start">
                                                 <p class="rounded-pill px-2 py-4 bg-theme text-white size-32">0</p>

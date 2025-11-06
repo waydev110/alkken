@@ -25,6 +25,8 @@ if($downline->num_rows > 0){
             $jumlah_ro = '<span class="size-11 text-danger fw-bold">Belum RO Aktif</span>';
             $tgl_ro = '';
         }
+        $jumlah_ro = '';
+        $tgl_ro = '';
     $html .='
     <li>
         <div class="listree-submenu-heading">

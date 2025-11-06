@@ -48,6 +48,12 @@
             --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
             --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             --input-focus: 0 0 0 3px rgba(212, 175, 55, 0.2);
+            --gold-primary: #D4AF37;
+            --gold-light: #F4E4C1;
+            --gold-dark: #B8941C;
+            --black-primary: #1a1a1a;
+            --black-secondary: #2d2d2d;
+            --black-light: #3a3a3a;
         }
         
         body {

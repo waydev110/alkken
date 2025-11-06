@@ -7,12 +7,9 @@
     require_once("../model/classBank.php");
     require_once("../model/classPlan.php");
 
-
-
     $cm = new classMember();
     $cw = new classWallet();
     $cwd = new classWithdraw();
-    
     $cb = new classBank();
     $cpl = new classPlan();
 
@@ -53,28 +50,253 @@
         $penarikan = 0;
         $total = 0;
     }
-    // $sisa_saldo = $saldo%10000;
     $sisa_saldo = 0;
 ?>
 
 <?php require_once("view/layout/header.php"); ?>
-<!-- loader section -->
 <?php require_once("view/layout/loader.php"); ?>
-<!-- loader section ends -->
 <?php require_once("view/layout/sidebar.php"); ?>
-<!-- Begin page -->
+
 <style>
-    .border-bottom-2 {
-        border-bottom: 2px solid #1f0000
+
+    .withdrawal-container {
+        background: linear-gradient(135deg, var(--black-primary) 0%, var(--black-secondary) 100%);
+        min-height: 100vh;
+    }
+
+    .header-gold {
+        background: linear-gradient(135deg, var(--black-primary) 0%, var(--black-secondary) 100%);
+        border-bottom: 2px solid var(--gold-primary);
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+    }
+
+    .header-gold h5 {
+        color: var(--gold-primary);
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .amount-input-wrapper {
+        background: var(--black-secondary);
+        border-radius: 20px;
+        padding: 40px 20px;
+        margin: 30px 0;
+        border: 2px solid var(--gold-primary);
+        box-shadow: 0 8px 30px rgba(212, 175, 55, 0.15);
+        position: relative;
+        overflow: hidden;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.1); opacity: 0.8; }
     }
 
     .trasparent-input {
-        font-size: 2.5rem;
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--gold-primary);
+        background: transparent;
+        border: none;
+        text-align: center;
+        width: 100%;
+        letter-spacing: 2px;
+        text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
+    }
+
+    .trasparent-input::placeholder {
+        color: rgba(212, 175, 55, 0.4);
+    }
+
+    .trasparent-input:focus {
+        outline: none;
+        color: var(--dark);
+    }
+
+    .info-card {
+        background: var(--black-light);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 15px 0;
+        border-left: 4px solid var(--gold-primary);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .info-card:hover {
+        transform: translateX(5px);
+        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2);
+    }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .info-row:last-child {
+        border-bottom: none;
+    }
+
+    .info-label {
+        color: #ccc;
+        font-size: 0.95rem;
+        font-weight: 400;
+    }
+
+    .info-value {
+        color: var(--gold-primary);
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .total-section {
+        background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-primary) 100%);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 25px 0;
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+    }
+
+    .total-section .info-label {
+        color: var(--black-primary);
+        font-size: 1rem;
+        font-weight: 600;
+    }
+
+    .total-section .info-value {
+        color: var(--black-primary);
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .bank-card {
+        background: var(--black-light);
+        border-radius: 20px;
+        padding: 25px;
+        margin: 20px 0;
+        border: 2px solid var(--gold-primary);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .bank-card h6 {
+        color: var(--gold-primary);
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .bank-info {
+        background: var(--black-secondary);
+        border-radius: 15px;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .bank-icon {
+        width: 50px;
+        height: 50px;
+        background: var(--gold-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--black-primary);
+        font-size: 1.5rem;
+    }
+
+    .bank-details p {
+        margin: 0;
+        color: #ccc;
+    }
+
+    .bank-details .bank-name {
+        color: var(--gold-primary);
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    .bank-details .account-number {
+        color: var(--gold-light);
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .btn-submit {
+        background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-primary) 100%);
+        color: var(--black-primary);
+        border: none;
+        padding: 18px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border-radius: 15px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+        background: linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-light) 100%);
+    }
+
+    .alert-card {
+        background: var(--black-light);
+        border-radius: 15px;
+        padding: 30px;
+        text-align: center;
+        border: 2px solid var(--gold-primary);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .alert-card h5 {
+        color: var(--gold-primary);
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .alert-card p {
+        color: #ccc;
+        margin-bottom: 10px;
+    }
+
+    .btn-profile {
+        background: var(--gold-primary);
+        color: var(--black-primary);
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-profile:hover {
+        background: var(--gold-light);
+        transform: scale(1.05);
+    }
+
+    #error {
+        color: #caa62e;
+        font-weight: 600;
+        text-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+    }
+
+    .amount-currency {
+        color: var(--gold-light);
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-right: 10px;
     }
 </style>
-<main class="h-100 has-header">
-    <!-- Header -->
-    <header class="header bg-theme position-fixed">
+
+<main class="h-100 has-header withdrawal-container">
+    <header class="header header-gold position-fixed">
         <div class="row">
             <?php require_once("view/layout/back.php"); ?>
             <div class="col align-self-center text-left">
@@ -82,177 +304,94 @@
             </div>
         </div>
     </header>
-    <!-- Header ends -->
-
-    <!-- main page content -->
 
     <div class="main-container container pt-5" id="blockFirstForm">
-        <?php
-// if($cek_pending_wd == 0){
-//     if (date('D', time()) !== 'Sun' && date('D', time()) !== 'Sat') {
-//         $jam_mulai = date('Y-m-d 00:00:00');
-//         $jam_selesai = date('Y-m-d 23:00:00');
-//         if (strtotime(date('Y-m-d H:i:s')) >= strtotime($jam_mulai) && strtotime(date('Y-m-d H:i:s')) <= strtotime($jam_selesai)) {
-?>
         <form action="controller/wallet/penarikan.php" id="formPenarikan" method="post">
             <input type="hidden" name="token" value="<?=$token?>">
             <input type="hidden" class="autonumeric" id="numeric">
-            <!-- select Amount -->
-            <div class="row">
-                <div class="col-12 text-center mb-4">
-                    <input type="text" class="trasparent-input text-center autonumeric" id="jumlah" name="jumlah"
-                        value="<?=$penarikan?>" placeholder="Masukan Jumlah">
-                    <input type="hidden" name="saldo" class="autonumeric" id="saldo" value="<?=$saldo?>">
-                    <input type="hidden" name="percent_admin" class="autonumeric" id="percent_admin" value="<?=$percent_admin?>">
-                    <input type="hidden" name="admin" class="autonumeric" id="admin" value="<?=$admin?>">
-                    <input type="hidden" name="total" class="autonumeric" id="total" value="<?=$total?>">
-                    <input type="hidden" name="numeric" class="autonumeric" id="numeric" value="<?=$sisa_saldo?>">
-                    <input type="hidden" name="minimal_penarikan" class="autonumeric" id="minimal_penarikan"
-                    value="<?=$minimal_penarikan?>">
-                    <input type="hidden" name="maksimal_penarikan" class="autonumeric" id="maksimal_penarikan"
-                        value="<?=$maksimal_penarikan?>">
-                    <div class="text-center">
-                        <span class="text-muted text-red" id="error"></span>
+            
+            <div class="amount-input-wrapper">
+                <input type="text" class="trasparent-input autonumeric" id="jumlah" name="jumlah" value="<?=$penarikan?>" placeholder="0">
+                <input type="hidden" name="saldo" class="autonumeric" id="saldo" value="<?=$saldo?>">
+                <input type="hidden" name="percent_admin" class="autonumeric" id="percent_admin" value="<?=$percent_admin?>">
+                <input type="hidden" name="admin" class="autonumeric" id="admin" value="<?=$admin?>">
+                <input type="hidden" name="total" class="autonumeric" id="total" value="<?=$total?>">
+                <input type="hidden" name="numeric" class="autonumeric" id="numeric" value="<?=$sisa_saldo?>">
+                <input type="hidden" name="minimal_penarikan" class="autonumeric" id="minimal_penarikan" value="<?=$minimal_penarikan?>">
+                <input type="hidden" name="maksimal_penarikan" class="autonumeric" id="maksimal_penarikan" value="<?=$maksimal_penarikan?>">
+                <div class="text-center mt-3">
+                    <span id="error"></span>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-row">
+                    <span class="info-label">Limit Penarikan</span>
+                    <span class="info-value" id="maksimal_penarikan"><?=rp($maksimal_penarikan)?></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Jumlah Penarikan</span>
+                    <span class="info-value" id="penarikan"><?=rp($penarikan)?></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Biaya Admin</span>
+                    <span class="info-value" id="admin_text"><?=rp($admin)?></span>
+                </div>
+            </div>
+
+            <div class="total-section">
+                <div class="info-row">
+                    <span class="info-label">TOTAL TRANSFER</span>
+                    <span class="info-value" id="total_text"><?=rp($total)?></span>
+                </div>
+            </div>
+
+            <?php if($member->id_bank <> '' && $member->no_rekening <> '' && $member->atas_nama_rekening): ?>
+            <div class="bank-card">
+                <h6>REKENING TUJUAN</h6>
+                <div class="bank-info">
+                    <div class="bank-icon">
+                        <i class="fa-light fa-building-columns"></i>
+                    </div>
+                    <div class="bank-details flex-grow-1">
+                        <p class="bank-name"><?=$nama_bank?></p>
+                        <p class="account-number"><?=$member->no_rekening?></p>
+                        <p style="color: var(--gold-light); font-size: 0.9rem;"><?=$member->atas_nama_rekening?></p>
+                    </div>
+                    <div class="text-end">
+                        <span style="color: var(--gold-primary); font-size: 1.8rem;">
+                            <span id="total_ditransfer"><?=rp($total)?></span>
+                        </span>
                     </div>
                 </div>
             </div>
-            <!-- amount breakdown -->
-            <div class="row mt-2 mb-3">
-                <div class="col">
-                    <p>Limit Penarikan</p>
-                </div>
-                <div class="col-auto text-end">
-                    <p class="text-dark" id="maksimal_penarikan"><?=rp($maksimal_penarikan)?></p>
-                </div>
-            </div>
-            <div class="row mt-2 mb-3">
-                <div class="col">
-                    <p>Jumlah Penarikan</p>
-                </div>
-                <div class="col-auto text-end">
-                    <p class="text-dark" id="penarikan"><?=rp($penarikan)?></p>
+
+            <div class="row mt-4">
+                <div class="col d-grid">
+                    <button type="button" class="btn btn-submit" id="btnSubmit">
+                        Ajukan Penarikan
+                    </button>
                 </div>
             </div>
-            <div class="row mt-2 mb-3 border-bottom-2">
-                <div class="col mb-3">
-                    <p>Admin</p>
-                </div>
-                <div class="col-auto text-end">
-                    <p class="text-dark" id="admin_text"><?=rp($admin)?></p>
-                </div>
+            <?php else: ?>
+            <div class="alert-card">
+                <h5>Profil Belum Lengkap</h5>
+                <p>Lengkapi data rekening bank Anda</p>
+                <p>untuk melakukan penarikan dana</p>
+                <a href="<?=site_url('change_profil')?>" class="btn btn-profile mt-3">
+                    Update Profil
+                </a>
             </div>
-            <div class="row mt-2 mb-3">
-                <div class="col">
-                    <p>Jumlah Ditransfer</p>
-                </div>
-                <div class="col-auto text-end">
-                    <p class="text-dark" id="total_text"><?=rp($total)?></p>
-                </div>
-            </div>
-            <?php
-                if($member->id_bank <> '' && $member->no_rekening <> '' && $member->atas_nama_rekening){
-            ?>
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div class="mt-2 p-4 bg-green-light">
-                        <h6>Kami akan mengirimkannya ke rekening Anda</h6>
-                        <h5 class="price mt-2">
-                            <div class="row">
-                                <div class="col-auto align-self-center">
-                                    <span class="percent size-13 px-2 py-1">Rp</span>
-                                    <span class="text-dark" id="total_ditransfer"><?=rp($total)?></span>
-                                </div>
-                                <div class="col-auto pe-0 align-self-center">
-                                    <span class="text-dark mx-2"><i class="fa-duotone fa-arrow-right"></i></span>
-                                    <div class="avatar avatar-36 rounded-circle bg-light text-dark size-22"><i
-                                            class="fa-light fa-building-columns"></i></div>
-                                </div>
-                                <div class="col">
-                                    <p class="text-dark mb-0"><small class="size-12"><?=$nama_bank?></small></p>
-                                    <p class="text-dark"><?=$member->no_rekening?></p>
-                                </div>
-                            </div>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col d-grid mb-4 mt-2">
-                    <button type="button" class="btn btn-default btn-lg shadow-sm" id="btnSubmit">Permintaan</button>
-                </div>
-            </div>
-            <?php
-                } else {
-            ?>
-            <div class="row mb-4">
-                <div class="col">
-                    <div class="px-2 py-4 bg-green-light text-center">
-                        <h6>Anda belum melengkapi profil anda.</h6>
-                        <p>Lengkapi profil terlebih dahulu untuk dapat melakukan penarikan</p>
-                        <a href="<?=site_url('change_profil')?>" class="btn btn-sm btn-primary  shadow-sm">Update
-                            Profil</a>
-                    </div>
-                </div>
-            </div>
-            <?php
-                }
-            ?>
+            <?php endif; ?>
         </form>
-        <?php 
-        // } else {
-        ?>
-            <!-- <div class="row mb-4">
-                <div class="col">
-                    <div class="px-2 py-4 bg-warning text-center">
-                        <h5>Mohon maaf Penarikan tidak dapat dilakukan.</h5>
-                        <p>Untuk penarikan saldo dapat dilakukan pada:</p>
-                        <p>Hari : Senin s/d Jum'at
-                        <p>Pukul : 08.00 s/d 16.00 WIB</p>
-                        <p>Terima Kasih.</p>
-                    </div>
-                </div>
-            </div> -->
-            <?php
-        // }
-    // } else {
-    ?>
-            <!-- <div class="row mb-4">
-                <div class="col">
-                    <div class="px-2 py-4 bg-warning text-center">
-                        <h5>Mohon maaf Penarikan tidak dapat dilakukan.</h5>
-                        <p>Untuk penarikan saldo dapat dilakukan pada:</p>
-                        <p>Hari : Senin s/d Jum'at
-                        <p>Pukul : 08.00 s/d 16.00 WIB</p>
-                        <p>Terima Kasih.</p>
-                    </div>
-                </div>
-            </div> -->
-            <?php
-    // }
-// } else {
-    ?>
-        <!-- <div class="row mb-4">
-            <div class="col">
-                <div class="px-2 py-4 bg-warning text-center">
-                    <h5>Mohon maaf Penarikan tidak dapat dilakukan.</h5>
-                    <p>Masih ada penarikan pending.</p>
-                    <p>Terima Kasih.</p>
-                </div>
-            </div>
-        </div> -->
-        <?php
-// }
-?>
     </div>
 
     <?php require_once("view/auth/form_cek_pin.php"); ?>
-    <!-- main page content ends -->
 </main>
-<!-- Page ends-->
+
 <?php require_once("view/layout/assets_js.php"); ?>
 
 <script src="assets/vendor/autoNumeric/autoNumeric.js"></script>
-
 <script>
     $(document).ready(function () {
         var blockFirstForm = $('#blockFirstForm');
@@ -267,7 +406,6 @@
             "mDec": "0",
         });
 
-
         $('#jumlah').on("keyup", function (e) {
             cek_data();
         });
@@ -279,10 +417,9 @@
             var maksimal_penarikan = parseInt($('#maksimal_penarikan').autoNumeric('get'));
             var percent_admin = parseInt($('#percent_admin').autoNumeric('get'));
             var admin = parseInt($('#admin').autoNumeric('get'));
-            
 
             if (penarikan % 10000 !== 0) {
-                $('#error').html(`<p class="text-danger mb-0 size-22 fw-bold">Jumlah penarikan harus dalam kelipatan 10.000</p>`);
+                $('#error').html(`<p class="mb-0">Jumlah harus kelipatan 10.000</p>`);
                 $('#admin').autoNumeric('set', 0);
                 $('#total').autoNumeric('set', 0);
                 return;
@@ -296,7 +433,7 @@
             } else if (penarikan >= minimal_penarikan) {
                 admin = penarikan * percent_admin/100;
                 var total = penarikan - admin;
-            } else  {
+            } else {
                 var total = 0;
             }
             if(total <= 0){
@@ -304,11 +441,8 @@
             }
             $('#admin').autoNumeric('set', admin);
             $('#total').autoNumeric('set', total);
-            var kelipatan = penarikan % 10000;
 
-            // if (penarikan <= saldo && penarikan >= minimal_penarikan && kelipatan == 0) {
             if (penarikan <= saldo && penarikan >= minimal_penarikan && penarikan <= maksimal_penarikan) {
-
                 $('#error').html('');
                 $('#jumlah').removeClass('error');
                 $('#penarikan').text(rp($('#jumlah').val()));
@@ -318,23 +452,12 @@
                 return true;
             } else {
                 if (penarikan > maksimal_penarikan) {
-                    var maksimal_penarikan_text = $('#maksimal_penarikan').val();
-                    var error = `<p class="text-danger mb-0 size-14 fw-bold">Maksimal penarikan:</p>
-                                <p class="text-danger mb-0 size-22 fw-bold">${maksimal_penarikan_text}</p>`;
+                    var error = `<p class="mb-0 size-14">Maksimal: ${$('#maksimal_penarikan').val()}</p>`;
                 } else if (penarikan < minimal_penarikan) {
-                    var minimal = $('#minimal_penarikan').val();
-                    var error = `<p class="text-danger mb-0 size-14 fw-bold">Minimal penarikan:</p>
-                                <p class="text-danger mb-0 size-22 fw-bold">${minimal}</p>`;
+                    var error = `<p class="mb-0 size-14">Minimal: ${$('#minimal_penarikan').val()}</p>`;
                 } else if (penarikan > saldo) {
-                    var maksimal_penarikan_text = $('#saldo').val();
-                    var error = `<p class="text-danger mb-0 size-14 fw-bold">Saldo Cash tidak cukup. Maksimal penarikan:</p>
-                                <p class="text-danger mb-0 size-22 fw-bold">${maksimal_penarikan_text}</p>`;
-                } 
-                // else if (kelipatan > 0) {
-                //     var error = `<p class="text-danger mb-0 size-14 fw-bold">Penarikan harus kelipatan:</p>
-                //                 <p class="text-danger mb-0 size-22 fw-bold">10.000</p>`;
-
-                // }
+                    var error = `<p class="mb-0 size-14">Saldo tidak cukup</p>`;
+                }
                 $('#error').html(error);
                 $('#jumlah').addClass('error');
                 $('#penarikan').text('0');
@@ -343,7 +466,7 @@
                 $('#total_ditransfer').text('0');
                 return false;
             }
-        };
+        }
 
         btnSubmit.on("click", function (e) {
             if (cek_data()) {
@@ -374,7 +497,6 @@
                             formCekPIN.prepend(
                                 '<p class="form-error text-center text-danger mb-1">Anda salah memasukan PIN sebanyak 3 kali.</p><p class="form-error text-center text-danger mb-3">Silahkan coba beberapa saat lagi.</p>'
                             );
-
                         } else {
                             if (formCekPIN.find('.form-error').length == 0) {
                                 formCekPIN.prepend(
