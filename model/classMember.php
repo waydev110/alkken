@@ -702,7 +702,7 @@ class classMember
             $subdata[]= currency($row->total_pin);
             $subdata[]='
                 <a href="index.php?go=member_edit&id='.base64_encode($row->id).'" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                <a onclick="sendsmsmember('.'"'.$row->id.'"'.')" class="btn btn-info btn-xs"><i class="fa fa-envelope"></i></a>
+                <a onclick="sendsmsmember('."'".$row->id."'".')" class="btn btn-info btn-xs"><i class="fa fa-envelope"></i></a>
                 <a target="_blank" href="index.php?go=bypass_login&id='.base64_encode($row->id).'" class="btn btn-danger btn-xs bypass"><i class="fa fa-sign-in"></i></a>
             ';
             $data[]=$subdata;

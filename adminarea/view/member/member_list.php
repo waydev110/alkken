@@ -17,31 +17,31 @@ $produk_jenis = $cpj->index(0);
 ?>
 <div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">Daftar Member</h3>            
+        <h3 class="box-title">Daftar Member</h3>
         <div class="pull-right">
         </div>
     </div>
     <div class="box-body">
-        <?php 
-          if(isset($_GET['stat'])){
-            if($_GET['stat']== 1){
-              ?>
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-check"></i> Info!</h4>
-            <?=ucwords($_GET['msg']);?> data sukses
-        </div>
         <?php
-            }else{
-              ?>
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h4><i class="icon fa fa-ban"></i> Info!</h4>
-            <?=ucwords($_GET['msg']);?> data gagal
-        </div>
+        if (isset($_GET['stat'])) {
+            if ($_GET['stat'] == 1) {
+        ?>
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-check"></i> Info!</h4>
+                    <?= ucwords($_GET['msg']); ?> data sukses
+                </div>
+            <?php
+            } else {
+            ?>
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <h4><i class="icon fa fa-ban"></i> Info!</h4>
+                    <?= ucwords($_GET['msg']); ?> data gagal
+                </div>
         <?php
             }
-          }
+        }
         ?>
         <div class="row" id="filterCard">
             <div class="col-sm-12">
@@ -51,11 +51,11 @@ $produk_jenis = $cpj->index(0);
                             <label for="" class="control-label">Provinsi</label>
                             <select name="provinsi" id="provinsi" class="form-control select2">
                                 <option value='' selected='selected'></option>
-                                <?php 
-                              while ($option_prov = $data_provinsi->fetch_object()) {
-                                echo '<option value="'.$option_prov->id.'">'.$option_prov->nama_provinsi.'</option>';
-                              }
-                            ?>
+                                <?php
+                                while ($option_prov = $data_provinsi->fetch_object()) {
+                                    echo '<option value="' . $option_prov->id . '">' . $option_prov->nama_provinsi . '</option>';
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="col-sm-4">
@@ -78,9 +78,9 @@ $produk_jenis = $cpj->index(0);
                     <select name="plan" id="plan" class="form-control">
                         <option value='' selected='selected'></option>
                         <?php
-                        while($row = $data_plan->fetch_object()){
+                        while ($row = $data_plan->fetch_object()) {
                         ?>
-                        <option value="<?=$row->id?>"><?=$row->nama_plan?></option>
+                            <option value="<?= $row->id ?>"><?= $row->nama_plan ?></option>
                         <?php
                         }
                         ?>
@@ -90,10 +90,10 @@ $produk_jenis = $cpj->index(0);
                     <label class="control-label" for="id_produk_jenis">Jenis Paket</label>
                     <select class="form-control" id="id_produk_jenis" name="id_produk_jenis">
                         <option value=""></option>
-                        <?php while ($row = $produk_jenis->fetch_object()) {?>
-                        <option value="<?=$row->id?>"
-                            <?=$data->id_produk_jenis == $row->id ? 'selected="selected"' : ''?>>
-                            <?=$row->short_name?></option>
+                        <?php while ($row = $produk_jenis->fetch_object()) { ?>
+                            <option value="<?= $row->id ?>"
+                                <?= $data->id_produk_jenis == $row->id ? 'selected="selected"' : '' ?>>
+                                <?= $row->short_name ?></option>
                         <?php } ?>
                     </select>
                 </div>
@@ -101,11 +101,11 @@ $produk_jenis = $cpj->index(0);
                     <label for="" class="control-label">Founder</label>
                     <select name="founder" id="founder" class="form-control">
                         <option value='' selected='selected'></option>
-                        <?php 
-                      while ($row = $founder->fetch_object()) {
-                        echo '<option value="'.$row->id.'">'.$row->name.'</option>';
-                      }
-                    ?>
+                        <?php
+                        while ($row = $founder->fetch_object()) {
+                            echo '<option value="' . $row->id . '">' . $row->name . '</option>';
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="col-sm-3">
@@ -137,11 +137,11 @@ $produk_jenis = $cpj->index(0);
                 <div class="col-sm-8">
                     <label for="" class="control-label">Pencarian</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="keyword" name="keyword">    
-                        <div class="input-group-btn">              
+                        <input type="text" class="form-control" id="keyword" name="keyword">
+                        <div class="input-group-btn">
                             <button type="button" class="btn btn-md btn-primary" id="btnFilter"><i class="fa fa-search"></i> Filter Data</button>
                             <button type="reset" class="btn btn-md btn-primary" id="btnReset">Reset Filter</button>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>
@@ -153,9 +153,9 @@ $produk_jenis = $cpj->index(0);
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th><?=$lang['paket']?></th>
-                            <th>ID <?=$lang['member']?></th>
-                            <th>Nama <?=$lang['member']?></th>
+                            <th><?= $lang['paket'] ?></th>
+                            <th>ID <?= $lang['member'] ?></th>
+                            <th>Nama <?= $lang['member'] ?></th>
                             <th>Tgl Daftar</th>
                             <th>Sponsor</th>
                             <th>Stok PIN</th>
@@ -173,7 +173,7 @@ $produk_jenis = $cpj->index(0);
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">History <?=$lang['paket']?></h4>
+                <h4 class="modal-title" id="exampleModalLabel">History <?= $lang['paket'] ?></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -183,7 +183,7 @@ $produk_jenis = $cpj->index(0);
                     <table id="table-history-paket" class="table table-hover" border="1" bordercolor="#ddd">
                         <thead>
                             <tr>
-                                <th><?=$lang['paket']?></th>
+                                <th><?= $lang['paket'] ?></th>
                                 <th>Tanggal</th>
                                 <th>Status</th>
                             </tr>
@@ -203,7 +203,7 @@ $produk_jenis = $cpj->index(0);
 <?php require_once("view/wilayah/wilayah.php"); ?>
 <script>
     var dataTable;
-    $(document).ready(function () {
+    $(document).ready(function() {
 
         dataTable = $("#member-list").DataTable({
             // sDom: "<'row'<'col-sm-6'l> <'col-sm-6'f>><'table-responsive't><'row'<'col-sm-6'i> <'col-sm-6'p>>",
@@ -212,7 +212,7 @@ $produk_jenis = $cpj->index(0);
             serverSide: true,
             ajax: {
                 url: "controller/member/member_list.php",
-                data: function (d) {
+                data: function(d) {
                     d.provinsi = $('#provinsi').val();
                     d.kota = $('#kota').val();
                     d.kecamatan = $('#kecamatan').val();
@@ -228,20 +228,20 @@ $produk_jenis = $cpj->index(0);
             columnDefs: [{
                 targets: [-1, 0, 1],
                 className: 'text-center'
-            },{
+            }, {
                 targets: [-2],
                 className: 'text-right'
             }]
         });
 
 
-        $('#custom_length').on( 'change', function () {
+        $('#custom_length').on('change', function() {
             dataTable.page.len($(this).val()).draw();
-        } );
-        $('#btnFilter').click(function(){
+        });
+        $('#btnFilter').click(function() {
             dataTable.ajax.reload();
         });
-        $('#btnToggle').click(function(){
+        $('#btnToggle').click(function() {
             $('#filterCard').toggle();
         });
 
@@ -275,7 +275,7 @@ $produk_jenis = $cpj->index(0);
                     type: "POST",
                     data: 'id_member=' + id_member,
                     dataType: "JSON",
-                    success: function (data) {
+                    success: function(data) {
                         if (data == true) {
                             Swal.fire(
                                 'Blokir!',
@@ -296,11 +296,11 @@ $produk_jenis = $cpj->index(0);
             type: "POST",
             data: 'id_member=' + id_member,
             dataType: "html",
-            success: function (data) {
+            success: function(data) {
                 $('#dataHistory').html(data);
                 $('#history').modal('show');
             },
-            error: function (jqXHR, textStatus, errorThrown) {
+            error: function(jqXHR, textStatus, errorThrown) {
                 alert('error');
             }
         });
@@ -316,7 +316,7 @@ $produk_jenis = $cpj->index(0);
                     id: idmember
                 },
                 dataType: "html",
-                success: function (data) {
+                success: function(data) {
                     if (data == 'success') {
                         alert("sukses kirim sms!");
                     } else {
