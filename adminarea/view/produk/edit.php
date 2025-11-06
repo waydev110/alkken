@@ -174,9 +174,17 @@ $data= $cp->show($id);
                         </div>
                         <script>
                             $(document).ready(function() {
-                                $('#fee_founder').trigger('keyup');
+                                // Trigger calculation on page load
+                                setTimeout(function() {
+                                    calculateFeeFounder();
+                                }, 100);
+                                
                                 $('#fee_founder').on('keyup change', function() {
-                                    var feeFounder = $(this).autoNumeric('get');
+                                    calculateFeeFounder();
+                                });
+                                
+                                function calculateFeeFounder() {
+                                    var feeFounder = $('#fee_founder').autoNumeric('get');
                                     
                                     $('.fee-founder-label').each(function() {
                                         var persentase = parseFloat($(this).data('persentase'));
@@ -185,7 +193,7 @@ $data= $cp->show($id);
                                         var formattedValue = calculatedFee.toLocaleString('id-ID', {minimumFractionDigits: 0, maximumFractionDigits: 0});
                                         $('#' + spanId).text(formattedValue);
                                     });
-                                });
+                                }
                             });
                         </script>
                         <div class="form-group">
