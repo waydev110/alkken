@@ -162,7 +162,7 @@ $data= $cp->show($id);
                             <div class="col-sm-10">
                                 <div class="input-group">
                                     <span class="input-group-addon">Rp.</span>
-                                    <input type="text" class="form-control autonumeric3" name="fee_founder" required="required" id="fee_founder">
+                                    <input type="text" class="form-control autonumeric3" name="fee_founder" required="required" id="fee_founder" value="<?=$data->fee_founder?>">
                                 </div>
                             </div>
                         </div>
