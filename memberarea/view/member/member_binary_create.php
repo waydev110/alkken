@@ -254,13 +254,17 @@ if (!isset($_GET['upline']) || empty($_GET['upline'])) {
         });
 
         // Toggle forms based on account type
-        $('#tipe_akun').on("change", function(e) {
-            if (e.target.value == '0') {
-                $('#blockDataMemberProspek').slideUp();
-                $('#blockDataMember, #blockDataBank').slideDown();
-            } else if (e.target.value == '2') {
-                $('#blockDataMember, #blockDataBank').slideUp();
-                $('#blockDataMemberProspek').slideDown();
+        $('#tipe_akun').on("change", function() {
+            var tipeAkun = $(this).val();
+            if (tipeAkun == '0') {
+                $('#blockDataMember, #blockDataBank').show();
+                $('#blockDataMemberProspek').hide();
+            } else if (tipeAkun == '1') {
+                $('#blockDataMemberProspek').hide();
+                $('#blockDataMember, #blockDataBank').hide();
+            } else if (tipeAkun == '2') {
+                $('#blockDataMember, #blockDataBank').hide();
+                $('#blockDataMemberProspek').show();
             }
         });
 
