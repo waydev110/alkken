@@ -57,14 +57,14 @@
                         </div>
                         <div class="row mb-2 position-relative">
                             <div class="col pe-0">
-                                <div class="form-group form-floating">
+                                <div class="form-group form-floating-2">
                                     <input type="text" class="form-control pt-3 pb-2 text-left"
                                         value="<?=currency($omset->omset_kiri)?>" disabled="disabled">
                                     <label class="form-control-label">Kiri</label>
                                 </div>
                             </div>
                             <div class="col align-self-center ps-0">
-                                <div class="form-group form-floating">
+                                <div class="form-group form-floating-2">
                                     <input type="text" class="form-control pt-3 pb-2 text-end"
                                         value="<?=currency($omset->omset_kanan)?>" disabled="disabled">
                                     <label class="form-control-label text-end pe-1 end-0 start-auto">Kanan</label>

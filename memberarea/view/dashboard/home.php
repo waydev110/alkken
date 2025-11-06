@@ -27,7 +27,7 @@
         background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     }
 
-    .form-floating>label.error {
+    .form-floating-2>label.error {
         position: absolute;
         top: 105px !important;
         font-size: 12px;
@@ -874,7 +874,7 @@ $cbrp = new classBonusRewardPaket();
         ?>
             <div class="row mb-3">
                 <div class="col">
-                    <h3 class="section-title">Produk Terlaris</h3>
+                    <h3 class="section-title">Produk Reseller</h3>
                 </div>
                 <div class="col-auto">
                     <a href="?go=product" class="btn btn-gold btn-sm">Lihat Semua</a>

@@ -9,7 +9,7 @@
 <?php include 'view/layout/header.php'; ?>
 <link rel="stylesheet" href="assets/vendor/select2/css/select2.min.css">
 <style>
-    .form-floating>label.error {
+    .form-floating-2>label.error {
         position: absolute;
         top: auto !important;
         bottom: -42px;
@@ -43,20 +43,20 @@
                     <h6> Data Diri</h6>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <input type="text" class="form-control" id="nama_samaran" name="nama_samaran"
                             value="<?=$member->nama_samaran?>">
                         <label class="form-control-label" for="nama_samaran">Nama Samaran</label>
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating-fix mb-4">
+                    <div class="form-group form-floating-2-fix mb-4">
                         <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="<?=$member->tempat_lahir_member?>">
                         <label class="form-control-label" for="tempat_lahir">Tempat Lahir</label>
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating-fix mb-4">
+                    <div class="form-group form-floating-2-fix mb-4">
                         <div class="input-group">
                             <input type="text" class="form-control datepicker" id="tanggal_lahir" name="tanggal_lahir" autocomplete="off" value="<?=$member->tgl_lahir_member <> '0000-00-00' && $member->tgl_lahir_member <> null && $member->tgl_lahir_member <> '' ? date('d/m/Y', strtotime($member->tgl_lahir_member)) : ''?>">
                         </div>

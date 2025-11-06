@@ -83,7 +83,7 @@ if(isset($_SESSION['session_user_member']) != ""){
                             <p class="mb-4">Please sign-in to your account</p>
 
                             <form id="formAuthentication" class="mb-3" action="controller/login/login.php" method="POST">
-                                <div class="form-floating form-floating-outline mb-3">
+                                <div class="form-floating-2 form-floating-2-outline mb-3">
                                     <input type="text" class="form-control" id="username" name="username"
                                         placeholder="Enter your email or username" autofocus />
                                     <label for="username">ID or Username</label>
@@ -91,7 +91,7 @@ if(isset($_SESSION['session_user_member']) != ""){
                                 <div class="mb-3">
                                     <div class="form-password-toggle">
                                         <div class="input-group input-group-merge">
-                                            <div class="form-floating form-floating-outline">
+                                            <div class="form-floating-2 form-floating-2-outline">
                                                 <input type="password" id="password" class="form-control"
                                                     name="password"
                                                     aria-describedby="password" />

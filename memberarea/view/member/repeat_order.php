@@ -86,7 +86,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="form-group form-floating mb-3">
+                    <div class="form-group form-floating-2 mb-3">
                         <select class="form-control" id="kode_aktivasi" name="kode_aktivasi" required="required">
                             <?php 
                             while ($row   = $kode_aktivasi->fetch_object()) {

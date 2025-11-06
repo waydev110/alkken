@@ -47,7 +47,7 @@
     <div class="main-container container pt-4 pb-4">
         <form action="<?=$_SERVER['PHP_SELF']?>" method="get" accept-charset="utf-8">
             <!-- Search -->
-            <div class="form-group form-floating mb-3">
+            <div class="form-group form-floating-2 mb-3">
                 <input type="hidden" name="go" value="genealogy">
                 <input type="text" class="form-control " id="id_member" name="id_member" placeholder="Search">
                 <label class="form-control-label" for="search">Search Member</label>

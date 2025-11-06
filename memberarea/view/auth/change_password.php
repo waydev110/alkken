@@ -27,7 +27,7 @@
             <form action="controller/auth/cek_password.php" id="formCekPassword" method="post">
                 <div class="row">
                     <div class="col-12">
-                        <div class="form-group form-floating mb-3">
+                        <div class="form-group form-floating-2 mb-3">
                             <input type="password" class="form-control" id="old_password" name="old_password" required="required">
                             <label class="form-control-label" for="old_password">Password</label>
                             <button type="button" class="btn btn-link text-black-50 tooltip-btn show_password">
@@ -55,14 +55,14 @@
             <form action="controller/auth/update_password.php" id="formUpdatePassword" method="post">
                 <div class="row">
                     <div class="col">
-                        <div class="form-group form-floating mb-3">
+                        <div class="form-group form-floating-2 mb-3">
                             <input type="password" class="form-control" id="new_password" name="new_password" required="required">
                             <label class="form-control-label" for="new_password">Password Baru</label>
                             <button type="button" class="btn btn-link text-black-50 tooltip-btn show_password">
                                 <i class="fa-solid fa-eye"></i>
                             </button>
                         </div>
-                        <div class="form-group form-floating mb-3">
+                        <div class="form-group form-floating-2 mb-3">
                             <input type="password" class="form-control" id="conf_password" name="conf_password">
                             <label class="form-control-label" for="conf_password">Konfirmasi Password Baru</label>
                             <button type="button" class="btn btn-link text-black-50 tooltip-btn show_password">

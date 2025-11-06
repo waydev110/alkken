@@ -59,7 +59,7 @@ $testimonies = $ct->index();
 <!-- Sidebar main menu ends -->
 
 <style>
-    .form-floating>label.error {
+    .form-floating-2>label.error {
         position: absolute;
         top: 105px !important;
         font-size: 12px;

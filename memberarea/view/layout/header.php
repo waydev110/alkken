@@ -52,7 +52,7 @@
         
         body {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            color: var(--white);
+            color: var(--dark);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
         }

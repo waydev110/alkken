@@ -28,7 +28,7 @@ $bonus_founder = $cbns->riwayat_bonus('bonus_founder', $session_member_id);
 // $bonus_reward_reseller = $cbns->riwayat_bonus('bonus_reward_reseller',$session_member_id);
 ?>
 <style>
-    .form-floating>label.error {
+    .form-floating-2>label.error {
         position: absolute;
         top: 105px !important;
         font-size: 12px;

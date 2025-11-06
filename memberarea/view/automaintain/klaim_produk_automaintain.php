@@ -151,7 +151,7 @@
                         <input type="hidden" name="id_klaim" id="id_klaim">
                         <div class="row">
                             <div class="col-12">
-                                <div class="form-group form-floating mb-3">
+                                <div class="form-group form-floating-2 mb-3">
                                     <select name="id_paket" id="id_paket" size="1" class="form-control" required="required">
                                         <option value="-" selected="selected">-- Pilih Paket Produk --</option>
                                         option
@@ -165,7 +165,7 @@
                                 </div>
                             </div>
                             <div class="col-12">
-                               <div class="form-group form-floating mb-4">
+                               <div class="form-group form-floating-2 mb-4">
                                    <textarea class="form-control" id="alamat_pengiriman" name="alamat_pengiriman"></textarea>
                                    <label class="form-control-label" for="alamat_pengiriman">Alamat</label>
                                </div>

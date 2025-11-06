@@ -48,7 +48,7 @@
                 <input type="hidden" name="token" value="<?=$token?>">
                 <div class="row">
                     <div class="col-12">
-                        <div class="form-group form-floating mb-3">
+                        <div class="form-group form-floating-2 mb-3">
                             <select class="select2 form-control" id="bank" name="bank" required="required">
                                 <option value="">Pilih Bank</option>
                                 <?php while ($row = $bank->fetch_object()) {?>
@@ -59,19 +59,19 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="form-group form-floating mb-3">
+                        <div class="form-group form-floating-2 mb-3">
                             <input type="text" class="form-control" id="no_rekening" name="no_rekening" value="<?=$member->no_rekening?>" required="required">
                             <label class="form-control-label" for="no_rekening">No Rekening</label>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="form-group form-floating mb-3">
+                        <div class="form-group form-floating-2 mb-3">
                             <input type="text" class="form-control" id="atas_nama_rekening" name="atas_nama_rekening" value="<?=$member->atas_nama_rekening?>" required="required">
                             <label class="form-control-label" for="atas_nama_rekening">Nama Pemilik Rekening</label>
                         </div>
                     </div>
                     <div class="col-12">
-                        <div class="form-group form-floating mb-3">
+                        <div class="form-group form-floating-2 mb-3">
                             <input type="text" class="form-control" id="cabang_rekening" name="cabang_rekening" value="<?=$member->cabang_rekening?>" required="required">
                             <label class="form-control-label" for="cabang_rekening">Cabang</label>
                         </div>

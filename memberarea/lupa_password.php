@@ -99,7 +99,7 @@ $theme = $s->setting('theme_memberarea');
         <p class="text-center">Masukkan ID akun Anda</p>
 
         <form action="controller/auth/lupa_password.php" id="formForgotPassword" method="post">
-            <div class="form-group form-floating mb-3">
+            <div class="form-group form-floating-2 mb-3">
                 <input type="text" class="form-control" id="id_member" name="id_member" placeholder="ID Member">
                 <label for="id_member">ID Member</label>
             </div>

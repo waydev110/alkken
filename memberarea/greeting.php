@@ -53,7 +53,7 @@ if(isset($_SESSION['session_user_member']) != ""){
             .btn-default {
                 background-color: #085d1a!important;
             }
-            .form-floating.is-valid:before {
+            .form-floating-2.is-valid:before {
                 content: "";
                 position: absolute;
                 left: 0;

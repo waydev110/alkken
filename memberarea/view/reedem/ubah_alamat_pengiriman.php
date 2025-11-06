@@ -37,7 +37,7 @@
 <?php include 'view/layout/header.php'; ?>
 <link rel="stylesheet" href="assets/vendor/select2/css/select2.min.css">
 <style>
-    .form-floating>label.error {
+    .form-floating-2>label.error {
         position: absolute;
         top: auto !important;
         bottom: -42px;
@@ -71,7 +71,7 @@
                     <h6> Data Alamat</h6>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <select class="form-control select2" id="provinsi" name="provinsi">
                             <option value="">Pilih Provinsi</option>
                             <?php while ($row = $provinsi->fetch_object()) {?>
@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <select class="select2 form-control" id="kota" name="kota">
                             <option value="">Pilih Kab/Kota</option>
                             <?php while ($row = $kota->fetch_object()) {?>
@@ -97,7 +97,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <select class="form-control select2" id="kecamatan" name="kecamatan">
                             <option value="">Pilih Kecamatan</option>
                             <?php while ($row = $kecamatan->fetch_object()) {?>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <select class="form-control select2" id="kelurahan" name="kelurahan">
                             <option value="">Pilih Kelurahan</option>
                             <?php while ($row = $kelurahan->fetch_object()) {?>
@@ -123,7 +123,7 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <textarea class="form-control" id="alamat_member"
                             name="alamat_member"><?=$member->alamat_member?></textarea>
                         <label class="form-control-label" for="alamat_member">Alamat</label>

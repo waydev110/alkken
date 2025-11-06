@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="assets/vendor/intlTelInput/css/intlTelInput.css">
 <link rel="stylesheet" href="assets/vendor/select2/css/select2.min.css">
 <style>
-    .form-floating-fix label.error {
+    .form-floating-2-fix label.error {
         position: absolute;
         top: 60px !important;
         left: 0;
@@ -93,13 +93,13 @@
                                         <input type="hidden" id="sponsor" name="sponsor" value="<?=$session_member_id?>">
                                         <?php } ?> 
                                         <div class="col pe-0">
-                                            <div class="form-group form-floating">
+                                            <div class="form-group form-floating-2">
                                                 <input type="text" class="form-control pt-4 pb-2 text-left" id="id_sponsor" value="<?=$session_id_member?>" <?=$readonly?>>
                                                 <label class="form-control-label">ID <?=$lang['sponsor']?></label>
                                             </div>
                                         </div>
                                         <div class="col align-self-center ps-0">
-                                            <div class="form-group form-floating">
+                                            <div class="form-group form-floating-2">
                                                 <input type="text" class="form-control pt-4 pb-2 text-end" value="<?=$session_nama_samaran?>" readonly="readonly">>
                                                 <label class="form-control-label text-end pe-1 end-0 start-auto">Nama
                                                     <?=$lang['sponsor']?></label>
@@ -118,7 +118,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <select class="form-control" id="paket_join" name="paket_join">
                             <?php 
                             while ($row   = $kode_aktivasi->fetch_object()) {
@@ -132,7 +132,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="form-group form-floating mb-3">
+                    <div class="form-group form-floating-2 mb-3">
                         <select class="form-control" id="tipe_akun" name="tipe_akun">
                             <option value="0"><?=$lang['member']?> Baru</option>
                         </select>
@@ -145,25 +145,25 @@
                     <h6>Data <?=$lang['member']?></h6>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <input type="text" class="form-control" id="username" name="username" required="required">
                         <label class="form-control-label" for="username">Username</label>
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating-fix mb-4">
+                    <div class="form-group form-floating-2-fix mb-4">
                         <input type="text" class="form-control" id="nama_member" name="nama_member" value="">
                         <label class="form-control-label" for="nama_member">Nama Lengkap</label>
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating-fix mb-4">
+                    <div class="form-group form-floating-2-fix mb-4">
                         <input type="text" class="form-control" id="nama_samaran" name="nama_samaran" value="">
                         <label class="form-control-label" for="nama_samaran">Nama Samaran</label>
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating-fix mb-4">
+                    <div class="form-group form-floating-2-fix mb-4">
                         <input type="text" class="form-control" id="wa_member" name="wa_member" value="">
                         <label class="form-control-label" for="wa_member">No Whatsapp <?=$lang['member']?></label>
                     </div>
@@ -174,7 +174,7 @@
                     <h6>Data Alamat</h6>
                 </div>
                 <div class="col-12">
-                   <div class="form-group form-floating mb-4">
+                   <div class="form-group form-floating-2 mb-4">
                        <select class="form-control select2" id="provinsi" name="provinsi">
                            <option value="">Pilih Provinsi</option>
                            <?php while ($row = $provinsi->fetch_object()) {?>
@@ -185,7 +185,7 @@
                    </div>
                 </div>
                 <div class="col-12">
-                   <div class="form-group form-floating mb-4">
+                   <div class="form-group form-floating-2 mb-4">
                        <select class="form-control select2" id="kota" name="kota">
                            <option value="">Pilih Kab/Kota</option>
                        </select>
@@ -193,7 +193,7 @@
                    </div>
                 </div>
                 <div class="col-12">
-                   <div class="form-group form-floating mb-4">
+                   <div class="form-group form-floating-2 mb-4">
                        <select class="form-control select2" id="kecamatan" name="kecamatan">
                            <option value="">Pilih Kecamatan</option>
                        </select>
@@ -201,7 +201,7 @@
                    </div>
                 </div>
                 <div class="col-12">
-                   <div class="form-group form-floating mb-4">
+                   <div class="form-group form-floating-2 mb-4">
                        <select class="form-control select2" id="kelurahan" name="kelurahan">
                            <option value="">Pilih Kelurahan</option>
                        </select>
@@ -209,7 +209,7 @@
                    </div>
                 </div>
                 <div class="col-12">
-                   <div class="form-group form-floating mb-4">
+                   <div class="form-group form-floating-2 mb-4">
                        <textarea class="form-control" id="alamat_member" name="alamat_member"></textarea>
                        <label class="form-control-label" for="alamat_member">Alamat</label>
                    </div>
@@ -218,7 +218,7 @@
                     <h6>Data Bank</h6>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <select class="select2 form-control" id="bank" name="bank" required="required">
                             <option value="">Pilih Bank</option>
                             <?php while ($row = $bank->fetch_object()) {?>
@@ -229,19 +229,19 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <input type="text" class="form-control" id="no_rekening" name="no_rekening" value="" required="required">
                         <label class="form-control-label" for="no_rekening">No Rekening</label>
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <input type="text" class="form-control" id="atas_nama_rekening" name="atas_nama_rekening" value="" required="required" disabled="disabled">
                         <label class="form-control-label" for="atas_nama_rekening">Nama Pemilik Rekening</label>
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <input type="text" class="form-control" id="cabang_rekening" name="cabang_rekening" value="" required="required">
                         <label class="form-control-label" for="cabang_rekening">Cabang</label>
                     </div>
@@ -252,7 +252,7 @@
                     <h6>Data <?=$lang['member']?> Prospek</h6>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating-fix mb-4">
+                    <div class="form-group form-floating-2-fix mb-4">
                         <select class="form-control" id="member_prospek" name="member_prospek">
                         <?php 
                             while ($row = $member_prospek->fetch_object()) {

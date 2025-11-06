@@ -24,7 +24,7 @@
         <form action="controller/auth/update_username.php" id="formUpdateUsername" method="post">
             <div class="row">
                 <div class="col">
-                    <div class="form-group form-floating mb-3">
+                    <div class="form-group form-floating-2 mb-3">
                         <input type="hidden" name="session_user_member" value="<?=$session_user_member?>">
                         <input type="text" class="form-control" id="username" name="username" required="required">
                         <label class="form-control-label" for="username">Username</label>

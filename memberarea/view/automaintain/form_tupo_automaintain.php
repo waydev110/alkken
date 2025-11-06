@@ -91,13 +91,13 @@
                         <form class="form-horizontal" method="post"
                             action="controller/automaintain/tupo_automaintain.php" id="formTopup">
                             <input type="hidden" name="token" value="<?=$token;?>">
-                            <div class="form-group form-floating mb-0">
+                            <div class="form-group form-floating-2 mb-0">
                                 <input type="hidden" id="nominal" name="nominal" value="<?=$kekurangan_saldo?>">
                                 <input type="text" class="form-control" id="total_transfer" name="total_transfer" readonly="readonly" required="required" value="Rp<?=number_format($kekurangan_saldo,0,',','.');?>">
                                 <label class="form-control-label">Total Transfer</label>
                             </div>
                             
-                            <div class="form-group form-floating mb-0">
+                            <div class="form-group form-floating-2 mb-0">
                                 <select class="form-control" id="rekening" name="rekening">
                                     <option value="">Pilih Bank</option>
                                     <?php 

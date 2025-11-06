@@ -8,7 +8,7 @@
 <?php include 'view/layout/header.php'; ?>
 <link rel="stylesheet" href="assets/vendor/select2/css/select2.min.css">
 <style>
-    .form-floating>label.error {
+    .form-floating-2>label.error {
         position: absolute;
         top: auto !important;
         bottom: -42px;
@@ -39,14 +39,14 @@
             <input type="hidden" name="token" value="<?=$token?>">
             <div class="row">
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <input type="text" class="form-control" id="username_marketplace" name="username_marketplace"
                             value="<?=$member->username_marketplace?>">
                         <label class="form-control-label" for="username_marketplace">Username Marketplace</label>
                     </div>
                 </div>
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <input type="text" class="form-control" id="address_coin" name="address_coin"
                             value="<?=$member->address_coin?>">
                         <label class="form-control-label" for="address_coin">Wallet Address BEP20</label>

@@ -30,7 +30,7 @@
         <!-- main page content -->
         <div class="main-container container pt-4 pb-4">
             <!-- Search -->
-            <div class="form-group form-floating mb-3">
+            <div class="form-group form-floating-2 mb-3">
                 <input type="text" class="form-control " id="search" placeholder="Search">
                 <label class="form-control-label" for="search">Search User</label>
                 <button type="button" class="text-color-theme tooltip-btn">

@@ -162,7 +162,7 @@ if ($produk_jenis->reward_sponsor_wajib_ro == '1') {
                                     </div>
                                     <div class="row mb-2 position-relative">
                                         <div class="col">
-                                            <div class="form-group form-floating">
+                                            <div class="form-group form-floating-2">
                                                 <div class="form-control pt-3 pb-2 text-left">
                                                     <span class="text-danger"><?= currency($poin_reward >= $row->poin ? $row->poin : $poin_reward) ?></span>
                                                     dari <?= currency($row->poin) ?>

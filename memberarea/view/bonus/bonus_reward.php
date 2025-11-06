@@ -105,7 +105,7 @@
                             </div>
                             <div class="row mb-2 position-relative">
                                 <div class="col pe-0">
-                                    <div class="form-group form-floating">
+                                    <div class="form-group form-floating-2">
                                         <div class="form-control pt-3 pb-2 text-left">
                                             <span class="text-danger"><?=currency($member->reward_kiri >= $row->jumlah_kiri ? $row->jumlah_kiri : $member->reward_kiri)?></span> dari <?=currency($row->jumlah_kiri)?>
                                         </div>
@@ -114,7 +114,7 @@
                                 </div>
                                 ---
                                 <div class="col align-self-center ps-0">
-                                    <div class="form-group form-floating">
+                                    <div class="form-group form-floating-2">
                                         <div class="form-control pt-3 pb-2 text-end">
                                             <span class="text-danger"><?=currency($member->reward_kanan >= $row->jumlah_kanan ? $row->jumlah_kanan : $member->reward_kanan)?></span> dari <?=currency($row->jumlah_kanan)?>
                                         </div>

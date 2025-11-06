@@ -38,11 +38,11 @@
                             <input type="hidden" name="token" value="<?=$token?>">
                             <input type="hidden" name="kode_unik" id="kode_unik" value="">
                             <input type="hidden" name="total_bayar" id="total_bayar" value="">
-                            <div class="form-group form-floating mb-3">
+                            <div class="form-group form-floating-2 mb-3">
                                 <input type="text" class="form-control autonumeric" id="nominal" name="nominal" value="">
                                 <label class="form-control-label" for="nominal">Nominal</label>
                             </div>
-                            <div class="form-group form-floating mb-3">
+                            <div class="form-group form-floating-2 mb-3">
                                 <select class="form-control" id="rekening" name="rekening">
                                     <option value="">Pilih Bank</option>
                                     <?php 

@@ -42,14 +42,14 @@
                             <div class="col mt-4 mb-2">
                                 <h6>Kirim Ke</h6>
                             </div>
-                            <div class="form-group form-floating mb-3">
+                            <div class="form-group form-floating-2 mb-3">
                                 <input type="hidden" name="id">
+                                <label for="id_member">ID <?=$lang['member']?></label>
                                 <input type="text" class="form-control" id="id_member" name="id_member" value="">
-                                <label class="form-control-label" for="id_member">ID <?=$lang['member']?></label>
                             </div>
-                            <div class="form-group form-floating mb-3">
+                            <div class="form-group form-floating-2 mb-3">
+                                <label for="nama_member">Nama <?=$lang['member']?></label>
                                 <input type="text" class="form-control" id="nama_member" name="nama_member" value="" disabled="disabled">
-                                <label class="form-control-label" for="nama_member">Nama <?=$lang['member']?></label>
                             </div>
                             <div id="daftarPIN" style="display:none">
                                 <div class="col">

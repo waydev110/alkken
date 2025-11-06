@@ -21,7 +21,7 @@
 
 <?php include 'view/layout/header.php'; ?>
 <style>
-    .form-floating-fix label.error {
+    .form-floating-2-fix label.error {
         position: absolute;
         top: 60px !important;
         left: 0;
@@ -52,9 +52,10 @@
             <?php
                 if($kode_aktivasi->num_rows == 0 ){
             ?>
-            <div class="alert alert-danger text-center">
-                Anda tidak memiliki <?=$lang['kode_aktivasi']?>.
-            </div>
+                <div class="alert alert-danger alert-modern">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    <span>Anda tidak memiliki <?= $lang['kode_aktivasi'] ?>.</span>
+                </div>
             <?php
                 } else {
             ?>
@@ -66,7 +67,7 @@
             <div class="row mb-3">
                 <input type="hidden" id="id" name="id" value="<?=base64_encode($member->id)?>">
                 <div class="col align-self-center">
-                    <div class="form-group form-floating">
+                    <div class="form-group form-floating-2">
                         <input type="text" class="form-control pt-4 pb-2" id="id_member" value="<?=$member->id_member?>" readonly="readonly">
                         <label class="form-control-label">ID <?=$lang['member']?></label>
                     </div>
@@ -74,7 +75,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col align-self-center">
-                    <div class="form-group form-floating">
+                    <div class="form-group form-floating-2">
                         <input type="text" class="form-control pt-4 pb-2" value="<?=$member->nama_samaran?>" readonly="readonly">
                         <label class="form-control-label">Nama
                             <?=$lang['member']?></label>
@@ -88,7 +89,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="form-group form-floating mb-4">
+                    <div class="form-group form-floating-2 mb-4">
                         <select class="form-control" id="id_kodeaktivasi" name="id_kodeaktivasi">
                             <option value="">-- Pilih Paket --</option>
                             <?php

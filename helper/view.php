@@ -724,14 +724,14 @@
                         </div>
                         <div class="row mb-2 position-relative">
                             <div class="col pe-0">
-                                <div class="form-group form-floating">
+                                <div class="form-group form-floating-2">
                                     <input type="text" class="form-control pt-3 pb-2 text-start size-12"
                                         value="'.currency($total_transfer).'" disabled="disabled">
                                     <label class="form-control-label">Ditransfer</label>
                                 </div>
                             </div>
                             <div class="col align-self-center ps-0">
-                                <div class="form-group form-floating">
+                                <div class="form-group form-floating-2">
                                     <input type="text" class="form-control pt-3 pb-2 text-end size-12"
                                         value="'.currency($total_pending).'" disabled="disabled">
                                     <label class="form-control-label text-end pe-1 end-0 start-auto">Pending</label>
@@ -761,14 +761,14 @@
                         </div>
                         <div class="row mb-2 position-relative">
                             <div class="col pe-0">
-                                <div class="form-group form-floating">
+                                <div class="form-group form-floating-2">
                                     <input type="text" class="form-control pt-3 pb-2 text-start size-12"
                                         value="'.currency($tersedia).'" disabled="disabled">
                                     <label class="form-control-label">Tersedia</label>
                                 </div>
                             </div>
                             <div class="col align-self-center ps-0">
-                                <div class="form-group form-floating">
+                                <div class="form-group form-floating-2">
                                     <input type="text" class="form-control pt-3 pb-2 pe-2 text-end size-12"
                                         value="'.currency($terpakai).'" disabled="disabled">
                                     <label class="form-control-label text-end pe-1 end-0 start-auto">Terpakai</label>
@@ -801,7 +801,7 @@
                             </div>
                             <div class="row mb-2 position-relative">
                                 <div class="col">
-                                    <div class="form-group form-floating">
+                                    <div class="form-group form-floating-2">
                                         <input type="text" class="form-control pt-3 pb-2 text-left"
                                             value="'.$info.'" disabled="disabled">
                                     </div>
