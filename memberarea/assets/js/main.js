@@ -268,6 +268,24 @@ function show_success_html(message = '', url = ''){
     $('main').append(html);
 }
 
+function show_success_html_message(message = '', url = ''){
+    $('main').children().remove();
+        var html = ``;
+    if(message != ''){
+        html += `<div class="col-12 mb-3 text-center px-5">
+                    ${message}
+                </div>`;       
+    }
+    if(url != ''){
+        html += `<div class="col-6 offset-3 d-grid mb-4">
+                    <a href="index.php?go=${url}" class="btn btn-default btn-lg shadow-sm">Ok</a>
+                </div>`;      
+    }
+    html += `</div>
+        </div>`;
+    $('main').append(html);
+}
+
 function show_error(message = '', url = ''){
     $('main').children().remove();
     var html = `<header class="header position-fixed">`;

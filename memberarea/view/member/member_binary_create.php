@@ -157,6 +157,16 @@ if (!isset($_GET['upline']) || empty($_GET['upline'])) {
                         <label>Nama Lengkap</label>
                         <input type="text" class="form-control" id="nama_member" name="nama_member">
                     </div>
+                    <div class="form-group">
+                        <label for="tempat_lahir">Tempat Lahir</label>
+                        <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" value="<?=$member->tempat_lahir_member?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="tanggal_lahir">Tanggal Lahir</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control datepicker" id="tanggal_lahir" name="tanggal_lahir" autocomplete="off" value="<?=$member->tgl_lahir_member <> '0000-00-00' && $member->tgl_lahir_member <> null && $member->tgl_lahir_member <> '' ? date('d/m/Y', strtotime($member->tgl_lahir_member)) : ''?>">
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label>No Whatsapp</label>
@@ -544,7 +554,7 @@ if (!isset($_GET['upline']) || empty($_GET['upline'])) {
                     const obj = JSON.parse(result);
                     if (obj.status == true) {
                         var redirect_url = 'genealogy_v1';
-                        show_success_html(obj.message, redirect_url);
+                        show_success_html_message(obj.message, redirect_url);
                     } else {
                         var redirect_url = 'genealogy_v1';
                         show_error(obj.message, redirect_url);

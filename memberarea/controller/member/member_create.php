@@ -165,8 +165,8 @@
             // $nama_samaran = addslashes(strip_tags($_POST['nama_samaran']));
             $user_member = addslashes(strip_tags($_POST['username']));
             $nama_samaran = $user_member;
-            $tgl_lahir_member = NULL;
-            $tempat_lahir_member = NULL;
+            $tgl_lahir_member = date('Y-m-d', strtotime(str_replace('/', '-', $_POST['tanggal_lahir'])));
+            $tempat_lahir_member = addslashes(strip_tags($_POST['tempat_lahir']));
             $alamat_member = NULL;
             $jns_kel_member = NULL;
             $no_ktp_member = NULL;
@@ -537,12 +537,52 @@
         echo json_encode(['status' => false, 'message' => $e->getMessage()]);
         return false;
     }
-    $message = '<p class="text-center text-muted mb-2 size-18">Pendaftaran Berhasil</p>
-                <p class="text-center text-muted mb-2 size-14">Berikut data '.$lang['member'].' anda : </p>
-                <p>Nama Member : '.$nama_member.'</p>
-                <p>ID '.$lang['member'].' : '.$id_member.'</p>
-                <p>Username : '.$user_member.'</p>
-                <p>Password : '.base64_decode($pass_member).'</p>
-                <p>PIN : '.base64_decode($pin_member).'</p>';
+    $message = '
+    <div style="max-width: 500px; margin: 0 auto; background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); border-radius: 16px; padding: 32px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); border: 1px solid #d4af37;">
+        <div style="text-align: center; margin-bottom: 24px;">
+            <div style="display: inline-block; background: linear-gradient(135deg, #d4af37 0%, #f4e5a1 100%); padding: 12px 24px; border-radius: 50px; margin-bottom: 16px;">
+                <svg style="width: 48px; height: 48px; fill: #1a1a1a;" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+            </div>
+            <h2 style="color: #d4af37; font-size: 24px; font-weight: 700; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px;">Pendaftaran Berhasil</h2>
+            <p style="color: #a0a0a0; font-size: 14px; margin: 0;">Selamat! Akun '.$lang['member'].' Anda telah aktif</p>
+        </div>
+        
+        <div style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; padding: 20px; margin-bottom: 16px;">
+            <div style="display: grid; gap: 16px;">
+                <div style="border-left: 3px solid #d4af37; padding-left: 16px;">
+                    <p style="color: #888; font-size: 12px; margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 0.5px;">Nama Member</p>
+                    <p style="color: #fff; font-size: 16px; font-weight: 600; margin: 0;">'.$nama_member.'</p>
+                </div>
+                
+                <div style="border-left: 3px solid #d4af37; padding-left: 16px;">
+                    <p style="color: #888; font-size: 12px; margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 0.5px;">ID '.$lang['member'].'</p>
+                    <p style="color: #d4af37; font-size: 18px; font-weight: 700; margin: 0; font-family: monospace;">'.$id_member.'</p>
+                </div>
+                
+                <div style="border-left: 3px solid #d4af37; padding-left: 16px;">
+                    <p style="color: #888; font-size: 12px; margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 0.5px;">Username</p>
+                    <p style="color: #fff; font-size: 16px; font-weight: 600; margin: 0; font-family: monospace;">'.$user_member.'</p>
+                </div>
+                
+                <div style="border-left: 3px solid #d4af37; padding-left: 16px;">
+                    <p style="color: #888; font-size: 12px; margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 0.5px;">Password</p>
+                    <p style="color: #fff; font-size: 16px; font-weight: 600; margin: 0; font-family: monospace;">'.base64_decode($pass_member).'</p>
+                </div>
+                
+                <div style="border-left: 3px solid #d4af37; padding-left: 16px;">
+                    <p style="color: #888; font-size: 12px; margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 0.5px;">PIN</p>
+                    <p style="color: #fff; font-size: 16px; font-weight: 600; margin: 0; font-family: monospace;">'.base64_decode($pin_member).'</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: rgba(212, 175, 55, 0.05); border-radius: 8px; padding: 16px; text-align: center;">
+            <p style="color: #d4af37; font-size: 12px; margin: 0; line-height: 1.6;">
+                <strong>⚠️ PENTING:</strong> Simpan data login Anda dengan aman
+            </p>
+        </div>
+    </div>';
     echo json_encode(['status' => true, 'message' => $message]);
     return true;

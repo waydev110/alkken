@@ -15531,6 +15531,10 @@ h5.price {
         order: 2;
     }
 
+    .form-group .input-group {
+        order: 2;
+    }
+
     .form-group input:focus,
     .form-group select:focus {
         border-color: #d4af37;
