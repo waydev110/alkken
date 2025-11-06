@@ -174,6 +174,7 @@ $data= $cp->show($id);
                         </div>
                         <script>
                             $(document).ready(function() {
+                                $('#fee_founder').trigger('keyup');
                                 $('#fee_founder').on('keyup change', function() {
                                     var feeFounder = $(this).autoNumeric('get');
                                     
