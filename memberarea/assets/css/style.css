@@ -14441,8 +14441,8 @@ a.card {
 }
 .iti--allow-dropdown .iti__flag-container, .iti--separate-dial-code .iti__flag-container {
   right: auto;
-  left: 5px!important;
-  top: 8px!important;
+  left: 25px!important;
+  top: 0px!important;
 }
 
 h3.price {
@@ -15519,7 +15519,7 @@ h5.price {
         color: #1a1a1a;
         order: 2;
     }
-    .form-group .iti__flag-container,.form-group textarea {
+    .form-group .iti,.form-group textarea {
         width: 100%;
         border: 2px solid #333;
         border-radius: 12px;
