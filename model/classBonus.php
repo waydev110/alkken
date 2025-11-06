@@ -135,10 +135,7 @@ class classBonus{
                         b.updated_at,
                         b.keterangan
                     FROM mlm_bonus_generasi b
-                    LEFT JOIN mlm_plan pl ON b.jenis_bonus = pl.id
                     WHERE b.id_member = '$id' 
-                    AND pl.jenis_plan = '1' 
-                    AND pl.id <> 14
                     AND b.nominal > 0
                     AND b.deleted_at IS NULL
     
@@ -147,7 +144,7 @@ class classBonus{
                     SELECT 
                         b.id,
                         b.id_member,
-                        'bonus_generasi' AS type,
+                        'bonus_upline' AS type,
                         b.nominal,
                         b.autosave,
                         b.admin,
@@ -157,9 +154,8 @@ class classBonus{
                         b.created_at,
                         b.updated_at,
                         b.keterangan
-                    FROM mlm_bonus_generasi b
+                    FROM mlm_bonus_upline b
                     WHERE b.id_member = '$id' 
-                    AND b.jenis_bonus IN (15,16,17)
                     AND b.nominal > 0
                     AND b.deleted_at IS NULL
     

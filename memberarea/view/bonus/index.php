@@ -67,56 +67,80 @@ $qualified_balik_modal = $cm->cek_sponsori_netreborn($session_member_id);
                             Semua Bonus
                         </button>
                         <?php
-                        if ($member->founder == '1') {
+                        // Define bonus types with their conditions
+                        $bonus_types = [
+                            [
+                                'key' => 'bonus_founder',
+                                'qualified' => $member->founder == '1',
+                                'label' => $lang['bonus_founder']
+                            ],
+                            [
+                                'key' => 'bonus_sponsor',
+                                'qualified' => true,
+                                'label' => $lang['bonus_sponsor']
+                            ],
+                            [
+                                'key' => 'bonus_cashback',
+                                'qualified' => false,
+                                'label' => $lang['bonus_cashback']
+                            ],
+                            [
+                                'key' => 'bonus_pasangan',
+                                'qualified' => true, // Hidden
+                                'label' => $lang['bonus_pasangan'] ?? 'Bonus Pasangan'
+                            ],
+                            [
+                                'key' => 'bonus_generasi_ro_aktif',
+                                'qualified' => false,
+                                'label' => $lang['bonus_generasi_ro_aktif']
+                            ],
+                            [
+                                'key' => 'bonus_titik_ro_aktif',
+                                'qualified' => false,
+                                'label' => $lang['bonus_titik_ro_aktif']
+                            ],
+                            [
+                                'key' => 'bonus_royalti_omset',
+                                'qualified' => false, // Hidden
+                                'label' => $lang['bonus_royalti_omset'] ?? 'Bonus Royalti Omset'
+                            ],
+                            [
+                                'key' => 'bonus_generasi',
+                                'qualified' => true,
+                                'label' => $lang['bonus_generasi']
+                            ],
+                            [
+                                'key' => 'bonus_titik',
+                                'qualified' => true,
+                                'label' => $lang['bonus_titik']
+                            ],
+                            [
+                                'key' => 'bonus_reward',
+                                'qualified' => true,
+                                'label' => $lang['bonus_reward']
+                            ],
+                            [
+                                'key' => 'bonus_reward_paket',
+                                'qualified' => false, // Hidden
+                                'label' => $lang['bonus_reward_paket'] ?? 'Bonus Reward Paket'
+                            ],
+                            [
+                                'key' => 'bonus_balik_modal',
+                                // 'qualified' => $qualified_balik_modal,
+                                'qualified' => false,
+                                'label' => $lang['bonus_balik_modal']
+                            ]
+                        ];
+
+                        // Loop through bonus types and display qualified ones
+                        foreach ($bonus_types as $bonus) {
+                            if ($bonus['qualified']) {
                         ?>
-                            <button class="btn-category swiper-slide tag" type="button" data-filter=".bonus_founder" style="width:auto" onclick="get_bonus(0, 'bonus_founder', this)">
-                                <?= $lang['bonus_founder'] ?>
-                            </button>
+                                <button class="btn-category swiper-slide tag" type="button" data-filter=".<?= $bonus['key'] ?>" style="width:auto" onclick="get_bonus(0, '<?= $bonus['key'] ?>', this)">
+                                    <?= $bonus['label'] ?>
+                                </button>
                         <?php
-                        }
-                        ?>
-                        <button class="btn-category swiper-slide tag" type="button" data-filter=".bonus_sponsor" style="width:auto" onclick="get_bonus(0, 'bonus_sponsor', this)">
-                            <?= $lang['bonus_sponsor'] ?>
-                        </button>
-                        <button class="btn-category swiper-slide tag" type="button" data-filter=".bonus_cashback" style="width:auto" onclick="get_bonus(0, 'bonus_cashback', this)">
-                            <?= $lang['bonus_cashback'] ?>
-                        </button>
-                        <button class="btn-category swiper-slide tag" type="button" data-filter=".bonus_pasangan" style="width:auto" onclick="get_bonus(0, 'bonus_pasangan', this)">
-                            <?= $lang['bonus_pasangan'] ?>
-                        </button>
-                        <button class="btn-category swiper-slide tag" type="button" data-filter=".bonus_generasi_ro_aktif"
-                            style="width:auto" onclick="get_bonus(0, 'bonus_generasi_ro_aktif', this)">
-                            <?= $lang['bonus_generasi_ro_aktif'] ?>
-                        </button>
-                        <button class="btn-category swiper-slide tag" type="button" data-filter=".bonus_titik_ro_aktif"
-                            style="width:auto" onclick="get_bonus(0, 'bonus_titik_ro_aktif', this)">
-                            <?= $lang['bonus_titik_ro_aktif'] ?>
-                        </button>
-                        <button class="btn-category swiper-slide tag" type="button" data-filter=".bonus_royalti_omset"
-                            style="width:auto" onclick="get_bonus(0, 'bonus_royalti_omset', this)">
-                            <?= $lang['bonus_royalti_omset'] ?>
-                        </button>
-                        <button class="btn-category swiper-slide tag" type="button" data-filter=".bonus_generasi"
-                            style="width:auto" onclick="get_bonus(0, 'bonus_generasi', this)">
-                            <?= $lang['bonus_generasi'] ?>
-                        </button>
-                        <button class="btn-category swiper-slide tag" type="button" data-filter=".bonus_unilevel"
-                            style="width:auto" onclick="get_bonus(0, 'bonus_unilevel', this)">
-                            <?= $lang['bonus_unilevel'] ?>
-                        </button>
-                        <button class="btn-category swiper-slide tag" type="button" data-filter=".bonus_reward" style="width:auto" onclick="get_bonus(0, 'bonus_reward', this)">
-                            <?= $lang['bonus_reward'] ?>
-                        </button>
-                        <button class="btn-category swiper-slide tag" type="button" data-filter=".bonus_reward" style="width:auto" onclick="get_bonus(0, 'bonus_reward_paket', this)">
-                            <?= $lang['bonus_reward_paket'] ?>
-                        </button>
-                        <?php
-                        if ($qualified_balik_modal) {
-                        ?>
-                            <button class="btn-category swiper-slide tag" type="button" data-filter=".bonus_balik_modal" style="width:auto" onclick="get_bonus(0, 'bonus_balik_modal', this)">
-                                <?= $lang['bonus_balik_modal'] ?>
-                            </button>
-                        <?php
+                            }
                         }
                         ?>
                     </div>
