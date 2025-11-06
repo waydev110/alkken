@@ -602,19 +602,19 @@ $cbrp = new classBonusRewardPaket();
                             </a>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <!-- <div class="col-6">
                         <div class="stats-card">
-                            <p class="stats-label mb-1">Sharing Profit</p>
+                            <p class="stats-label mb-1">Sharing Profit</p> -->
                             <?php
-                            $qualified_balik_modal = $cm->cek_sponsori_netreborn($session_member_id);
-                            if ($qualified_balik_modal == true) {
-                                echo '<span class="badge bg-success"><i class="fa fa-check me-1"></i> Qualified</span>';
-                            } else {
-                                echo '<span class="badge bg-warning text-dark">Not Qualified</span>';
-                            }
+                            // $qualified_balik_modal = $cm->cek_sponsori_netreborn($session_member_id);
+                            // if ($qualified_balik_modal == true) {
+                            //     echo '<span class="badge bg-success"><i class="fa fa-check me-1"></i> Qualified</span>';
+                            // } else {
+                            //     echo '<span class="badge bg-warning text-dark">Not Qualified</span>';
+                            // }
                             ?>
-                        </div>
-                    </div>
+                        <!-- </div>
+                    </div> -->
                 </div>
             <?php } ?>
 
