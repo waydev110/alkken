@@ -11,13 +11,13 @@ require_once 'classStokisDepositDetail.php';
 class classSMS
 {
     private $hp_testing = '082119632854';
-    private $hp_admin = '6285179879966';
+    private $hp_admin = '082120192008';
     private $testing = false;
 
     public function smsKeMember($nohptujuan, $isi_pesan)
     {
         $curl = curl_init();
-        $token = "jUAXl3lP6inZuuN9dXx8i5twZ5OBxbjZMWSe5JC9RJnyGgQKNmqheWm.nxRQqMVD";
+        $token = "2SBGT4jzGK2jBH7wjBQq4cJdG4Fy1HO8mXsL4sXYRC7rSw6vLm3B7gR6oIALZXMP.Cc9acekT";
         $data = [
             'phone' => $nohptujuan,
             'message' => $isi_pesan,
