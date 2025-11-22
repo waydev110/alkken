@@ -49,7 +49,7 @@
 
     <!-- main page content -->
     <div class="main-container container pt-4 pb-4" id="blockFirstForm">
-        <form action="controller/member/member_create.php" id="formPendaftaran" method="post">
+        <form action="controller/posting/member_create.php" id="formPendaftaran" method="post">
             <?php
                 if($kode_aktivasi->num_rows == 0 ){
             ?>
@@ -127,8 +127,15 @@
                     <div class="form-group form-floating-2 mb-3">
                         <select class="form-control" id="tipe_akun" name="tipe_akun">
                             <option value="0"><?=$lang['member']?> Baru</option>
+                            <option value="1">Tambah Titik (Cloning Data)</option>
                         </select>
                         <label class="form-control-label" for="tipe_akun">Tipe Pendaftaran</label>
+                    </div>
+                    <div id="infoCloningMember" style="display:none;">
+                        <div class="alert alert-info size-13 mb-3">
+                            <i class="fas fa-info-circle"></i> <strong>Mode Tambah Titik:</strong> 
+                            Data akan di-clone dari akun Anda. Username akan ditambahkan nomor urut otomatis.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -294,14 +301,28 @@
         $('.select2').select2();
         tipeAkun.on("change", function (e) {
             if(e.target.value == '0'){
+                // Member Baru
                 blockDataMemberProspek.hide();
                 blockDataMember.show();
+                $('#infoCloningMember').hide();
+                // Enable semua field
+                $('#username, #nama_member, #wa_member, #email_member, #tempat_lahir, #tanggal_lahir').prop('readonly', false);
+                $('#no_rekening, #atas_nama_rekening, #id_bank').prop('readonly', false);
+                $('#provinsi, #kota, #kecamatan, #kelurahan').prop('disabled', false);
             } else if(e.target.value == '1') {
+                // Tambah Titik (Cloning)
                 blockDataMemberProspek.hide();
-                blockDataMember.hide();
+                blockDataMember.show();
+                $('#infoCloningMember').show();
+                // Readonly semua field karena akan di-clone
+                $('#username, #nama_member, #wa_member, #email_member, #tempat_lahir, #tanggal_lahir').prop('readonly', true).css('background-color', '#f4f4f4');
+                $('#no_rekening, #atas_nama_rekening, #id_bank').prop('readonly', true).css('background-color', '#f4f4f4');
+                $('#provinsi, #kota, #kecamatan, #kelurahan').prop('disabled', true);
             } else {
+                // Member Prospek
                 blockDataMember.hide();
                 blockDataMemberProspek.show();
+                $('#infoCloningMember').hide();
             }
         });
         formPendaftaran.validate({

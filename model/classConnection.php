@@ -114,6 +114,42 @@ class classConnection{
         }
         echo "Final query: " . $sql;
     }
+
+    // Transaction methods
+    public function beginTransaction() {
+        $this->openConnection();
+        $this->koneksi->autocommit(FALSE);
+        $this->koneksi->begin_transaction();
+    }
+
+    public function commit() {
+        $this->koneksi->commit();
+        $this->koneksi->autocommit(TRUE);
+        $this->closeConnection();
+    }
+
+    public function rollback() {
+        $this->koneksi->rollback();
+        $this->koneksi->autocommit(TRUE);
+        $this->closeConnection();
+    }
+
+    // Query method for use within transaction
+    public function _query_transaction($sql) {
+        $query = $this->koneksi->query($sql);
+        if (!$query) {
+            throw new Exception("Query failed: " . $this->koneksi->error);
+        }
+        return $query;
+    }
+
+    public function _query_insert_transaction($sql) {
+        $query = $this->koneksi->query($sql);
+        if (!$query) {
+            throw new Exception("Insert query failed: " . $this->koneksi->error);
+        }
+        return $this->koneksi->insert_id;
+    }
 	
 }
 

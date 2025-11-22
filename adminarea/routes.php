@@ -406,6 +406,18 @@ switch ($halaman) {
         $mod_url= "member";
         $title= "Edit ".$lang['member'];
         break;
+    
+    case 'member_pohon_jaringan':
+        $view = "view/member/pohon_jaringan.php";
+        $mod_url= "member";
+        $title= "Pohon Jaringan - Daftar ".$lang['member'];
+        break;
+    
+    case 'member_register':
+        $view = "view/member/member_register.php";
+        $mod_url= "member";
+        $title= "Daftar ".$lang['member']." Baru";
+        break;
 
     case 'member_ro':
         $view = "view/member_ro/member_ro.php";

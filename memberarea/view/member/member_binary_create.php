@@ -61,7 +61,7 @@ if (!isset($_GET['upline']) || empty($_GET['upline'])) {
     </header>
 
     <div class="main-container container pt-4" id="blockFirstForm">
-        <form action="controller/member/member_create.php" id="formPendaftaran" method="post">
+        <form action="controller/posting/member_create.php" id="formPendaftaran" method="post">
             <?php if ($kode_aktivasi->num_rows == 0) { ?>
                 <div class="alert alert-danger alert-modern">
                     <i class="bi bi-exclamation-triangle"></i>

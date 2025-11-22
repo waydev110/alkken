@@ -56,7 +56,7 @@ if (!isset($_SESSION['user_login']) || isset($_SESSION['user_login']) == "") {
         .table>thead>tr>th {
             vertical-align: bottom;
             border-bottom: 1px solid #ddd;
-            background: #33624e;
+            background: #3c8dbc;
             color: #fff;
             font-size: 12px;
             padding-left: 10px !important;
@@ -71,7 +71,7 @@ if (!isset($_SESSION['user_login']) || isset($_SESSION['user_login']) == "") {
         .table>tfoot>tr>th {
             vertical-align: bottom;
             border-bottom: 1px solid #ddd;
-            background: #33624e;
+            background: #3c8dbc;
             color: #fff;
             font-size: 12px;
             padding-left: 10px !important;
@@ -139,7 +139,7 @@ if (!isset($_SESSION['user_login']) || isset($_SESSION['user_login']) == "") {
 
         label.control-title {
             font-weight: bold !important;
-            color: #33624e;
+            color: #3c8dbc;
             text-align: left;
 
         }

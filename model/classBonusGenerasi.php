@@ -577,6 +577,114 @@ class classBonusGenerasi{
         }
         return true;
     }
+
+    // Create with transaction support
+    public function create_transaction($conn, $dari_member, $id_member, $nama_samaran, $nominal, $jenis_bonus, $text_keterangan, $id_kodeaktivasi, $max, $created_at){        
+        $sql ="CALL GenerasiSponsorWithMax($dari_member, $max)";
+        $query = $conn->_query_transaction($sql);
+        $total_record = $query->num_rows;
+        if($total_record > 0){
+            $sql  = "SELECT * FROM mlm_bonus_generasi_setting WHERE id_plan = '$jenis_bonus'";
+            $setting_query = $conn->_query_transaction($sql);
+            $setting_bonus = $setting_query->fetch_object();
+            
+            if($setting_bonus && $setting_bonus->rekap == '1'){
+                $status_transfer = '-1';
+            } else {
+                $status_transfer = '0';
+            }
+            
+            while($row = $query->fetch_object()){
+                $sponsor = $row->sponsor;
+                $generasi = $row->generasi;
+                if($jenis_bonus >= 200){
+                    $keterangan = 'Bonus Generasi '.$text_keterangan.' dari '.$nama_samaran.' ('.$id_member.') Generasi ke-'.$generasi; 
+            		$sql = "INSERT INTO mlm_wallet (
+                                    id_member, 
+                                    jenis_saldo, 
+                                    nominal, 
+                                    type, 
+                                    keterangan, 
+                                    status, 
+                                    status_transfer, 
+                                    dari_member, 
+                                    id_kodeaktivasi, 
+                                    dibaca, 
+                                    created_at
+                                ) values (
+                                    '$sponsor',
+                                    'cash', 
+                                    '$nominal',
+                                    'bonus_generasi',
+                                    '$keterangan',  
+                                    'd',
+                                    '0', 
+                                    '$dari_member',       
+                                    '$id_kodeaktivasi',         
+                                    '0',             
+                                    '$created_at'
+                                    )";
+            		$conn->_query_transaction($sql);
+                } else {
+                    $sql  = "SELECT * FROM mlm_bonus_generasi_persentase WHERE id_plan = '$jenis_bonus' AND generasi = '$generasi'";
+                    $setting_query2 = $conn->_query_transaction($sql);
+                    $setting = $setting_query2->fetch_object();
+                    
+                    if($setting){
+                        $persentase = $setting->persentase;
+                        $syarat_sponsori = $setting->sponsori;
+                    } else {
+                        $persentase = 100;
+                        $syarat_sponsori = 0;
+                    }
+
+                    $total_sponsori = $this->sponsori($sponsor);
+
+                    $status_transfer = '0';
+                    $kondisi = false;
+                    if($total_sponsori >= $syarat_sponsori) {
+                        $kondisi = true;
+                        $status_transfer = '0';
+                    }
+                    if($jenis_bonus == 14) {
+                        $status_transfer = '-1';
+                        $keterangan = 'Bonus Generasi RO Aktif '.$text_keterangan.' dari '.$nama_samaran.' ('.$id_member.') Generasi ke-'.$generasi; 
+                    } else {
+                        $keterangan = 'Bonus Generasi '.$text_keterangan.' dari '.$nama_samaran.' ('.$id_member.') Generasi ke-'.$generasi; 
+                    }
+
+                    if ($kondisi == true){
+                        $nominal_bonus = floor($nominal * $persentase/100);
+                        if($this->cek_bonus($sponsor, $id_kodeaktivasi, $jenis_bonus) == 0){
+                            $sql = "INSERT INTO mlm_bonus_generasi (
+                                    id_member,
+                                    nominal,
+                                    status_transfer,
+                                    dari_member,
+                                    id_kodeaktivasi,
+                                    jenis_bonus,
+                                    generasi,
+                                    keterangan,
+                                    created_at
+                                ) values (
+                                    '$sponsor', 
+                                    '$nominal_bonus',
+                                    '$status_transfer',
+                                    '$dari_member',
+                                    '$id_kodeaktivasi',       
+                                    '$jenis_bonus',           
+                                    '$generasi',     
+                                    '$keterangan',       
+                                    '$created_at'
+                                )";
+                            $conn->_query_transaction($sql);
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
     
     
     public function create_rekap($dari_member, $id_member, $nama_samaran, $nominal, $jenis_bonus, $text_keterangan, $id_kodeaktivasi, $max, $created_at, $bulan){        

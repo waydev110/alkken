@@ -546,6 +546,107 @@ class classMember
         return $query;
     }
 
+    // Create with transaction support
+    public function create_transaction($conn)
+    {
+        $sql =
+            "INSERT INTO mlm_member (
+                    id_member, 
+                    id_plan, 
+                    id_produk_jenis,
+                    id_paket, 
+                    id_peringkat, 
+                    user_member, 
+                    nama_samaran, 
+                    nama_member, 
+                    kode_aktivasi, 
+                    tgl_lahir_member, 
+                    angka_elemen, 
+                    tempat_lahir_member, 
+                    jns_kel_member, 
+                    no_ktp_member, 
+                    telp_member, 
+                    hp_member, 
+                    pass_member, 
+                    pin_member, 
+                    sponsor, 
+                    upline, 
+                    posisi, 
+                    kaki_kiri, 
+                    kaki_kanan, 
+                    jumlah_kiri, 
+                    jumlah_kanan, 
+                    reposisi, 
+                    founder, 
+                    email_member, 
+                    no_rekening, 
+                    atas_nama_rekening, 
+                    cabang_rekening, 
+                    id_bank, 
+                    status_member, 
+                    id_provinsi, 
+                    id_kota, 
+                    id_kecamatan, 
+                    id_kelurahan, 
+                    rt, 
+                    rw, 
+                    alamat_member, 
+                    kodepos_member, 
+                    profile_updated, 
+                    level, 
+                    group_akun, 
+                    created_at
+                ) values (
+                    '".$this->get_id_member()."',
+                    '".$this->get_id_plan()."',
+                    '".$this->get_id_produk_jenis()."',
+                    '".$this->get_id_paket()."',
+                    '".$this->get_id_peringkat()."',
+                    '".$this->get_user_member()."',
+                    '".$this->get_nama_samaran()."',
+                    '".$this->get_nama_member()."',
+                    '".$this->get_kode_aktivasi()."',
+                    '".$this->get_tgl_lahir_member()."',
+                    '".$this->get_angka_elemen()."',
+                    '".$this->get_tempat_lahir_member()."',
+                    '".$this->get_jns_kel_member()."',
+                    '".$this->get_no_ktp_member()."',
+                    '".$this->get_telp_member()."',
+                    '".$this->get_hp_member()."',
+                    '".$this->get_pass_member()."',
+                    '".$this->get_pin_member()."',
+                    '".$this->get_sponsor()."',
+                    '".$this->get_upline()."',
+                    '".$this->get_posisi()."',
+                    '".$this->get_kaki_kiri()."',
+                    '".$this->get_kaki_kanan()."',
+                    '".$this->get_jumlah_kiri()."',
+                    '".$this->get_jumlah_kanan()."',
+                    '".$this->get_reposisi()."',
+                    '".$this->get_founder()."',
+                    '".$this->get_email_member()."',
+                    '".$this->get_no_rekening()."',
+                    '".$this->get_atas_nama_rekening()."',
+                    '".$this->get_cabang_rekening()."',
+                    '".$this->get_id_bank()."',
+                    '".$this->get_status_member()."',
+                    '".$this->get_id_provinsi()."',
+                    '".$this->get_id_kota()."',
+                    '".$this->get_id_kecamatan()."',
+                    '".$this->get_id_kelurahan()."',
+                    '".$this->get_rt()."',
+                    '".$this->get_rw()."',
+                    '".$this->get_alamat_member()."',
+                    '".$this->get_kodepos_member()."',
+                    '".$this->get_profile_updated()."',
+                    '".$this->get_level()."',
+                    '".$this->get_group_akun()."',
+                    '".$this->get_created_at()."'
+                )";
+        $query = $conn->_query_insert_transaction($sql);
+        return $query;
+    }
+
     public function datatable($request){
         $c    = new classConnection();
 
@@ -701,9 +802,10 @@ class classMember
             $subdata[]= $id_sponsor.'<br>'.$nama_sponsor;
             $subdata[]= currency($row->total_pin);
             $subdata[]='
-                <a href="index.php?go=member_edit&id='.base64_encode($row->id).'" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
-                <a onclick="sendsmsmember('."'".$row->id."'".')" class="btn btn-info btn-xs"><i class="fa fa-envelope"></i></a>
-                <a target="_blank" href="index.php?go=bypass_login&id='.base64_encode($row->id).'" class="btn btn-danger btn-xs bypass"><i class="fa fa-sign-in"></i></a>
+                <a href="index.php?go=member_pohon_jaringan&id_member='.$row->id_member.'" class="btn btn-success btn-xs" title="Lihat Pohon Jaringan"><i class="fa fa-sitemap"></i></a>
+                <a href="index.php?go=member_edit&id='.base64_encode($row->id).'" class="btn btn-primary btn-xs" title="Edit Member"><i class="fa fa-edit"></i></a>
+                <a onclick="sendsmsmember('."'".$row->id."'".')" class="btn btn-info btn-xs" title="Kirim SMS"><i class="fa fa-envelope"></i></a>
+                <a target="_blank" href="index.php?go=bypass_login&id='.base64_encode($row->id).'" class="btn btn-danger btn-xs bypass" title="Login As Member"><i class="fa fa-sign-in"></i></a>
             ';
             $data[]=$subdata;
             $no++;
@@ -2242,5 +2344,16 @@ class classMember
         } else {
             return false;
         }
+    }
+
+    public function first_member()
+    {
+        $sql = "SELECT * FROM mlm_member 
+                WHERE deleted_at IS NULL 
+                ORDER BY id ASC 
+                LIMIT 1";
+        $c = new classConnection();
+        $query = $c->_query_fetch($sql);
+        return $query;
     }
 }

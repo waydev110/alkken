@@ -33,6 +33,9 @@
     $cbc = new classBonusCashback();
     $csms    = new classSMS();
     $created_at = date('Y-m-d H:i:s');
+    
+    // Initialize connection for transaction
+    $conn = new classConnection();
 
     if(!isset($_POST['id_member'])){
         echo json_encode(['status' => false, 'message' => 'Terjadi Kesalahan.']);
@@ -110,44 +113,49 @@
         }
     }
 
-    $harga_paket = floor($nominal/$qty_paket);
-    $obj->set_id_member($member_id);
-    $obj->set_id_plan($id_plan);
-    $obj->set_harga($harga_paket);
-    $obj->set_qty($qty_paket);
-    $obj->set_nominal($nominal);
-    $obj->set_status($status);
-    $obj->set_id_stokis($id_stokis);
-    $obj->set_keterangan($keterangan);
-    $obj->set_created_at($created_at);
-    $obj->set_updated_at($created_at);
-    $create = $obj->create();
+    try {
+        // Start transaction
+        $conn->beginTransaction();
+        $current_operation = 'Create Jual Pin';
+        
+        $harga_paket = floor($nominal/$qty_paket);
+        $obj->set_id_member($member_id);
+        $obj->set_id_plan($id_plan);
+        $obj->set_harga($harga_paket);
+        $obj->set_qty($qty_paket);
+        $obj->set_nominal($nominal);
+        $obj->set_status($status);
+        $obj->set_id_stokis($id_stokis);
+        $obj->set_keterangan($keterangan);
+        $obj->set_created_at($created_at);
+        $obj->set_updated_at($created_at);
+        $create = $obj->create();
 
-    if(!$create){
-        echo json_encode(['status' => false, 'message' => 'Transaksi gagal.']);
-        return false;
-    }
+        if(!$create){
+            throw new Exception('Transaksi gagal saat membuat record jual pin.');
+        }
 
-    $produk_cart = $ccart->get_cart($member_id, $id_stokis, $id_plan);    
-    if($produk_cart->num_rows == 0){
-        echo json_encode(['status' => false, 'message' => 'Transaksi gagal. Produk tidak ditemukan.']);
-        return false;
-    } 
+        $current_operation = 'Get Cart Products';
+        $produk_cart = $ccart->get_cart($member_id, $id_stokis, $id_plan);    
+        if($produk_cart->num_rows == 0){
+            throw new Exception('Transaksi gagal. Produk tidak ditemukan.');
+        } 
     
-    $no = 0;
-    $harga_paket = 0;
-    $jumlah_hu = 0;
-    $poin_reward = 0;
-    $bonus_sponsor = 0;
-    $bonus_cashback = 0;
-    $bonus_generasi = 0;
-    $bonus_upline = 0;
-    $bonus_sponsor_monoleg = 0;
-    $total_fee = 0;
-    $fee_founder = 0;
-    $fee_stokis = 0;
-    $detail_produk = 'Detail Produk : \n';
-    while($produk = $produk_cart->fetch_object()){  
+        $current_operation = 'Process Cart Items';
+        $no = 0;
+        $harga_paket = 0;
+        $jumlah_hu = 0;
+        $poin_reward = 0;
+        $bonus_sponsor = 0;
+        $bonus_cashback = 0;
+        $bonus_generasi = 0;
+        $bonus_upline = 0;
+        $bonus_sponsor_monoleg = 0;
+        $total_fee = 0;
+        $fee_founder = 0;
+        $fee_stokis = 0;
+        $detail_produk = 'Detail Produk : \n';
+        while($produk = $produk_cart->fetch_object()){  
         $produk_diskon = $ccart->produk_diskon($produk->id_produk, $produk->qty);
 
         $diskon = 0;
@@ -158,24 +166,6 @@
                 $diskon += $produk->harga*($produk_diskon->persetase/100) * $produk->qty;
             }
         }            
-        // if($diskon > 0){
-        //     $persentase_bonus_cashback = $cbc->persentase_bonus_cashback($member_id);
-        //     $nominal_cashback = floor($diskon * $persentase_bonus_cashback/100);
-        //     $keterangan = 'Saldo Autosave Cashback dari Pembelian Produk '.$produk->nama_produk.' sebanyak '.currency($produk->qty);
-        //     $cw->set_id_member($member_id);
-        //     $cw->set_jenis_saldo('poin');
-        //     $cw->set_nominal($nominal_cashback);
-        //     $cw->set_type('bonus_cashback');
-        //     $cw->set_keterangan($keterangan);
-        //     $cw->set_status('d');
-        //     $cw->set_status_transfer('0');
-        //     $cw->set_dari_member($member_id);
-        //     $cw->set_id_kodeaktivasi($create);
-        //     $cw->set_dibaca('0');
-        //     $cw->set_created_at($created_at);                 
-        //     $cw->create();
-        //     $csms->smsBonusCashbackPoin($member_id, $nominal_cashback, $keterangan, $created_at);
-        // }
         $cjpd->set_id_jual_pin($create);
         $cjpd->set_id_produk($produk->id_produk);
         $cjpd->set_nama_produk($produk->nama_produk);
@@ -188,11 +178,7 @@
         $create_detail = $cjpd->create();
 
         if(!$create_detail){
-            $obj->delete($create);
-            $cjpd->delete($create);
-            $cka->delete_jual_pin($create);
-            echo json_encode(['status' => false, 'message' => 'Detail Transaksi gagal.']);
-            return false;
+            throw new Exception('Detail Transaksi gagal untuk produk: ' . $produk->nama_produk);
         }
         
         $jumlah_hu              += $produk->poin_pasangan*$produk->qty; 
@@ -200,25 +186,27 @@
         $bonus_sponsor          += $produk->bonus_sponsor*$produk->qty; 
         $bonus_cashback         += $produk->bonus_cashback*$produk->qty; 
         $bonus_generasi         += $produk->bonus_generasi*$produk->qty; 
-        $bonus_upline         += $produk->bonus_upline*$produk->qty; 
+        $bonus_upline           += $produk->bonus_upline*$produk->qty; 
         $bonus_sponsor_monoleg  += $produk->bonus_sponsor_monoleg*$produk->qty; 
         $fee_stokis             += $produk->fee_stokis*$produk->qty;
-        $fee_founder             += $produk->fee_founder*$produk->qty; 
-        $total_fee += $fee_stokis;    
+        $fee_founder            += $produk->fee_founder*$produk->qty; 
+        $total_fee              += $fee_stokis;    
         $no++;
         $detail_produk .= $no.". ".$produk->nama_produk_detail ."\n";
         $detail_produk .= " ".rp($produk->harga)." x ".$produk->qty." = ".rp($produk->harga*$produk->qty)." \n";
     }
-    $jumlah_hu = floor($jumlah_hu/$qty_paket);
-    $poin_reward = floor($poin_reward/$qty_paket);
-    $harga_pin = floor($nominal/$qty_paket);
-    $bonus_sponsor = floor($bonus_sponsor/$qty_paket);
-    $bonus_cashback = floor($bonus_cashback/$qty_paket);
-    $bonus_generasi = floor($bonus_generasi/$qty_paket);
-    $bonus_upline = floor($bonus_upline/$qty_paket);
-    $bonus_sponsor_monoleg = floor($bonus_sponsor_monoleg/$qty_paket);
     
-    for($i=1;$i<=$qty_paket;$i++) {
+        $current_operation = 'Generate PIN Codes';
+        $jumlah_hu = floor($jumlah_hu/$qty_paket);
+        $poin_reward = floor($poin_reward/$qty_paket);
+        $harga_pin = floor($nominal/$qty_paket);
+        $bonus_sponsor = floor($bonus_sponsor/$qty_paket);
+        $bonus_cashback = floor($bonus_cashback/$qty_paket);
+        $bonus_generasi = floor($bonus_generasi/$qty_paket);
+        $bonus_upline = floor($bonus_upline/$qty_paket);
+        $bonus_sponsor_monoleg = floor($bonus_sponsor_monoleg/$qty_paket);
+        
+        for($i=1;$i<=$qty_paket;$i++) {
 
 
         $kode_aktivasi = $cka->generate_code(12);
@@ -241,67 +229,77 @@
         $cka->set_created_at($created_at);
 
         $create_kodeaktivasi = $cka->create();
-    
+        
         if(!$create_kodeaktivasi){
-            $obj->delete($create);
-            $cjpd->delete($create);
-            $cka->delete_jual_pin($create);
-            echo json_encode(['status' => false, 'message' => 'Transaksi gagal. Gagal membuat Kode Aktivasi.']);
-            return false;
+            throw new Exception('Transaksi gagal. Gagal membuat Kode Aktivasi ke-' . $i);
         }
     }
-    
-    $jenis = 'saldo';
-    $type = 'jual_pin';
-    $status = 'k';
-    $id_relasi = $create;
-    $asal_tabel = 'mlm_stokis_jual_pin';
-    $keterangan = 'Penjualan';
+        
+        $current_operation = 'Update Stokis Wallet';
+        $jenis = 'saldo';
+        $type = 'jual_pin';
+        $status = 'k';
+        $id_relasi = $create;
+        $asal_tabel = 'mlm_stokis_jual_pin';
+        $keterangan = 'Penjualan';
 
-    $cws->set_id_stokis($id_stokis);
-    $cws->set_type($type);
-    $cws->set_status($status);
-    $cws->set_nominal($nominal);
-    $cws->set_id_relasi($id_relasi);
-    $cws->set_asal_tabel($asal_tabel);
-    $cws->set_keterangan($keterangan);
-    $cws->set_created_at($created_at);
+        $cws->set_id_stokis($id_stokis);
+        $cws->set_type($type);
+        $cws->set_status($status);
+        $cws->set_nominal($nominal);
+        $cws->set_id_relasi($id_relasi);
+        $cws->set_asal_tabel($asal_tabel);
+        $cws->set_keterangan($keterangan);
+        $cws->set_created_at($created_at);
 
-    $create_wallet = $cws->create();
-    if(!$create_wallet){
-        echo json_encode(['status' => false, 'message' => 'Terjadi Kesalahan. Tidak dapat mengurangi saldo.']);
-        return false;
-    } else {                
+        $create_wallet = $cws->create();
+        if(!$create_wallet){
+            throw new Exception('Terjadi Kesalahan. Tidak dapat mengurangi saldo.');
+        }
+        
+        $current_operation = 'Update Product Stock';
         $update_stok = $csp->create($create, $id_stokis, $created_at);
         if(!$update_stok){
-            $obj->delete($create);
-            $cjpd->delete($create);
-            $cka->delete_jual_pin($create);
-            $cws->delete($create);
-            echo json_encode(['status' => false, 'message' => 'Terjadi Kesalahan. Tidak dapat mengurangi stok.']);
-            return false;
+            throw new Exception('Terjadi Kesalahan. Tidak dapat mengurangi stok.');
         }
-    }
 
-    if($total_fee > 0){
-        $csc->set_id_stokis($id_stokis);
-        $csc->set_nominal($total_fee);
-        $csc->set_status_transfer(0);
-        $csc->set_id_transaksi($create);
-        $csc->set_created_at($created_at);
-        $stokis_cashback = $csc->create();
-    }
-    
-    $ccart->set_id_member($member_id);
-    $ccart->set_id_stokis($id_stokis);
-    $ccart->set_status(1);
-    $update_status = $ccart->update_status();
+        $current_operation = 'Create Stokis Cashback';
+        if($total_fee > 0){
+            $csc->set_id_stokis($id_stokis);
+            $csc->set_nominal($total_fee);
+            $csc->set_status_transfer(0);
+            $csc->set_id_transaksi($create);
+            $csc->set_created_at($created_at);
+            $stokis_cashback = $csc->create();
+        }
+        
+        $current_operation = 'Update Cart Status';
+        $ccart->set_id_member($member_id);
+        $ccart->set_id_stokis($id_stokis);
+        $ccart->set_status(1);
+        $update_status = $ccart->update_status();
 
-    $nama_plan = $plan->nama_plan;
-    $csms->smsJualPinStokis($id_stokis, $member_id, $nama_plan, $qty_paket, $nominal, $detail_produk, $created_at);
-    $csms->smsJualPinMember($id_stokis, $member_id, $nama_plan, $qty_paket, $nominal, $detail_produk, $created_at);
-    $message = '<h5>Transaksi berhasil</h5>
-                <h3 class="jenis-title text-bold px-4">'.currency($qty_paket).' Paket '.$nama_plan.'</h3>
-                <h1 class="jenis-title text-bold px-4" id="nominalTitle">'.rp($nominal).'</h1>';
-    echo json_encode(['status' => true, 'total_pin' => $qty_paket, 'id_jual_pin' => $create, 'message' => $message]);
-    return true;
+        // === TRANSACTION COMPLETE ===
+        $current_operation = 'Commit Transaction';
+        $conn->commit();
+        
+        // === SEND SMS/WA AFTER SUCCESSFUL COMMIT ===
+        $nama_plan = $plan->nama_plan;
+        $csms->smsJualPinStokis($id_stokis, $member_id, $nama_plan, $qty_paket, $nominal, $detail_produk, $created_at);
+        $csms->smsJualPinMember($id_stokis, $member_id, $nama_plan, $qty_paket, $nominal, $detail_produk, $created_at);
+        
+        $message = '<h5>Transaksi berhasil</h5>
+                    <h3 class="jenis-title text-bold px-4">'.currency($qty_paket).' Paket '.$nama_plan.'</h3>
+                    <h1 class="jenis-title text-bold px-4" id="nominalTitle">'.rp($nominal).'</h1>';
+        echo json_encode(['status' => true, 'total_pin' => $qty_paket, 'id_jual_pin' => $create, 'message' => $message]);
+        return true;
+        
+    } catch (\Exception $e) {
+        $conn->rollback();
+        
+        $error_message = "Gagal jual pin pada tahap: {$current_operation}. ";
+        $error_message .= "Error: " . $e->getMessage();
+        
+        echo json_encode(['status' => false, 'message' => $error_message]);
+        return false;
+    }

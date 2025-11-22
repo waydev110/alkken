@@ -115,7 +115,7 @@ $plan = $cpl->index_upgrade($id_plan, $tingkat);
                     <p class="text-center mb-2">Anda yakin akan melakukan upgrade paket. <?= $lang['kode_aktivasi'] ?> anda akan otomatis digunakan.</p>
                 </div>
             </div>
-            <form action="controller/member/upgrade_member.php" id="formUpgradeMember" method="post">
+            <form action="controller/posting/upgrade_member.php" id="formUpgradeMember" method="post">
                 <input type="hidden" id="id_upgrade" name="id_upgrade" value="">
                 <input type="hidden" id="id_kodeaktivasi" name="id_kodeaktivasi" value="">
                 <div class="row">

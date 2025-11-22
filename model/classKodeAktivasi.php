@@ -619,6 +619,7 @@
                         AND a.status_aktivasi='0' 
                         AND a.deleted_at is null
                         GROUP BY a.jenis_produk, a.jenis_aktivasi, a.jenis_produk, a.reposisi, a.founder";
+                    
             $c    = new classConnection();
             $query  = $c->_query($sql);
             return $query;

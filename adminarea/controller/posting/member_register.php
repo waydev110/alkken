@@ -31,7 +31,7 @@ require_once '../../../model/classKodeAktivasi.php';
 // ============================================================
 // STEP 1: VALIDATION
 // ============================================================
-if(!isset($_POST['upline']) || !isset($_POST['sponsor']) || !isset($_POST['paket_join'])) {
+if(!isset($_POST['upline']) || !isset($_POST['sponsor']) || !isset($_POST['id_kodeaktivasi'])) {
     echo json_encode([
         'status' => false, 
         'message' => 'Data tidak lengkap. Mohon isi semua field yang diperlukan.'
@@ -40,32 +40,18 @@ if(!isset($_POST['upline']) || !isset($_POST['sponsor']) || !isset($_POST['paket
 }
 
 $sponsor_id = number($_POST['sponsor']);
-$id_plan_selected = number($_POST['paket_join']);
+$id_kodeaktivasi = number($_POST['id_kodeaktivasi']);
 
 // ============================================================
-// STEP 2: FIND ACTIVATION CODE FROM SPONSOR
+// STEP 2: VERIFY ACTIVATION CODE
 // ============================================================
 $cka = new classKodeAktivasi();
-$kode_aktivasi_list = $cka->index_member_new($sponsor_id, 0);
+$pin = $cka->get_kodeaktivasi($sponsor_id, $id_kodeaktivasi, 0);
 
-$id_kodeaktivasi_found = null;
-if($kode_aktivasi_list && $kode_aktivasi_list->num_rows > 0) {
-    while($row = $kode_aktivasi_list->fetch_object()) {
-        if($row->jenis_aktivasi == $id_plan_selected && $row->total > 0) {
-            // Get first available PIN for this plan
-            $pin_check = $cka->get_kodeaktivasi($sponsor_id, $row->id_kodeaktivasi, 0);
-            if($pin_check) {
-                $id_kodeaktivasi_found = $pin_check->id;
-                break;
-            }
-        }
-    }
-}
-
-if(!$id_kodeaktivasi_found) {
+if(!$pin) {
     echo json_encode([
         'status' => false, 
-        'message' => 'Kode aktivasi tidak tersedia untuk paket yang dipilih. Sponsor tidak memiliki PIN untuk paket ini.'
+        'message' => 'Terjadi Kesalahan. Kode Aktivasi tidak ditemukan atau sudah digunakan.'
     ]);
     exit;
 }
@@ -83,10 +69,12 @@ $_SESSION['session_user_member'] = 'ADMIN_REGISTRATION';
 $_POST['sponsor'] = $sponsor_id;
 $_POST['id_upline'] = isset($_POST['upline']) ? base64_encode($_POST['upline']) : null;
 $_POST['posisi'] = isset($_POST['posisi']) ? $_POST['posisi'] : null;
-$_POST['id_kodeaktivasi'] = $id_kodeaktivasi_found;
-$_POST['tipe_akun'] = '0'; // Always new member
+$_POST['id_kodeaktivasi'] = $id_kodeaktivasi; // Already set from form
+$_POST['tipe_akun'] = isset($_POST['tipe_akun']) ? $_POST['tipe_akun'] : '0';
 
 // Member data - pass through as-is
+// NOTE: For tipe_akun=1 (Tambah Titik), these values will be ignored
+//       because member_create.php will clone data from sponsor
 $_POST['username'] = isset($_POST['username']) ? $_POST['username'] : null;
 $_POST['nama_member'] = isset($_POST['nama_member']) ? $_POST['nama_member'] : null;
 $_POST['hp_member'] = isset($_POST['hp_member']) ? $_POST['hp_member'] : null;
@@ -112,15 +100,16 @@ $_POST['kelurahan'] = isset($_POST['kelurahan']) ? $_POST['kelurahan'] : null;
 $log_message = "[" . date('Y-m-d H:i:s') . "] Admin Registration Initiated\n";
 $log_message .= "Admin: " . (isset($_SESSION['user_login']) ? $_SESSION['user_login'] : 'Unknown') . "\n";
 $log_message .= "Sponsor: " . $sponsor_id . "\n";
-$log_message .= "Plan: " . $id_plan_selected . "\n";
-$log_message .= "Activation Code ID: " . $id_kodeaktivasi_found . "\n";
+$log_message .= "Tipe Pendaftaran: " . ($_POST['tipe_akun'] == '1' ? 'Tambah Titik (Cloning)' : 'Member Baru') . "\n";
+$log_message .= "Activation Code ID: " . $id_kodeaktivasi . "\n";
+$log_message .= "Activation Code: " . $pin->kode_aktivasi . "\n";
 $log_message .= "-----------------------------------\n";
 @file_put_contents(__DIR__ . '/../log/admin_registration.log', $log_message, FILE_APPEND);
 
 // Include the SINGLE SOURCE OF TRUTH for registration logic
 // This will execute ALL 16+ steps: validation, member creation, bonus calculations,
 // poin distribution, SMS notifications, etc.
-require_once '../../../memberarea/controller/member/member_create.php';
+require_once '../../../memberarea/controller/posting/member_create.php';
 
 // ============================================================
 // NOTE: Everything after this line is handled by member_create.php

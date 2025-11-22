@@ -104,9 +104,9 @@ $.AdminLTE.options = {
   },
   //Define the set of colors to use globally around the website
   colors: {
-    lightBlue: "#33624e",
+    lightBlue: "#3c8dbc",
     red: "#f56954",
-    green: "#33624e",
+    green: "#3c8dbc",
     aqua: "#00c0ef",
     yellow: "#f39c12",
     blue: "#0073b7",
