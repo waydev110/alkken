@@ -517,7 +517,8 @@
         }
 
         public function delete($id){
-            $sql  = "DELETE FROM mlm_produk
+            $sql  = "UPDATE mlm_produk
+                        SET deleted_at = NOW()
                         WHERE id = '$id'";
             $c    = new classConnection();
             $query 	= $c->_query($sql);

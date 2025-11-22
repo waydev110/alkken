@@ -150,8 +150,11 @@ function titik($id, $upline, $action, $next = '0', $_binary = true)
                     <a href="?go=member_edit&id=<?= base64_encode($member->id) ?>" class="btn btn-default btn-sm btn-block" style="margin-top: 5px;">
                         <i class="fa fa-edit"></i> Edit Member
                     </a>
-                    <button type="button" class="btn btn-warning btn-sm btn-block" style="margin-top: 5px;" onclick="openPostingRoModal(<?= $member->id ?>, '<?= $member->id_member ?>', '<?= $member->user_member ?>', <?= $member->sponsor ?>)">
+                    <button type="button" class="btn btn-warning btn-sm btn-block" style="margin-top: 5px;" onclick="openPostingRoModal(<?= $member->id ?>, '<?= $member->id_member ?>', '<?= $member->user_member ?>', '<?= $member->sponsor ?>')">
                         <i class="fa fa-refresh"></i> Posting RO
+                    </button>
+                    <button type="button" class="btn btn-success btn-sm btn-block" style="margin-top: 5px;" onclick="openUpgradeMemberModal(<?= $member->id ?>, '<?= $member->id_member ?>', '<?= $member->user_member ?>', '<?= $member->sponsor ?>', <?= $member->id_plan ?>)">
+                        <i class="fa fa-arrow-up"></i> Upgrade Member
                     </button>
                 </div>
             </div>
@@ -496,6 +499,63 @@ if ($id_member) {
     </div>
 </div>
 
+<!-- Modal Upgrade Member -->
+<div class="modal fade" id="modalUpgradeMember" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form id="formUpgradeMember" method="post">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <i class="fa fa-arrow-up"></i> Upgrade Member
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="member_id" id="upgradeMemberId">
+                    <input type="hidden" name="pin_owner" id="upgradePinOwner">
+                    <input type="hidden" name="sponsor_id" id="upgradeSponsorId">
+                    <input type="hidden" name="current_plan" id="upgradeCurrentPlan">
+                    
+                    <div class="alert alert-info">
+                        <i class="fa fa-info-circle"></i>
+                        <strong>Member:</strong> <span id="upgradeIdMember"></span> - <span id="upgradeUserName"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Pemilik PIN Upgrade <span class="text-danger">*</span></label>
+                        <select class="form-control" id="upgradePinOwnerSelect" onchange="$('#upgradePinOwner').val(this.value).trigger('change');" required>
+                            <option value="">-- Pilih Pemilik PIN --</option>
+                        </select>
+                        <small class="text-muted">Pilih siapa yang memiliki PIN upgrade untuk member ini</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>PIN Upgrade <span class="text-danger">*</span></label>
+                        <select class="form-control" name="id_kodeaktivasi" id="upgradePinSelect" required>
+                            <option value="">Pilih pemilik PIN terlebih dahulu</option>
+                        </select>
+                        <small class="text-muted">PIN upgrade yang tersedia akan ditampilkan setelah memilih pemilik</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Paket Upgrade <span class="text-danger">*</span></label>
+                        <select class="form-control" name="id_upgrade" id="upgradePackageSelect" required>
+                            <option value="">Pilih PIN terlebih dahulu</option>
+                        </select>
+                        <small class="text-muted">Paket akan otomatis terisi sesuai jenis PIN yang dipilih</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success" id="btnSubmitUpgradeMember">
+                        <i class="fa fa-arrow-up"></i> Upgrade Member
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script>
 let currentMemberId = null;
 let currentSponsorId = null;
@@ -566,6 +626,105 @@ $('#formPostingRo').submit(function(e) {
             console.error('Error:', xhr.responseText);
             alert('Terjadi kesalahan sistem. Silakan coba lagi.');
             $btn.prop('disabled', false).html('<i class="fa fa-check"></i> Posting RO');
+        }
+    });
+});
+
+// ========== UPGRADE MEMBER MODAL & FUNCTIONS ==========
+
+function openUpgradeMemberModal(memberId, idMember, userName, sponsorId, currentPlan) {
+    $('#upgradeMemberId').val(memberId);
+    $('#upgradeIdMember').text(idMember);
+    $('#upgradeUserName').text(userName);
+    $('#upgradeCurrentPlan').val(currentPlan);
+    $('#upgradeSponsorId').val(sponsorId);
+    
+    // Populate pin owner dropdown
+    var pinOwnerHtml = '<option value="">-- Pilih Pemilik PIN --</option>';
+    pinOwnerHtml += '<option value="' + memberId + '">PIN Milik Member (' + idMember + ')</option>';
+    pinOwnerHtml += '<option value="' + sponsorId + '">PIN Milik Sponsor</option>';
+    $('#upgradePinOwnerSelect').html(pinOwnerHtml);
+    
+    // Set default to member
+    $('#upgradePinOwner').val(memberId);
+    $('#upgradePinOwnerSelect').val(memberId);
+    
+    // Load PINs for member by default
+    loadUpgradePins(memberId, memberId, currentPlan);
+    
+    $('#modalUpgradeMember').modal('show');
+}
+
+function loadUpgradePins(memberId, ownerId, currentPlan) {
+    $.ajax({
+        url: 'controller/posting/get_pin_upgrade.php',
+        method: 'POST',
+        data: {
+            member_id: memberId,
+            owner_id: ownerId,
+            current_plan: currentPlan
+        },
+        success: function(response) {
+            $('#upgradePinSelect').html(response);
+            $('#upgradePackageSelect').html('<option value="">Pilih PIN terlebih dahulu</option>');
+        },
+        error: function() {
+            $('#upgradePinSelect').html('<option value="">- Error loading PINs -</option>');
+            $('#upgradePackageSelect').html('<option value="">- Error -</option>');
+        }
+    });
+}
+
+// Change PIN owner
+$('#upgradePinOwner').change(function() {
+    var memberId = $('#upgradeMemberId').val();
+    var ownerId = $(this).val();
+    var currentPlan = $('#upgradeCurrentPlan').val();
+    
+    if(ownerId) {
+        loadUpgradePins(memberId, ownerId, currentPlan);
+    }
+});
+
+// When PIN selected, auto-populate package
+$('#upgradePinSelect').change(function() {
+    var selectedOption = $(this).find('option:selected');
+    var planId = selectedOption.data('plan-id');
+    var planName = selectedOption.data('plan-name');
+    
+    if(planId && planName) {
+        $('#upgradePackageSelect').html('<option value="' + planId + '">' + planName + '</option>');
+    } else {
+        $('#upgradePackageSelect').html('<option value="">Pilih PIN terlebih dahulu</option>');
+    }
+});
+
+// Submit Upgrade Member
+$('#formUpgradeMember').submit(function(e) {
+    e.preventDefault();
+    
+    var $btn = $('#btnSubmitUpgradeMember');
+    $btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Proses...');
+    
+    $.ajax({
+        url: 'controller/posting/upgrade_member.php',
+        method: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+            if(response.status) {
+                alert('Success: Upgrade member berhasil');
+                $('#modalUpgradeMember').modal('hide');
+                location.reload();
+            } else {
+                alert('Error: ' + response.message);
+                $btn.prop('disabled', false).html('<i class="fa fa-arrow-up"></i> Upgrade Member');
+            }
+        },
+        error: function(xhr) {
+            console.error('Error:', xhr.responseText);
+            alert('Terjadi kesalahan sistem. Silakan coba lagi.');
+            $btn.prop('disabled', false).html('<i class="fa fa-arrow-up"></i> Upgrade Member');
         }
     });
 });

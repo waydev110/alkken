@@ -46,7 +46,7 @@ $query = $obj->index();
                     <option value='100'>100</option>
                     <option value='-1'>All</option>
                 </select>
-            </div>        
+            </div>
             <div class="col-sm-2">
                 <label for="" class="control-label">Paket</label>
                 <select name="id_plan" id="id_plan" class="form-control">
@@ -64,12 +64,12 @@ $query = $obj->index();
             <div class="col-sm-3">
                 <label for="" class="control-label">Jenis Produk</label>
                 <select class="form-control" name="jenis_produk" id="jenis_produk">
-                    <option value="">Semua Jenis Produk</option>                            
+                    <option value="">Semua Jenis Produk</option>
                     <?php
                     $produk_jenis = $cpj->index();
-                    while($row = $produk_jenis->fetch_object()){
+                    while ($row = $produk_jenis->fetch_object()) {
                     ?>
-                    <option value="<?=$row->id?>"><?=$row->name?></option>
+                        <option value="<?= $row->id ?>"><?= $row->name ?></option>
                     <?php
                     }
                     ?>
@@ -82,7 +82,7 @@ $query = $obj->index();
                     <option value='1'>Ya</option>
                     <option value='0'>Tidak</option>
                 </select>
-            </div>     
+            </div>
             <div class="col-sm-4">
                 <label for="" class="control-label">Pencarian</label>
                 <div class="input-group">
@@ -148,11 +148,11 @@ $query = $obj->index();
                 [3, 'asc']
             ],
             columnDefs: [{
-                    targets: [-1, -2, -3, -4, -5, -6,  0, 1, 2],
+                    targets: [-1, -2, -3, -4, -5, -6, 0, 1, 2],
                     className: 'text-center'
                 },
                 {
-                    targets: [4,5],
+                    targets: [4, 5],
                     className: 'text-right'
                 }
             ]
@@ -172,8 +172,12 @@ $query = $obj->index();
             dataTable.ajax.reload();
         });
     });
-
+    
     function delete_item(id, e) {
+        //tambahkan konfirmasi sweetalert
+        if (!confirm('Apakah anda yakin ingin menghapus data ini?')) {
+            return false;
+        }
         $.ajax({
             url: 'controller/produk/delete_item.php',
             type: 'post',

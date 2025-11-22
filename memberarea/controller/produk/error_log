@@ -1,4 +1,0 @@
-[21-Aug-2025 14:07:03 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Call to undefined method classProduk::index_order() in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/produk/get_produk_stokis.php:15
-Stack trace:
-#0 {main}
-  thrown in /home/netp7474/public_html/new.netlife.my.id/memberarea/controller/produk/get_produk_stokis.php on line 15
