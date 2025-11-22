@@ -11,19 +11,7 @@ $qualified_balik_modal = $cm->cek_sponsori_netreborn($session_member_id);
 <!-- loader section ends -->
 
 <!-- Sidebar main menu ends -->
-<style type="text/css">
-    .bonus-list {
-        width: 100%;
-    }
-
-    .bonus-item {
-        width: 100%;
-    }
-
-    .btn-load {
-        padding: 20px;
-    }
-</style>
+<!-- All bonus page styles moved to assets/css/custom-memberarea.css -->
 <!-- Begin page -->
 <main class="h-100 has-header">
     <!-- Header -->

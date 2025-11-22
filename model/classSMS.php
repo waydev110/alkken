@@ -12,7 +12,7 @@ class classSMS
 {
     private $hp_testing = '082119632854';
     private $hp_admin = '082120192008';
-    private $testing = false;
+    private $testing = true;
 
     public function smsKeMember($nohptujuan, $isi_pesan)
     {

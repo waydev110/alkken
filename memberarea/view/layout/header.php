@@ -35,43 +35,9 @@
     <link href="assets/css/coupon.css" rel="stylesheet" id="style">
     <link rel="stylesheet" href="assets/vendor/sweetalert/sweetalert2.min.css">
     <link rel="stylesheet" href="assets/vendor/owlcarousel/owl.carousel.min.css">
-    <style>
-        :root {
-            --black: #0a0a0a;
-            --dark: #1a1a1a;
-            --gold: #d4af37;
-            --gold-light: #f4d03f;
-            --white: #ffffff;
-            --gray: #888888;
-            --border: rgba(212, 175, 55, 0.2);
-            --primary-gradient: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
-            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            --input-focus: 0 0 0 3px rgba(212, 175, 55, 0.2);
-            --gold-primary: #D4AF37;
-            --gold-light: #F4E4C1;
-            --gold-dark: #B8941C;
-            --black-primary: #1a1a1a;
-            --black-secondary: #2d2d2d;
-            --black-light: #3a3a3a;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            color: var(--dark);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-        }
-        .bg-theme {
-            background: var(--dark);
-        }
-        .footer .nav .nav-item.centerbutton .nav-link > span img {
-            opacity: 1;
-            width: 32px;
-            height: 50px;
-            vertical-align: middle;
-        }
-    </style>
+    
+    <!-- Custom Memberarea Styles -->
+    <link href="assets/css/custom-memberarea.css" rel="stylesheet">
 </head>
 <body class="body-scroll theme-<?=$theme?>" data-page="index">
 <?php include 'view/layout/waiting.php'; ?>

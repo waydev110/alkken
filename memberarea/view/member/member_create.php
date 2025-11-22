@@ -29,15 +29,7 @@
 <?php include 'view/layout/header.php'; ?>
 <link rel="stylesheet" href="assets/vendor/intlTelInput/css/intlTelInput.css">
 <link rel="stylesheet" href="assets/vendor/select2/css/select2.min.css">
-<style>
-    .form-floating-2-fix label.error {
-        position: absolute;
-        top: 60px !important;
-        left: 0;
-        color: red;
-        font-size: 12px
-    }
-</style>
+<!-- All form styles moved to assets/css/custom-memberarea.css -->
 <!-- loader section -->
 <?php include 'view/layout/loader.php'; ?>
 <!-- loader section ends -->
