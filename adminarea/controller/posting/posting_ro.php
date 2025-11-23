@@ -94,6 +94,10 @@ $session_member_id = $sponsor;
 $_POST['id'] = base64_encode($member_id);
 $_POST['id_kodeaktivasi'] = $id_kodeaktivasi;
 
+// Pass pre-validated PIN data to skip re-validation
+$_POST['_admin_validated_pin'] = serialize($pin);
+$_POST['_pin_owner'] = $sponsor;
+
 // ============================================================
 // STEP 6: INCLUDE MEMBERAREA POSTING_RO.PHP
 // ============================================================

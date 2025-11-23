@@ -58,6 +58,10 @@
     $_SESSION['session_member_id'] = $member_id;
     $_SESSION['session_user_member'] = $member->user_member;
     $_SESSION['session_sponsor_id'] = $member->sponsor;
+    
+    // Pass PIN data to memberarea controller to skip re-validation
+    $_POST['_admin_validated_pin'] = serialize($pin);
+    $_POST['_pin_owner'] = $pin_owner;
 
     // Include memberarea controller
     require_once '../../../memberarea/controller/posting/upgrade_member.php';

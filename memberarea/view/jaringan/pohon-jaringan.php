@@ -19,14 +19,14 @@ function titik($id, $upline, $action, $next = '0', $_binary = true)
     $plan_pasangan = $cpl->plan_pasangan();
     $plan_reward = $cpl->plan_reward();
     $plan_reward_paket = $cpj->plan_reward();
-    $info_ro = $cm->info_ro($id, 14);
+    $info_ro = $cm->info_ro($id, 7);
     
     if ($info_ro->total > 0) {
-        $jumlah_ro = '<span class="badge-info">RO Aktif: ' . $info_ro->total . '</span>';
+        $jumlah_ro = '<span class="badge-info">Sudah RO: ' . $info_ro->total . '</span>';
         $tgl_ro = '<span class="badge-date">' . tgl_indo($info_ro->created_at) . '</span>';
     } else {
         $jumlah_ro = '<span class="badge-info inactive">Belum RO</span>';
-        $tgl_ro = '';
+        $tgl_ro = '<span class="badge badge-secondary">-</span>';
     }
     
     if ($id == null) {

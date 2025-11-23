@@ -43,7 +43,17 @@
     $id_kodeaktivasi = addslashes(strip_tags($_POST['id_kodeaktivasi']));
     
     # CEK KODE AKTIVASI
-    $pin = $cka->get_kodeaktivasi_ro($sponsor, $id_kodeaktivasi, 1);
+    // Check if PIN already validated by admin controller
+    if(isset($_POST['_admin_validated_pin'])){
+        // Use pre-validated PIN from admin
+        $pin = unserialize($_POST['_admin_validated_pin']);
+        $pin_owner = isset($_POST['_pin_owner']) ? $_POST['_pin_owner'] : $sponsor;
+    } else {
+        // Normal validation for member area
+        $pin = $cka->get_kodeaktivasi_ro($sponsor, $id_kodeaktivasi, 1);
+        $pin_owner = $sponsor;
+    }
+    
     if(!$pin){
         echo json_encode(['status' => false, 'message' => 'Anda tidak memiliki '.$lang['pin_ro']]);
         return false;

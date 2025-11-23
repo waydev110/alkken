@@ -42,7 +42,18 @@
         return false;
     }
     $id_kodeaktivasi = number($_POST['id_kodeaktivasi']);
-    $pin = $cka->get_kodeaktivasi($member_id, $id_kodeaktivasi, 0);
+    
+    // Check if PIN already validated by admin controller
+    if(isset($_POST['_admin_validated_pin'])){
+        // Use pre-validated PIN from admin
+        $pin = unserialize($_POST['_admin_validated_pin']);
+        $pin_owner = isset($_POST['_pin_owner']) ? $_POST['_pin_owner'] : $member_id;
+    } else {
+        // Normal validation for member area
+        $pin = $cka->get_kodeaktivasi($member_id, $id_kodeaktivasi, 0);
+        $pin_owner = $member_id;
+    }
+    
     if(!$pin){
         echo json_encode(['status' => false, 'message' => 'Terjadi Kesalahan. PIN tidak ditemukan.']);
         return false;

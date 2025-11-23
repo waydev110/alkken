@@ -16,60 +16,55 @@
 
 <?php
 // All styles have been moved to assets/css/custom-memberarea.css
+require_once '../model/classBerita.php';
+require_once '../model/classMember.php';
+require_once '../model/classSlideShow.php';
+require_once '../model/classKodeAktivasi.php';
+require_once '../model/classTestimoni.php';
+require_once '../model/classBonus.php';
+require_once '../model/classBonusRewardPaket.php';
+require_once '../model/classPlan.php';
+require_once '../model/classWallet.php';
 
-// Consolidated require_once for all needed models
-foreach ([
-    '../model/classBerita.php',
-    '../model/classMember.php',
-    '../model/classSlideShow.php',
-    '../model/classKodeAktivasi.php',
-    '../model/classTestimoni.php',
-    '../model/classBonus.php',
-    '../model/classBonusRewardPaket.php',
-    '../model/classPlan.php',
-    '../model/classWallet.php'
-] as $modelFile) {
-    require_once $modelFile;
-}
-
-
-// Instantiate all needed classes once
 $cbns = new classBonus();
-$cpl = new classPlan();
-$cm = new classMember();
-$css = new classSlideShow();
-$cb = new classBerita();
-$cka = new classKodeAktivasi();
-$cw = new classWallet();
-$ct = new classTestimoni();
-$cbrp = new classBonusRewardPaket();
-
-// Cache member detail and use throughout
-$member = $cm->detail($session_member_id);
-$limit_penarikan = $cpl->show($member->id_plan)->maximal_wd;
-$max_autosave = $member->max_autosave;
-
-// Cache bonus and wallet queries
 $total_bonus = $cbns->total_bonus($session_member_id);
 $total_bonus_pending = $cbns->total_bonus($session_member_id, 0);
 $total_bonus_transfer = $cbns->total_bonus($session_member_id, 1);
 $saldo_wd = $cbns->saldo_wd($session_member_id);
 
+$cpl = new classPlan();
 $plan_pasangan = $cpl->plan_pasangan();
 $plan_reward = $cpl->plan_reward();
+
+$cm = new classMember();
 $new_member = $cm->new_member();
 $total_sponsori = $cm->sponsori($session_member_id);
 
+$member = $cm->detail($session_member_id);
+$limit_penarikan = $cpl->show($member->id_plan)->maximal_wd;
+$max_autosave = $member->max_autosave;
+
+$css = new classSlideShow();
 $slide = $css->index();
+
+$cb = new classBerita();
 $berita = $cb->dashboard();
+
+$cka = new classKodeAktivasi();
 $total_kodeaktivasi_pending = $cka->total_kode_aktivasi($session_member_id, 0);
 $total_kodeaktivasi_aktif = $cka->total_kode_aktivasi($session_member_id, 1);
+
+$cw = new classWallet();
 $saldo_poin = $cw->saldo($session_member_id, 'poin');
 $total_poin = $cw->total_saldo($session_member_id, 'poin', 'd');
 $total_poin_bulan_ini = $cw->total_saldo($session_member_id, 'poin', 'd', date('Y-m'));
 $saldo_wallet = $cw->saldo($session_member_id, 'cash');
 $saldo_reward = $cw->saldo($session_member_id, 'reward');
+
+$ct = new classTestimoni();
 $testimoni = $ct->index_member();
+
+$cbrp = new classBonusRewardPaket();
 ?>
 
 <main class="h-100">
@@ -249,18 +244,9 @@ $testimoni = $ct->index_member();
                         </div>
                     </div>
                     <?php
-                    // Cache poin_pasangan and poin for each plan id to avoid redundant queries
-                    $poin_pasangan_cache = [];
-                    $poin_cache = [];
                     while ($row = $plan_pasangan->fetch_object()) {
-                        if (!isset($poin_pasangan_cache[$row->id])) {
-                            $poin_pasangan_cache[$row->id] = $cm->total_poin_pasangan($session_member_id, $row->id);
-                        }
-                        if (!isset($poin_cache[$row->id])) {
-                            $poin_cache[$row->id] = $cm->jumlah_poin_pasangan($session_member_id, $row->id);
-                        }
-                        $poin_pasangan = $poin_pasangan_cache[$row->id];
-                        $poin = $poin_cache[$row->id];
+                        $poin_pasangan = $cm->total_poin_pasangan($session_member_id, $row->id);
+                        $poin = $cm->jumlah_poin_pasangan($session_member_id, $row->id);
                         $show_pasangan = false;
                         if ($row->id >= 200) {
                             $show_pasangan = true;
@@ -305,16 +291,11 @@ $testimoni = $ct->index_member();
                     ?>
                     <?php if ($_binary == true && $show_modul) { ?>
                     <?php
-                    // Cache jumlah_poin_ro and jumlah_poin_reward for each plan id to avoid redundant queries
-                    $jumlah_poin_ro_cache = [];
-                    $jumlah_poin_reward_cache = [];
                     while ($row = $plan_reward->fetch_object()) {
-                        if (!isset($jumlah_poin_ro_cache[$row->id])) {
-                            $jumlah_poin_ro_cache[$row->id] = $cm->jumlah_poin_ro($member->id, $row->id);
-                        }
                         $kondisi = false;
                         if ($row->reward_wajib_ro == 1) {
-                            if ($jumlah_poin_ro_cache[$row->id] > 0) {
+                            $jumlah_poin_ro = $cm->jumlah_poin_ro($member->id, $row->id);
+                            if ($jumlah_poin_ro > 0) {
                                 $kondisi = true;
                             } else {
                                 $kondisi = false;
@@ -328,10 +309,7 @@ $testimoni = $ct->index_member();
                         <div class="row">
                             <?php
                             if ($kondisi == true) {
-                                if (!isset($jumlah_poin_reward_cache[$row->id])) {
-                                    $jumlah_poin_reward_cache[$row->id] = $cm->jumlah_poin_reward($session_member_id, $row->id);
-                                }
-                                $poin = $jumlah_poin_reward_cache[$row->id];
+                                $poin = $cm->jumlah_poin_reward($session_member_id, $row->id);
                             ?>
                             <div class="col-6 network-stat">
                                 <p class="network-stat-label">Kiri</p>
@@ -380,9 +358,13 @@ $testimoni = $ct->index_member();
                     <div class="card-body">
                         <div class="menu-container rounded-0 text-center">
                             <?php 
-                                // Use cached $member instead of re-instantiating classMember
+                                require_once '../model/classMember.php';
+                                $cm = new classMember();
+                                $member_akun = $cm->detail($session_member_id);
                                 while ($row = $home_menu->fetch_object()) {
-                            ?>
+                                    // if($row->url == 'genealogy_level') {
+                                        // if ($member_akun->id_plan >= 15 && $member_akun->id_plan <= 17 ) {
+                                    ?>
                                     <div class="main-menu">
                                         <a href="<?= site_url($row->url) ?>" class="size-32">
                                             <div class="icon-menu icon-menu-40">
@@ -391,7 +373,7 @@ $testimoni = $ct->index_member();
                                             <p class="text-black fw-normal size-11 mt-m-5"><?=$row->name?></p>
                                         </a>
                                     </div>
-                            <?php
+                                <?php
                                 }
                             ?>
                         </div>

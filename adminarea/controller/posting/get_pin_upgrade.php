@@ -26,6 +26,7 @@
               LEFT JOIN mlm_plan p ON ka.jenis_aktivasi = p.id
               WHERE ka.id_member = '$owner_id' 
               AND ka.jenis_aktivasi > '$current_plan'
+              AND p.jenis_plan = '0'
               AND ka.status_aktivasi = '0'
               AND ka.deleted_at IS NULL
               ORDER BY ka.jenis_aktivasi ASC, ka.created_at DESC";

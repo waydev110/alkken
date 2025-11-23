@@ -33,28 +33,6 @@ class classBonus{
                         keterangan
                     FROM mlm_bonus_sponsor
                     WHERE id_member = '$id' 
-                    AND jenis_bonus NOT IN (15,16,17)
-                    AND nominal > 0
-                    AND deleted_at IS NULL
-
-                    UNION ALL
-
-                    SELECT 
-                        id,
-                        id_member,
-                        'bonus_sponsor_netborn' AS type,
-                        nominal,
-                        autosave,
-                        admin,
-                        total,
-                        status_transfer,
-                        CASE WHEN status_transfer = '1' THEN updated_at ELSE created_at END AS tanggal,
-                        created_at,
-                        updated_at,
-                        keterangan
-                    FROM mlm_bonus_sponsor
-                    WHERE id_member = '$id' 
-                    AND jenis_bonus IN (15,16,17)
                     AND nominal > 0
                     AND deleted_at IS NULL
 
@@ -77,46 +55,6 @@ class classBonus{
                     WHERE bp.id_member = '$id'
                     AND bp.id_plan = '4'
                     AND bp.nominal > 0
-                    AND bp.deleted_at IS NULL
-
-                    UNION ALL
-    
-                    SELECT 
-                        bp.id,
-                        bp.id_member,
-                        'bonus_pasangan_netborn' AS type,
-                        bp.nominal,
-                        bp.autosave,
-                        bp.admin,
-                        bp.total,
-                        bp.status_transfer,
-                        CASE WHEN bp.status_transfer = '1' THEN bp.updated_at ELSE bp.created_at END AS tanggal,
-                        bp.created_at,
-                        bp.updated_at,
-                        bp.keterangan
-                    FROM mlm_bonus_pasangan bp
-                    WHERE bp.id_member = '$id' 
-                    AND bp.id_plan = '15' 
-                    AND bp.nominal > 0
-                    AND bp.deleted_at IS NULL
-
-                    UNION ALL
-    
-                    SELECT 
-                        bp.id,
-                        bp.id_member,
-                        'bonus_pasangan_level_netborn' AS type,
-                        bp.nominal,
-                        bp.autosave,
-                        bp.admin,
-                        bp.total,
-                        bp.status_transfer,
-                        CASE WHEN bp.status_transfer = '1' THEN bp.updated_at ELSE bp.created_at END AS tanggal,
-                        bp.created_at,
-                        bp.updated_at,
-                        bp.keterangan
-                    FROM mlm_bonus_pasangan_level bp
-                    WHERE bp.id_member = '$id' AND bp.nominal > 0
                     AND bp.deleted_at IS NULL
     
                     UNION ALL
@@ -144,7 +82,7 @@ class classBonus{
                     SELECT 
                         b.id,
                         b.id_member,
-                        'bonus_upline' AS type,
+                        'bonus_titik' AS type,
                         b.nominal,
                         b.autosave,
                         b.admin,
@@ -156,73 +94,6 @@ class classBonus{
                         b.keterangan
                     FROM mlm_bonus_upline b
                     WHERE b.id_member = '$id' 
-                    AND b.nominal > 0
-                    AND b.deleted_at IS NULL
-    
-                    UNION ALL
-    
-                    SELECT 
-                        b.id,
-                        b.id_member,
-                        'bonus_titik_netborn' AS type,
-                        b.nominal,
-                        b.autosave,
-                        b.admin,
-                        b.total,
-                        b.status_transfer,
-                        CASE WHEN b.status_transfer = '1' THEN b.updated_at ELSE b.created_at END AS tanggal,
-                        b.created_at,
-                        b.updated_at,
-                        b.keterangan
-                    FROM mlm_bonus_upline b 
-                    WHERE b.id_member = '$id' 
-                    AND b.jenis_bonus IN (15,16,17)
-                    AND b.nominal > 0
-                    AND b.deleted_at IS NULL
-    
-                    UNION ALL
-    
-                    SELECT 
-                        b.id,
-                        b.id_member,
-                        'bonus_generasi_ro_aktif' AS type,
-                        b.nominal,
-                        b.autosave,
-                        b.admin,
-                        b.total,
-                        b.status_transfer,
-                        CASE WHEN b.status_transfer = '1' THEN b.updated_at ELSE b.created_at END AS tanggal,
-                        b.created_at,
-                        b.updated_at,
-                        b.keterangan
-                    FROM mlm_bonus_generasi b
-                    LEFT JOIN mlm_plan pl ON b.jenis_bonus = pl.id
-                    WHERE b.id_member = '$id' 
-                    AND pl.jenis_plan = '1' 
-                    AND pl.id = 14
-                    AND b.nominal > 0
-                    AND b.deleted_at IS NULL
-    
-                    UNION ALL
-    
-                    SELECT 
-                        b.id,
-                        b.id_member,
-                        'bonus_titik_ro_aktif' AS type,
-                        b.nominal,
-                        b.autosave,
-                        b.admin,
-                        b.total,
-                        b.status_transfer,
-                        CASE WHEN b.status_transfer = '1' THEN b.updated_at ELSE b.created_at END AS tanggal,
-                        b.created_at,
-                        b.updated_at,
-                        b.keterangan
-                    FROM mlm_bonus_upline b
-                    LEFT JOIN mlm_plan pl ON b.jenis_bonus = pl.id
-                    WHERE b.id_member = '$id' 
-                    AND pl.jenis_plan = '1' 
-                    AND pl.id = 14
                     AND b.nominal > 0
                     AND b.deleted_at IS NULL
 
@@ -311,49 +182,6 @@ class classBonus{
                     SELECT 
                         r.id,
                         r.id_member,
-                        'bonus_reward_netborn' AS type,
-                        r.nominal,
-                        r.autosave,
-                        r.admin,
-                        r.total,
-                        r.status_transfer,
-                        CASE WHEN r.status_transfer = '1' THEN r.updated_at ELSE r.created_at END AS tanggal,
-                        r.created_at,
-                        r.updated_at,
-                        r.keterangan
-                    FROM mlm_bonus_reward r
-                    LEFT JOIN mlm_bonus_reward_setting s ON r.id_bonus_reward_setting = s.id
-                    LEFT JOIN mlm_plan pl ON s.id_plan = pl.id
-                    WHERE r.id_member = '$id' 
-                    AND pl.id = 15
-                    AND pl.jenis_plan = '0' AND r.nominal > 0
-                    AND r.deleted_at IS NULL
-    
-                    UNION ALL
-    
-                    SELECT 
-                        r.id,
-                        r.id_member,
-                        'bonus_reward_paket' AS type,
-                        r.nominal,
-                        r.autosave,
-                        r.admin,
-                        r.total,
-                        r.status_transfer,
-                        CASE WHEN r.status_transfer = '1' THEN r.updated_at ELSE r.created_at END AS tanggal,
-                        r.created_at,
-                        r.updated_at,
-                        r.keterangan
-                    FROM mlm_bonus_reward_paket r
-                    LEFT JOIN mlm_bonus_reward_paket_setting s ON r.id_bonus_reward_setting = s.id
-                    WHERE r.id_member = '$id' AND r.nominal > 0
-                    AND r.deleted_at IS NULL
-    
-                    UNION ALL
-    
-                    SELECT 
-                        r.id,
-                        r.id_member,
                         'bonus_balik_modal' AS type,
                         r.nominal,
                         r.autosave,
@@ -417,7 +245,6 @@ class classBonus{
                         2 AS sort
                     FROM mlm_bonus_pasangan bp
                     LEFT JOIN mlm_plan pl ON bp.id_plan = pl.id
-                    WHERE pl.jenis_plan = '0' AND bp.nominal > 0
                     AND bp.deleted_at IS NULL
     
                     UNION ALL
@@ -435,9 +262,7 @@ class classBonus{
                         4 AS sort
                     FROM mlm_bonus_generasi b
                     LEFT JOIN mlm_plan pl ON b.jenis_bonus = pl.id
-                    WHERE pl.jenis_plan = '1' 
-                    AND pl.id <> 14
-                    AND b.nominal > 0
+                    WHERE b.nominal > 0
                     AND b.deleted_at IS NULL
     
                     UNION ALL
@@ -445,27 +270,7 @@ class classBonus{
                     SELECT 
                         b.id,
                         b.id_member,
-                        'bonus_generasi_ro_aktif' AS type,
-                        b.nominal,
-                        b.status_transfer,
-                        CASE WHEN b.status_transfer = '1' THEN b.updated_at ELSE b.created_at END AS tanggal,
-                        b.created_at,
-                        b.updated_at,
-                        b.keterangan,
-                        4 AS sort
-                    FROM mlm_bonus_generasi b
-                    LEFT JOIN mlm_plan pl ON b.jenis_bonus = pl.id
-                    WHERE pl.jenis_plan = '1' 
-                    AND pl.id = 14
-                    AND b.nominal > 0
-                    AND b.deleted_at IS NULL
-    
-                    UNION ALL
-    
-                    SELECT 
-                        b.id,
-                        b.id_member,
-                        'bonus_titik_ro_aktif' AS type,
+                        'bonus_titik' AS type,
                         b.nominal,
                         b.status_transfer,
                         CASE WHEN b.status_transfer = '1' THEN b.updated_at ELSE b.created_at END AS tanggal,
@@ -475,9 +280,7 @@ class classBonus{
                         4 AS sort
                     FROM mlm_bonus_upline b
                     LEFT JOIN mlm_plan pl ON b.jenis_bonus = pl.id
-                    WHERE pl.jenis_plan = '1' 
-                    AND pl.id = 14
-                    AND b.nominal > 0
+                    WHERE b.nominal > 0
                     AND b.deleted_at IS NULL
     
                     UNION ALL
@@ -530,45 +333,7 @@ class classBonus{
                     FROM mlm_bonus_reward r
                     LEFT JOIN mlm_bonus_reward_setting s ON r.id_bonus_reward_setting = s.id
                     LEFT JOIN mlm_plan pl ON s.id_plan = pl.id
-                    WHERE pl.id = '4' AND r.nominal > 0
-                    AND r.deleted_at IS NULL
-    
-                    UNION ALL
-    
-                    SELECT 
-                        r.id,
-                        r.id_member,
-                        'bonus_reward_ro' AS type,
-                        r.nominal,
-                        r.status_transfer,
-                        CASE WHEN r.status_transfer = '1' THEN r.updated_at ELSE r.created_at END AS tanggal,
-                        r.created_at,
-                        r.updated_at,
-                        r.keterangan,
-                        8 AS sort
-                    FROM mlm_bonus_reward r
-                    LEFT JOIN mlm_bonus_reward_setting s ON r.id_bonus_reward_setting = s.id
-                    LEFT JOIN mlm_plan pl ON s.id_plan = pl.id
-                    WHERE pl.id = '11' AND r.nominal > 0
-                    AND r.deleted_at IS NULL
-    
-                    UNION ALL
-    
-                    SELECT 
-                        r.id,
-                        r.id_member,
-                        'bonus_reward_fasttrack' AS type,
-                        r.nominal,
-                        r.status_transfer,
-                        CASE WHEN r.status_transfer = '1' THEN r.updated_at ELSE r.created_at END AS tanggal,
-                        r.created_at,
-                        r.updated_at,
-                        r.keterangan,
-                        9 AS sort
-                    FROM mlm_bonus_reward r
-                    LEFT JOIN mlm_bonus_reward_setting s ON r.id_bonus_reward_setting = s.id
-                    LEFT JOIN mlm_plan pl ON s.id_plan = pl.id
-                    WHERE pl.id = '13' AND r.nominal > 0
+                    WHERE r.nominal > 0
                     AND r.deleted_at IS NULL
     
                     UNION ALL

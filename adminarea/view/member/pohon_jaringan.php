@@ -16,15 +16,14 @@ function titik($id, $upline, $action, $next = '0', $_binary = true)
     $cm = new classMember();
     $plan_pasangan = $cpl->plan_pasangan();
     $plan_reward = $cpl->plan_reward();
-    $plan_reward_paket = $cpj->plan_reward();
-    $info_ro = $cm->info_ro($id, 14);
+    $info_ro = $cm->info_ro($id, 7);
 
     if ($info_ro->total > 0) {
-        $jumlah_ro = '<span class="badge badge-info">RO Aktif: ' . $info_ro->total . '</span>';
+        $jumlah_ro = '<span class="badge badge-info">Sudah RO: ' . $info_ro->total . '</span>';
         $tgl_ro = '<span class="badge badge-secondary">' . tgl_indo($info_ro->created_at) . '</span>';
     } else {
         $jumlah_ro = '<span class="badge badge-warning">Belum RO</span>';
-        $tgl_ro = '';
+        $tgl_ro = '<span class="badge badge-secondary">-</span>';
     }
 
     if ($id == null) {
@@ -124,7 +123,7 @@ function titik($id, $upline, $action, $next = '0', $_binary = true)
                     <div class="poin-item">
                         <span class="text-success"><strong><?= currency($poin_pasangan->jumlah_kiri) ?></strong></span>
                         <span style="font-size: 10px;">
-                            <i class="fa fa-chart-line"></i>
+                            <i class="fa fa-chart-line"></i><br>
                             <?= $row->show_name ? $row->show_name : 'Pasangan' ?>
                         </span>
                         <span class="text-primary"><strong><?= currency($poin_pasangan->jumlah_kanan) ?></strong></span>
@@ -133,6 +132,41 @@ function titik($id, $upline, $action, $next = '0', $_binary = true)
                         }
                     }
                 } ?>
+
+                <?php if ($_binary == true && $show_modul) {
+                    while ($row = $plan_reward->fetch_object()) {
+                        $kondisi = false;
+                        if ($row->reward_wajib_ro == 1) {
+                            $jumlah_poin_ro = $cm->jumlah_poin_ro($member->id, $row->id);
+                            if ($jumlah_poin_ro > 0) {
+                                $kondisi = true;
+                            } else {
+                                $kondisi = false;
+                            }
+                        } else {
+                            $kondisi = true;
+                        }
+                        if ($kondisi == true) {
+                            $poin_reward = $cm->jumlah_poin_reward($id, $row->id);
+                ?>
+                            <div class="poin-item">
+                                <span class="poin-left"><?= $poin_reward->reward_kiri ?></span>
+                                <span class="poin-label" data-toggle="tooltip" data-placement="top" title="Poin Reward <?= $row->nama_reward ?>"><i class="fas fa-<?= $row->icon_reward ?>"></i><br><?= $row->nama_reward ?></span>
+                                <span class="poin-right"><?= $poin_reward->reward_kanan ?></span>
+                            </div>
+                        <?php
+                        } else {
+                        ?>
+                            <div class="poin-item" style="opacity: 0.5;">
+                                <span class="poin-left">0</span>
+                                <span class="poin-label" data-toggle="tooltip" data-placement="top" title="Poin Reward <?= $row->nama_reward ?> Terkunci"><i class="fas fa-lock"></i><br><?= $row->nama_reward ?></span>
+                                <span class="poin-right">0</span>
+                            </div>
+                <?php
+                        }
+                    }
+                }
+                ?>
 
                 <?php if ($show_modul) { ?>
                 <div style="text-align: center; padding-top: 8px; border-top: 1px solid #f4f4f4;">
@@ -156,6 +190,7 @@ function titik($id, $upline, $action, $next = '0', $_binary = true)
                     <button type="button" class="btn btn-success btn-sm btn-block" style="margin-top: 5px;" onclick="openUpgradeMemberModal(<?= $member->id ?>, '<?= $member->id_member ?>', '<?= $member->user_member ?>', '<?= $member->sponsor ?>', <?= $member->id_plan ?>)">
                         <i class="fa fa-arrow-up"></i> Upgrade Member
                     </button>
+                    <a target="_blank" href="index.php?go=bypass_login&id=<?= base64_encode($member->id) ?>" class="btn btn-danger btn-sm btn-block" title="Login As Member"><i class="fa fa-sign-in"></i> Bypass Login</a>
                 </div>
             </div>
         </div>
