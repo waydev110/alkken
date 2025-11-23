@@ -17,7 +17,7 @@
     }
     
     .profile-header {
-        background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+        background: linear-gradient(135deg, #0033a0 0%, #0055d4 100%);;
         border-radius: 20px;
         padding: 25px;
         margin-bottom: 20px;
@@ -150,7 +150,7 @@
     }
     
     .logout-btn {
-        background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+        background: linear-gradient(135deg, #0033a0 0%, #0055d4 100%);
         color: var(--gold);
         border: 2px solid var(--gold);
         font-weight: 700;

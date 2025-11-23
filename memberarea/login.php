@@ -19,274 +19,100 @@ if(isset($_SESSION['session_user_member']) != ""){
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../assets/theme1/libs/sweetalert2/sweetalert2.min.css" />
-
-    <!-- Custom CSS -->
+    <!-- Modernized, blue/light theme: Bootstrap 4/5 + custom-memberarea.css -->
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/custom-memberarea.css">
     <style>
-        :root {
-            --gold: #D4AF37;
-            --gold-light: #F4E5B1;
-            --gold-dark: #B8941E;
-            --black: #0A0A0A;
-            --black-soft: #1A1A1A;
-            --black-light: #2A2A2A;
-        }
-
-        * { 
-            box-sizing: border-box; 
-            margin: 0;
-            padding: 0;
-        }
-
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--black);
-            overflow-x: hidden;
-            position: relative;
+            background: linear-gradient(135deg, #eaf1fb 0%, #f8fafc 100%);
             min-height: 100vh;
         }
-
-        /* Animated Background */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--black) 0%, var(--black-soft) 50%, var(--black-light) 100%);
-            z-index: 0;
-        }
-
-        .particles {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: var(--gold);
-            border-radius: 50%;
-            opacity: 0;
-            animation: float 15s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { 
-                opacity: 0;
-                transform: translateY(0) translateX(0) scale(0);
-            }
-            10% {
-                opacity: 0.8;
-            }
-            50% { 
-                opacity: 1;
-                transform: translateY(-100vh) translateX(50px) scale(1);
-            }
-            90% {
-                opacity: 0.3;
-            }
-        }
-
-        /* Login Container */
         .login-wrapper {
-            position: relative;
-            display: flex;
             min-height: 100vh;
+            display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
-            z-index: 10;
+            background: none;
         }
-
         .login-card {
-            background: linear-gradient(135deg, var(--black-soft) 0%, var(--black-light) 100%);
-            border: 2px solid var(--gold);
-            border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3),
-                        0 0 100px rgba(212, 175, 55, 0.1);
-            padding: 0;
+            background: #fff;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 32px rgba(0,51,160,0.08);
+            padding: 2.5rem 2rem 2rem 2rem;
+            max-width: 400px;
             width: 100%;
-            max-width: 450px;
-            position: relative;
-            overflow: hidden;
-            animation: slideUp 0.8s ease-out;
+            margin: 2rem 0;
+            border: 1px solid #d6e0f5;
         }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Glowing Border Effect */
-        .login-card::before {
-            content: "";
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--gold), var(--gold-light), var(--gold), var(--gold-dark));
-            border-radius: 24px;
-            z-index: -1;
-            opacity: 0;
-            animation: glow 3s infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.8; }
-        }
-
-        /* Header */
         .login-header {
-            background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%);
-            padding: 2.5rem 2rem;
             text-align: center;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 2rem;
         }
-
-        .login-header::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
         .login-logo {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 1rem;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 1rem auto;
+            background: #eaf1fb;
             border-radius: 50%;
-            border: 3px solid var(--black);
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            animation: pulse 2s infinite;
-            position: relative;
-            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0,51,160,0.10);
         }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
         .login-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
         }
-
-        .login-title {
-            position: relative;
-            z-index: 1;
-        }
-
         .login-title h2 {
-            font-size: 1.8rem;
-            margin: 0;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--black);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            color: #0033a0;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
         }
-
-        /* Form Content */
+        .login-title p {
+            color: #0033a0;
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 0;
+            opacity: 0.7;
+        }
         .login-content {
-            padding: 2.5rem 2rem;
+            margin-top: 0.5rem;
         }
-
         .form-group {
             margin-bottom: 1.5rem;
-            position: relative;
-            animation: fadeIn 0.8s ease-out backwards;
         }
-
-        .form-group:nth-child(1) { animation-delay: 0.2s; }
-        .form-group:nth-child(2) { animation-delay: 0.4s; }
-        .form-group:nth-child(3) { animation-delay: 0.6s; }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--gold);
-            letter-spacing: 0.5px;
-        }
-
         .input-wrapper {
             position: relative;
         }
-
         .input-icon {
             position: absolute;
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--gold);
+            color: #0033a0;
             font-size: 1.1rem;
-            transition: all 0.3s ease;
         }
-
-        .form-group input {
+        input[type="text"],
+        input[type="password"] {
             width: 100%;
-            padding: 0.9rem 1rem 0.9rem 3rem;
-            border-radius: 12px;
-            border: 2px solid var(--black-light);
-            background: var(--black);
-            font-size: 0.95rem;
-            color: var(--gold-light);
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus {
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1.5px solid #d6e0f5;
+            border-radius: 10px;
+            background: #f4f8fd;
+            color: #0033a0;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: border 0.2s, box-shadow 0.2s;
             outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
-
-        .form-group input:focus + .input-icon {
-            color: var(--gold-light);
-            transform: translateY(-50%) scale(1.1);
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #0033a0;
+            box-shadow: 0 0 0 2px #0033a033;
         }
-
-        .form-group input::placeholder {
-            color: rgba(212, 175, 55, 0.4);
-        }
-
         .toggle-password {
             position: absolute;
             right: 1rem;
@@ -294,67 +120,57 @@ if(isset($_SESSION['session_user_member']) != ""){
             transform: translateY(-50%);
             background: none;
             border: none;
+            color: #0033a0;
+            font-size: 1.1rem;
             cursor: pointer;
-            color: var(--gold);
-            font-size: 1.2rem;
             transition: all 0.3s ease;
         }
-
         .toggle-password:hover {
-            color: var(--gold-light);
+            color: #0055d4;
             transform: translateY(-50%) scale(1.2);
         }
-
         .captcha-group {
             display: flex;
             align-items: center;
             gap: 1rem;
         }
-
         .captcha-wrapper {
             flex: 0 0 120px;
-            border: 2px solid var(--gold);
+            border: 2px solid #0033a0;
             border-radius: 8px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .captcha-wrapper:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 20px rgba(0,51,160,0.10);
         }
-
         .captcha {
             display: block;
             width: 100%;
             height: auto;
         }
-
         .captcha-input {
             flex: 1;
         }
-
         .forgot-link {
             display: block;
             text-align: right;
             font-size: 0.85rem;
             margin-top: -0.5rem;
             margin-bottom: 1.5rem;
-            color: var(--gold);
+            color: #0033a0;
             text-decoration: none;
             transition: all 0.3s ease;
-            animation: fadeIn 0.8s ease-out 0.8s backwards;
         }
-
         .forgot-link:hover {
-            color: var(--gold-light);
+            color: #0055d4;
             transform: translateX(-5px);
         }
-
         .btn-login {
-            background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%);
-            color: var(--black);
+            background: #0033a0;
+            color: #fff;
             border: none;
             padding: 1rem;
             width: 100%;
@@ -367,53 +183,28 @@ if(isset($_SESSION['session_user_member']) != ""){
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            animation: fadeIn 0.8s ease-out 1s backwards;
         }
-
-        .btn-login::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .btn-login:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-
         .btn-login:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+            background: #0055d4;
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0,51,160,0.10);
         }
-
         .btn-login:active {
-            transform: translateY(-1px);
+            background: #002266;
         }
-
         .footer {
             text-align: center;
             margin-top: 2rem;
             padding-top: 1.5rem;
-            border-top: 1px solid var(--black-light);
+            border-top: 1px solid #d6e0f5;
             font-size: 0.85rem;
-            color: var(--gold);
-            animation: fadeIn 0.8s ease-out 1.2s backwards;
+            color: #0033a0;
         }
-
-        /* Alert */
         .alert {
             display: none;
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
-
         .alert-danger {
             background: rgba(220, 53, 69, 0.2);
             color: #ff6b6b;
@@ -421,8 +212,6 @@ if(isset($_SESSION['session_user_member']) != ""){
             border-radius: 12px;
             border: 1px solid rgba(220, 53, 69, 0.3);
         }
-
-        /* Responsive */
         @media (max-width: 480px) {
             .login-card {
                 margin: 1rem;
@@ -455,10 +244,10 @@ if(isset($_SESSION['session_user_member']) != ""){
             </div>
 
             <div class="login-content">
-                <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%); border-left: 3px solid var(--gold); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--gold-light);">
+                <!-- <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%); border-left: 3px solid var(--gold); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.85rem; color: var(--gold-light);">
                     <i class="bi bi-info-circle-fill" style="margin-right: 0.5rem;"></i>
                     <strong>Info:</strong> Gunakan ID Member atau Username yang telah terdaftar untuk mengakses dashboard Anda.
-                </div>
+                </div> -->
 
                 <div class="alert alert-danger" id="psn-gagal"></div>
 
@@ -521,7 +310,7 @@ if(isset($_SESSION['session_user_member']) != ""){
                 </form>
 
                 <div class="footer">
-                    <p style="margin: 0 0 0.5rem 0;"><i class="bi bi-shield-lock-fill"></i> Keamanan Data Terjamin</p>
+                    <!-- <p style="margin: 0 0 0.5rem 0;"><i class="bi bi-shield-lock-fill"></i> Keamanan Data Terjamin</p> -->
                     <p style="margin: 0; font-size: 0.8rem; opacity: 0.8;"><i class="bi bi-c-circle"></i> <?= date('Y') ?> <?= $sitename ?>. All Rights Reserved.</p>
                 </div>
             </div>
