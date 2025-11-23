@@ -7,25 +7,15 @@
 ?>
 <?php include 'view/layout/header.php'; ?>
 <link rel="stylesheet" href="assets/css/style-product.css">
+<link rel="stylesheet" href="assets/css/custom-memberarea.css">
 
 <!-- loader section -->
 <?php include 'view/layout/loader.php'; ?>
 <!-- loader section ends -->
 
-
 <!-- Sidebar main menu -->
 <?php include 'view/layout/sidebar.php'; ?>
-
 <!-- Sidebar main menu ends -->
-<style type="text/css">
-    .bonus-list {
-        width: 100%;
-    }
-
-    .bonus-item {
-        width: 100%;
-    }
-</style>
 <!-- Begin page -->
 <main class="h-100 has-header">
     <!-- Header -->

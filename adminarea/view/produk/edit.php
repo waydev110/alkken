@@ -97,7 +97,7 @@ $data= $cp->show($id);
                             </div>
                             <label for="poin_reward" class="col-sm-2 control-label">Poin Reward</label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control autonumeric3" name="poin_reward" id="poin_reward" required="required"  value="<?=$data->poin_reward?>">
+                                <input type="text" class="form-control autonumeric4" name="poin_reward" id="poin_reward" required="required" value="<?= str_replace('.', ',', $data->poin_reward) ?>" pattern="^\d{1,9}([\.,]\d{1,4})?$" inputmode="decimal" placeholder="0,00">
                             </div>
                         </div>
                         <div class="form-group">
@@ -185,7 +185,6 @@ $data= $cp->show($id);
                                 
                                 function calculateFeeFounder() {
                                     var feeFounder = $('#fee_founder').autoNumeric('get');
-                                    
                                     $('.fee-founder-label').each(function() {
                                         var persentase = parseFloat($(this).data('persentase'));
                                         var calculatedFee = (feeFounder * persentase) / 100;
@@ -194,6 +193,13 @@ $data= $cp->show($id);
                                         $('#' + spanId).text(formattedValue);
                                     });
                                 }
+                                // Allow only numbers, comma, and dot for poin_reward
+                                $('#poin_reward').on('input', function() {
+                                    let val = $(this).val().replace(/[^\d.,]/g, '');
+                                    // Replace multiple commas/dots with single
+                                    val = val.replace(/([.,]){2,}/g, '$1');
+                                    $(this).val(val);
+                                });
                             });
                         </script>
                         <div class="form-group">

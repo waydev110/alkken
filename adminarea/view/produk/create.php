@@ -79,7 +79,7 @@
                             </div>
                             <label for="poin_reward" class="col-sm-2 control-label">Poin Reward</label>
                             <div class="col-sm-2">
-                                <input type="text" class="form-control autonumeric3" name="poin_reward" id="poin_reward" required="required">
+                                <input type="text" class="form-control autonumeric4" name="poin_reward" id="poin_reward" required="required">
                             </div>
                         </div>
                         <div class="form-group">

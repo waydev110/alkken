@@ -16,7 +16,9 @@
     $order_detail = $objd->index($id_order);
 ?>
 <?php include 'view/layout/header.php'; ?>
+
 <link rel="stylesheet" href="assets/css/style-product.css">
+<link rel="stylesheet" href="assets/css/custom-memberarea.css">
 
 <!-- loader section -->
 <?php include 'view/layout/loader.php'; ?>

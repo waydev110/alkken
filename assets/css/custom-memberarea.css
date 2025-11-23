@@ -1,0 +1,117 @@
+/*
+ * Custom Memberarea Styles for Order Pages
+ * Updated for modern, light card theme and improved readability
+ */
+
+/* Card and container styles */
+.card.custom-order-card {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 1.5rem;
+}
+.card.custom-order-card .card-body {
+    padding: 1.25rem 1rem;
+}
+
+/* Typography */
+.custom-order-card .size-18,
+.custom-order-card .size-14,
+.custom-order-card .size-12 {
+    color: #222;
+}
+.custom-order-card .text-price {
+    color: #d4af37;
+    font-weight: 700;
+}
+
+/* Buttons */
+.btn-custom-primary {
+    background: #d4af37;
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 0.5rem 1.5rem;
+    transition: background 0.2s;
+}
+.btn-custom-primary:hover {
+    background: #bfa133;
+    color: #fff;
+}
+
+/* Form controls */
+.custom-order-card .form-control,
+.custom-order-card .select2-container--default .select2-selection--single {
+    background: #f8f9fa;
+    color: #222;
+    border: 1px solid #e5e5e5;
+    border-radius: 1rem;
+    min-height: 40px;
+}
+.custom-order-card .form-control:focus {
+    border-color: #d4af37;
+    box-shadow: none;
+    outline: none;
+}
+
+/* Filter/search UI */
+.custom-order-card .form-control-label {
+    color: #d4af37;
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card.custom-order-card .card-body {
+        padding: 1rem;
+    }
+    .btn-custom-primary {
+        font-size: 1rem;
+        padding: 0.4rem 1rem;
+    }
+}
+
+/* Avatar/product image */
+.custom-order-card .avatar,
+.custom-order-card .avatar.rounded-10 {
+    border: 2px solid #f3e6b3;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f8f9fa;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tag/filter button */
+.btn-custom-tag {
+    background: #f8f9fa;
+    color: #d4af37;
+    border-radius: 2rem;
+    border: 1px solid #f3e6b3;
+    margin-right: 0.5rem;
+    font-size: 0.95rem;
+    padding: 0.4rem 1.2rem;
+    transition: background 0.2s;
+}
+.btn-custom-tag.active, .btn-custom-tag:active {
+    background: #d4af37 !important;
+    color: #fff !important;
+    font-weight: 700;
+}
+.btn-custom-tag:hover {
+    background: #f3e6b3;
+    color: #d4af37;
+}
+
+/* Empty state */
+.card.custom-order-card.empty {
+    background: #f8f9fa;
+    border: 1px solid #e5e5e5;
+    color: #888;
+}

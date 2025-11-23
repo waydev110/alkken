@@ -23,6 +23,7 @@
 ?>
 
 <?php include 'view/layout/header.php'; ?>
+<link rel="stylesheet" href="assets/css/custom-memberarea.css">
 <!-- loader section -->
 <?php include 'view/layout/loader.php'; ?>
 <!-- loader section ends -->
@@ -40,7 +41,7 @@
     </header>
     <!-- Header ends -->
     <div class="main-container container pt-4 pb-4 mb-2" id="blockFirstForm">
-        <div class="card mb-4">
+        <div class="card custom-order-card mb-4">
             <div class="card-body">
                 <h6>Total Pembayaran:</h6>
                 <h3 class="text-danger my-2"><?=rp($order->nominal)?></h3>
@@ -66,7 +67,7 @@
                                                         <h6><?=$row->nama_bank?></h6>
                                                 </div>
                                                 <div class="col align-self-center text-end">
-                                                <button class="btn btn-sm px-0 size-9" onclick="copyToClipboard('#no_rekening<?=$row->id?>')"><i class="fa fa-copy"></i> Salin</button>
+                                                <button class="btn btn-sm px-0 size-9 btn-custom-primary" onclick="copyToClipboard('#no_rekening<?=$row->id?>')"><i class="fa fa-copy"></i> Salin</button>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -112,7 +113,7 @@
                     <div class="row">
                         <div class="col-12">
                             <button type="button"
-                                class="btn btn-default btn-block btn-lg rounded-pill px-5 order-xs-first mb-3"
+                                class="btn btn-custom-primary btn-block btn-lg rounded-pill px-5 order-xs-first mb-3"
                                 id="btnKonfirmasi">KONFIRMASI</button>
                             <a href="?go=riwayat_order" class="btn btn-outline-default btn-block btn-lg rounded-pill px-4 mb-2" id="btnKembali">KEMBALI</a>
                         </div>
@@ -128,7 +129,7 @@
                     <div class="col-12 align-self-center text-end mt-0 d-xs-grid">
                         <a href="?go=riwayat_order" class="btn btn-outline-default btn-lg rounded-pill px-4 mb-2" id="btnKembali">KEMBALI</a>
                         <a href="https://wa.me/<?=$data_stokis->no_handphone?>" type="button"
-                            class="btn btn-default btn-block btn-lg rounded-pill px-5 order-xs-first mb-3" target="_blank">CHAT VIA WA</a>
+                            class="btn btn-custom-primary btn-block btn-lg rounded-pill px-5 order-xs-first mb-3" target="_blank">CHAT VIA WA</a>
                     </div>
                 </div>
                 <?php

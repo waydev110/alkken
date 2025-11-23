@@ -11,7 +11,9 @@
     $carts = $cc->index_checkout($session_member_id);
 ?>
 <?php include 'view/layout/header.php'; ?>
+
 <link rel="stylesheet" href="assets/css/style-product.css">
+<link rel="stylesheet" href="assets/css/custom-memberarea.css">
 
 <!-- loader section -->
 <?php include 'view/layout/loader.php'; ?>

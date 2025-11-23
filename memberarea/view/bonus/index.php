@@ -15,43 +15,32 @@ $qualified_balik_modal = $cm->cek_sponsori_netreborn($session_member_id);
 <!-- Begin page -->
 <main class="h-100 has-header">
     <!-- Header -->
-    <header class="header position-fixed bg-theme">
-        <div class="row">
-            <?php include 'view/layout/back.php'; ?>
-            <div class="col align-self-center pt-1 ps-0">
-                <h5><?= $title ?></h5>
-            </div>
-            <div class="col-auto px-4"></div>
-        </div>
-        <div class="row bg-theme">
-            <div class="col">
-                <div class="main-container container pt-2 pb-2">
-                    <div class="row form-search-custom form-theme">
-                        <div class="col align-self-center">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button type="button" class="btn btn-outline-primary" disabled><i class="fa fa-search"></i></button>
-                                </div>
-                                <input type="text" name="keterangan" id="keterangan" class="form-control rounded-5" placeholder="Cari keterangan bonus">
-                            </div>
-                        </div>
-                        <div class="col-auto align-self-center px-0">
-                            <button type="button" id="btnBatal" class="btn btn-transparent" onclick="showModalFilter()"><i class="fas fa-sliders"></i></button>
-                        </div>
-                    </div>
+    <header class="header position-fixed bg-theme shadow-sm" style="z-index: 1001; width: 100%;">
+        <div class="container-fluid py-2 px-3">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <?php include 'view/layout/back.php'; ?>
+                    <h5 class="mb-0 ms-2 fw-semibold text-white" style="letter-spacing:0.5px;"> <?= $title ?> </h5>
                 </div>
-
+                <button type="button" id="btnBatal" class="btn btn-light btn-sm rounded-circle shadow-sm ms-2" onclick="showModalFilter()" title="Filter">
+                    <i class="fas fa-sliders"></i>
+                </button>
+            </div>
+            <div class="mt-3">
+                <div class="input-group input-group-sm shadow-sm bg-white rounded-pill px-2 py-1" style="max-width: 480px; margin: 0 auto;">
+                    <span class="input-group-text bg-white border-0 pe-1"><i class="fa fa-search text-muted"></i></span>
+                    <input type="text" name="keterangan" id="keterangan" class="form-control border-0 bg-white rounded-pill ps-1" placeholder="Cari keterangan bonus" style="box-shadow:none;">
+                </div>
             </div>
         </div>
-
     </header>
     <!-- main page content -->
     <div class="main-container container pb-4 pt-4">
         <div class="row">
-            <div class="col">
+            <div class="col-12">
                 <div class="swiper-container bonus-swiper mb-3">
                     <div class="filter-button-group swiper-wrapper">
-                        <button class="btn-category swiper-slide tag active" type="button" data-option-value="*" style="width:auto" onclick="get_bonus(0, '', this)">
+                        <button class="btn btn-outline-primary btn-sm rounded-pill swiper-slide tag active me-2 mb-2" type="button" data-option-value="*" onclick="get_bonus(0, '', this)">
                             Semua Bonus
                         </button>
                         <?php
@@ -124,7 +113,7 @@ $qualified_balik_modal = $cm->cek_sponsori_netreborn($session_member_id);
                         foreach ($bonus_types as $bonus) {
                             if ($bonus['qualified']) {
                         ?>
-                                <button class="btn-category swiper-slide tag" type="button" data-filter=".<?= $bonus['key'] ?>" style="width:auto" onclick="get_bonus(0, '<?= $bonus['key'] ?>', this)">
+                                <button class="btn btn-outline-primary btn-sm rounded-pill swiper-slide tag me-2 mb-2" type="button" data-filter=".<?= $bonus['key'] ?>" onclick="get_bonus(0, '<?= $bonus['key'] ?>', this)">
                                     <?= $bonus['label'] ?>
                                 </button>
                         <?php
@@ -133,13 +122,10 @@ $qualified_balik_modal = $cm->cek_sponsori_netreborn($session_member_id);
                         ?>
                     </div>
                 </div>
-                <div class="bonus-list">
-                </div>
-                <div class="load-list" display="none">
-                    <div class="col-12 btn-load">
-                        <div class="row">
-                            <button class="btn btn-default rounded-pill" id="btnMore" onclick="get_bonus(0)">Load More
-                        </div>
+                <div class="bonus-list"></div>
+                <div class="load-list d-none mt-3">
+                    <div class="d-flex justify-content-center">
+                        <button class="btn btn-outline-secondary rounded-pill px-4" id="btnMore" onclick="get_bonus(0)">Load More</button>
                     </div>
                 </div>
             </div>
@@ -147,31 +133,31 @@ $qualified_balik_modal = $cm->cek_sponsori_netreborn($session_member_id);
         <div class="modal modal-bottom fade" id="modalFilter" tabindex="-1" aria-labelledby="modalFilterLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header border-bottom-0">
-                        <h4 class="modal-title size-18" id="myModalLabel">Filter Bonus</h4>
+                    <div class="modal-header border-bottom-0 bg-light">
+                        <h5 class="modal-title fw-semibold" id="myModalLabel">Filter Bonus</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group mb-3">
-                            <label class="form-control-label" for="status_transfer">Status Transfer</label>
-                            <select class="form-control rounded-0" id="status_transfer" name="status_transfer">
+                        <div class="mb-3">
+                            <label class="form-label" for="status_transfer">Status Transfer</label>
+                            <select class="form-select rounded-pill" id="status_transfer" name="status_transfer">
                                 <option value="">-- Semua Status --</option>
                                 <option value="0">Pending</option>
                                 <option value="1">Ditransfer</option>
                             </select>
                         </div>
-                        <div class="form-group mb-3">
-                            <label class="form-control-label" for="start_date">Tanggal</label>
-                            <div class="input-group">
-                                <input type="date" class="form-control rounded-0" id="start_date" name="start_date">
-                                <span class="input-group-addon">s/d</span>
-                                <input type="date" class="form-control rounded-0" id="end_date" name="end_date">
+                        <div class="mb-3">
+                            <label class="form-label" for="start_date">Tanggal</label>
+                            <div class="input-group input-group-sm">
+                                <input type="date" class="form-control rounded-pill" id="start_date" name="start_date">
+                                <span class="input-group-text bg-white border-0">s/d</span>
+                                <input type="date" class="form-control rounded-pill" id="end_date" name="end_date">
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-block btn-outline-default rounded-5 px-5 py-2" data-bs-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-block btn-default rounded-5 px-5 py-2" onclick="bonus()">Filter</button>
+                    <div class="modal-footer bg-light d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-primary rounded-pill px-4" onclick="bonus()">Filter</button>
                     </div>
                 </div>
             </div>

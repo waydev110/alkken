@@ -296,7 +296,7 @@
                 $subdata[] = currency($row->bonus_sponsor);
                 $subdata[] = currency($row->nilai_produk);
                 $subdata[] = currency($row->poin_pasangan);
-                $subdata[] = currency($row->poin_reward);
+                $subdata[] = decimal($row->poin_reward);
                 $subdata[] = $row->plan_produk;
                 $subdata[] = $row->tampilkan == '1' ? 'Ya' : 'Tidak';
                 $subdata[] = '<div class="btn-group">
@@ -428,7 +428,7 @@
             $sql  = "SELECT p.*
                         FROM mlm_produk p
                         WHERE p.deleted_at IS NULL
-                        AND p.id_produk_jenis IN (201)
+                        AND p.id_produk_jenis IN (3)
                         AND p.tampilkan = '1'
                         ORDER BY id DESC";
             $c    = new classConnection();
