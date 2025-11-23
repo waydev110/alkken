@@ -27,33 +27,7 @@ $bonus_founder = $cbns->riwayat_bonus('bonus_founder', $session_member_id);
 // $bonus_reward_fasttrack = $cbns->riwayat_bonus('bonus_reward_fasttrack',$session_member_id);
 // $bonus_reward_reseller = $cbns->riwayat_bonus('bonus_reward_reseller',$session_member_id);
 ?>
-<style>
-    .form-floating-2>label.error {
-        position: absolute;
-        top: 105px !important;
-        font-size: 12px;
-    }
-
-    .form-textarea {
-        display: block;
-        width: 100%;
-        padding: 0.375rem 0.75rem;
-        font-size: 0.7rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #686868;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #ced4da;
-        appearance: none;
-        border-radius: 0.25rem;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-
-    .text-testimoni {
-        color: #686868;
-    }
-</style>
+<!-- Custom styles moved to assets/css/custom-memberarea.css -->
 <!-- <div class="col-12 col-md-6 col-lg-6 order-lg-2 order-2"> -->
 <div class="swiper-container home-swiper mb-0">
     <ul class="nav nav-pills mb-3 filter-button-group swiper-wrapper flex-nowrap" id="pills-tab" role="tablist">
@@ -97,7 +71,7 @@ $bonus_founder = $cbns->riwayat_bonus('bonus_founder', $session_member_id);
 </div>
 <div class="tab-content" id="pills-tabContent">
     <div class="tab-pane fade show active" id="bonusMember" role="tabpanel" aria-labelledby="bonus-member-tab">
-        <div class="card bg-white shadow-sm mb-4">
+        <div class="custom-order-card card shadow-sm mb-4">
             <div class="card-body p-0">
                 <ul class="list-group list-group-flush border-0 border-bottom bg-none py-2">
 
@@ -130,7 +104,7 @@ $bonus_founder = $cbns->riwayat_bonus('bonus_founder', $session_member_id);
         </div>
     </div>
     <div class="tab-pane fade" id="testiMember" role="tabpanel" aria-labelledby="testi-member-tab">
-        <div class="card bg-white shadow-sm mb-4">
+        <div class="custom-order-card card shadow-sm mb-4">
             <div class="card-body p-0">
                 <ul class="list-group list-group-flush border-0 border-bottom bg-none py-2">
                     <?php
@@ -190,7 +164,7 @@ $bonus_founder = $cbns->riwayat_bonus('bonus_founder', $session_member_id);
                         </div>
                         <div class="col-12 text-end">
                             <button type="reset" class="btn btn-light rounded-pill">Reset</button>
-                            <button type="submit" class="btn btn-default rounded-pill" id="btnSubmitTestimoni">Submit</button>
+                            <button type="submit" class="btn btn-custom-primary rounded-pill" id="btnSubmitTestimoni">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -201,7 +175,7 @@ $bonus_founder = $cbns->riwayat_bonus('bonus_founder', $session_member_id);
     if ($top_sponsor->num_rows > 0) {
     ?>
         <div class="tab-pane fade" id="topSponsor" role="tabpanel" aria-labelledby="top-sponsor-tab">
-            <div class="card bg-white shadow-sm mb-4">
+            <div class="custom-order-card card shadow-sm mb-4">
                 <div class="card-body p-0">
                     <ul class="list-group list-group-flush bg-none">
                         <?php
@@ -241,7 +215,7 @@ $bonus_founder = $cbns->riwayat_bonus('bonus_founder', $session_member_id);
     if ($top_income->num_rows > 0) {
     ?>
         <div class="tab-pane fade" id="topIncome" role="tabpanel" aria-labelledby="top-income-tab">
-            <div class="card bg-white shadow-sm mb-4">
+            <div class="custom-order-card card shadow-sm mb-4">
                 <div class="card-body p-0">
                     <ul class="list-group list-group-flush bg-none">
                         <?php
@@ -281,7 +255,7 @@ $bonus_founder = $cbns->riwayat_bonus('bonus_founder', $session_member_id);
     if ($top_ro->num_rows > 0) {
     ?>
         <div class="tab-pane fade" id="topRO" role="tabpanel" aria-labelledby="top-ro-tab">
-            <div class="card bg-white shadow-sm mb-4">
+            <div class="custom-order-card card shadow-sm mb-4">
                 <div class="card-body p-0">
                     <ul class="list-group list-group-flush bg-none">
                         <?php

@@ -1,7 +1,7 @@
 <?php
 if($slide->num_rows > 0){
 ?>
-<div class="swiper-container sliderswiper">
+<div class="swiper-container sliderswiper custom-order-card">
     <div class="swiper-wrapper">
         <?php
         while ($row = $slide->fetch_object()){

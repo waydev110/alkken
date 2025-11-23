@@ -17,19 +17,7 @@ $bonus_reward_promo_poin_sponsor = $cbns->riwayat_bonus('bonus_reward_promo_poin
 $bonus_reward_fasttrack = $cbns->riwayat_bonus('bonus_reward_fasttrack',$session_member_id);
 $bonus_reward_reseller = $cbns->riwayat_bonus('bonus_reward_reseller',$session_member_id);
 ?>
-<style>
-    /* .form-control:disabled, .form-control[readonly] {
-        background-color: #1f0000;
-        opacity: 1;
-        color:#FFFFFF;
-    } */
-    /* .form-control-label {
-        color:#FFFFFF;
-    } */
-    .poinswiper .swiper-wrapper .swiper-slide {
-        width: 270px;
-    }
-</style>
+<!-- Custom styles moved to assets/css/custom-memberarea.css -->
 <div class="">
     <h4 class="size-18 mt-4">Bonus Plan A</h4>
     <div class="swiper-container poinswiper mt-1">

@@ -13,25 +13,7 @@ $reward_pribadi = $cpl->index_reward_pribadi();
 
 <!-- Sidebar main menu -->
 <?php include 'view/layout/sidebar.php'; ?>
-<style>
-    .menu-container {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        flex-wrap: wrap;
-    }
-
-    .main-menu {
-        width: 100px;
-        text-align: center;
-    }
-
-    .main-menu a {
-        display: block;
-        margin: 0 auto;
-        text-align: center;
-    }
-</style>
+<!-- Custom styles moved to assets/css/custom-memberarea.css -->
 <?php
 require_once '../model/classMenu.php';
 
@@ -60,12 +42,12 @@ $kategori_menu = $cmenu->kategori_menu();
         ?>
                 <div class="row mt-3">
                     <div class="col py-2">
-                        <h5 class="title text-primary"><?= $data->kategori ?></h5>
+                        <h5 class="title text-custom-primary"><?= $data->kategori ?></h5>
                     </div>
                 </div>
                     <div class="row">
                         <div class="col-12">
-                            <div class="card shadow-sm mt-0 mb-0">
+                            <div class="custom-order-card card shadow-sm mt-0 mb-0">
                                 <div class="card-body">
                                     <div class="menu-container rounded-0">
                                         <?php

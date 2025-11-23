@@ -1,7 +1,7 @@
 <!-- Footer -->
 <style>
 .footer {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    background: linear-gradient(135deg, #0033a0 0%, #0055d4 100%);
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
     padding: 10px 0;
     position: fixed;

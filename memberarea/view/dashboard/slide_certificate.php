@@ -13,7 +13,7 @@
             <?php
         while($row = $slides->fetch_object()){
             ?>
-            <div class="bg-white rounded-10 p-2">
+            <div class="custom-order-card rounded-10 p-2">
                 <img width="100%" class="img-fluid" src="../images/slide_certificate/<?=$row->gambar?>"
                     alt="image">
             </div>

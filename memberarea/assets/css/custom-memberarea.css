@@ -1,3 +1,8 @@
+/* Override for dashboard header background conflict */
+.hero-section.header:after {
+    background: none !important;
+    opacity: 0 !important;
+}
 /**
  * Custom Memberarea Styles
  * Centralized styling untuk semua halaman di memberarea
@@ -44,7 +49,7 @@ body {
 }
 
 .bg-theme {
-    background: var(--color-dark);
+    background: #0055d4;
 }
 
 .main-container {
@@ -79,7 +84,7 @@ body {
 .hero-section {
     position: relative;
     width: 100%;
-    background: linear-gradient(135deg, var(--color-black) 0%, var(--color-dark) 100%);
+    background: linear-gradient(135deg, #0033a0 0%, #0055d4 100%);
     min-height: 280px;
     padding: 20px 0;
     overflow: hidden;
@@ -921,12 +926,12 @@ body {
    SIDEBAR STYLES
    ======================================== */
 .sidebar {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    background: linear-gradient(135deg, #0033a0 0%, #0055d4 100%);
 }
 
 .sidebar .card {
-    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
-    border: 1px solid rgba(212, 175, 55, 0.3) !important;
+    background: linear-gradient(135deg, #0033a0 0%, #0055d4 100%);
+    border: 1px solid rgba(19, 36, 161, 0.3) !important;
 }
 
 .sidebar .paket-name {
@@ -966,7 +971,7 @@ body {
 }
 
 .sidebar select.form-control {
-    background-color: #1a1a1a;
+    background-color: #0055d4;
     color: var(--color-gold);
     border: 1px solid var(--color-gold);
 }
@@ -1290,7 +1295,7 @@ body {
 /* Member Card - Network Tree Version */
 .tree .member-card {
     width: 280px;
-    background: linear-gradient(145deg, #1a1a1a, #252525);
+    background: linear-gradient(135deg, #0033a0 0%, #0055d4 100%);
     border: 2px solid var(--border);
     border-radius: 20px;
     overflow: hidden;
@@ -1392,7 +1397,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--black-primary);
+    background: #ffffff;
     border-radius: 12px;
     padding: 16px;
     margin-bottom: 16px;
@@ -1461,7 +1466,7 @@ body {
 .tree .member-card .ro-info {
     text-align: center;
     padding: 12px;
-    background: var(--black-primary);
+    background: #ffffff;
     border-radius: 8px;
     margin: 16px 0;
 }
@@ -1516,7 +1521,7 @@ body {
 }
 
 .tree .member-card .btn-action.secondary {
-    background: var(--black-primary);
+    background: #ffffff;
     color: var(--color-gold);
     border: 1px solid var(--color-gold);
 }
@@ -1595,7 +1600,7 @@ body {
 
 /* Genealogy Header */
 .genealogy-header {
-    background: var(--color-dark);
+    background: #0055d4;
     border-bottom: 1px solid var(--border);
 }
 

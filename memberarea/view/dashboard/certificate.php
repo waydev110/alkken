@@ -16,7 +16,7 @@
     
     <div class="col-12">
         <div class="d-grid mb-4">
-            <button class="btn btn-lg btn-default btn-block rounded-pill" onclick="downloadSertifikat('certifikatCanvas')">Download Sertifikat</button>
+            <button class="btn btn-lg btn-custom-primary btn-block rounded-pill" onclick="downloadSertifikat('certifikatCanvas')">Download Sertifikat</button>
         </div>
     </div>
 </div>
